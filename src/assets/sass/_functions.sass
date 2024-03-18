@@ -1,0 +1,9 @@
+@function hex-to-rgba($hex, $alpha: 1)
+  // Extract RGB values from HEX
+  $red: red($hex)
+  $green: green($hex)
+  $blue: blue($hex)
+  // Calculation of alpha value in the range from 0 to 1
+  $alpha: max(min($alpha, 1), 0)
+  // Return rgba string
+  @return rgba($red, $green, $blue, $alpha)

@@ -1,0 +1,96 @@
+@import '@/assets/sass/_functions.sass'
+
+\:root
+  --e-btn-icon-size: 14px
+  --e-btn-icon-margin: 8px
+  --e-btn-height: 36px
+  --e-btn-font-size: 0.875rem
+
+.e-btn
+  display: flex
+  align-items: center
+  width: fit-content
+  height: var(--e-btn-height)
+  font-size: var(--e-btn-icon-size)
+  outline: none
+  border: none
+  border-radius: 4px
+  cursor: pointer
+  transition: all ease-in-out .2s
+  &:disabled
+    opacity: 0.5
+
+  // Colors
+  &.color
+    &-primary
+      --e-btn-background-color: #0089ED
+      --e-btn-font-color: #FFF
+      --e-btn-border-color: #0089ED
+    &-secondary
+      --e-btn-background-color: #8D8D8D
+      --e-btn-font-color: #FFF
+      --e-btn-border-color: #8D8D8D
+
+  // Variants
+  &.variant
+    &-default
+      background-color: var(--e-btn-background-color)
+      color: var(--e-btn-font-color)
+      //&:hover
+      //  background-color: hex-to-rgba(#0089ED, 0.8)
+    &-outlined
+      border: 1px solid var(--e-btn-border-color)
+      background-color: transparent
+      color: var(--e-btn-font-color)
+      //&:hover
+      //  border: 1px solid hex-to-rgba(#0089ED, 0.8)
+      //  color: hex-to-rgba(#0089ED, 0.8)
+    &-text
+      background-color: transparent
+      color: var(--e-btn-font-color)
+      //&:hover
+      //  color: hex-to-rgba(#0089ED, 0.8)
+
+  // Icons
+  &--prepend, &--append
+    display: inline-block
+    width: var(--e-btn-icon-size)
+    height: var(--e-btn-icon-size)
+    background-size: cover
+  &--prepend
+    margin-right: var(--e-btn-icon-margin)
+  &--append
+    margin-left: var(--e-btn-icon-margin)
+
+  // Size
+  &.size
+    &-x-small
+      --e-btn-height: 20px
+      --e-btn-icon-size: 10px
+      --e-btn-icon-margin: 4px
+      --e-btn-font-size: 0.625rem
+      padding: 4px 8px
+    &-small
+      --e-btn-height: 28px
+      --e-btn-icon-size: 12px
+      --e-btn-icon-margin: 4px
+      --e-btn-font-size: 0.75rem
+      padding: 4px 8px
+    &-medium
+      --e-btn-height: 36px
+      --e-btn-icon-size: 14px
+      --e-btn-icon-margin: 8px
+      --e-btn-font-size: 0.875rem
+      padding: 8px 16px
+    &-large
+      --e-btn-height: 44px
+      --e-btn-icon-size: 16px
+      --e-btn-icon-margin: 8px
+      --e-btn-font-size: 1rem
+      padding: 12px 18px
+    &-x-large
+      --e-btn-height: 52px
+      --e-btn-icon-size: 18px
+      --e-btn-icon-margin: 8px
+      --e-btn-font-size: 1.125rem
+      padding: 12px 18px
