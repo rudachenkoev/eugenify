@@ -1,11 +1,20 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
 import { getRgbValues, isHexOrRgb } from '@/helpers/colors.ts'
+import { isURL } from '@/helpers'
 
 const props = defineProps({
   text: { type: String, default: '' },
-  prependIcon: { type: String, default: '' },
-  appendIcon: { type: String, default: '' },
+  prependIcon: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isURL(value)) || !value }
+  },
+  appendIcon: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isURL(value)) || !value }
+  },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   variant: {
