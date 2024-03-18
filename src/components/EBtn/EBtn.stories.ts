@@ -13,8 +13,14 @@ export default {
   },
   argTypes: {
     text: { control: 'text' },
-    prependIcon: { control: 'text' },
-    appendIcon: { control: 'text' },
+    prependIcon: {
+      name: 'prepend-icon',
+      control: 'text'
+    },
+    appendIcon: {
+      name: 'append-icon',
+      control: 'text'
+    },
     disabled: { control: 'boolean' },
     variant: {
       control: 'inline-radio',
@@ -30,15 +36,12 @@ export default {
       table: { disable: true }
     },
     backgroundColor: {
-      control: 'color',
       table: { disable: true }
     },
     fontColor: {
-      control: 'color',
       table: { disable: true }
     },
     borderColor: {
-      control: 'color',
       table: { disable: true }
     }
   }
@@ -63,13 +66,19 @@ CustomColors.args = {
 }
 CustomColors.argTypes = {
   backgroundColor: {
+    name: 'background-color',
+    control: 'color',
     table: { disable: false },
-    if: { arg: 'variant', neq: 'outlined' }
+    if: { arg: 'variant', eq: 'default' }
   },
   fontColor: {
+    name: 'font-color',
+    control: 'color',
     table: { disable: false }
   },
   borderColor: {
+    name: 'border-color',
+    control: 'color',
     table: { disable: false },
     if: { arg: 'variant', eq: 'outlined' }
   }

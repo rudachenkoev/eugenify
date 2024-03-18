@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
+import { getRgbValues } from '@/helpers'
 
 const props = defineProps({
   text: { type: String, default: '' },
@@ -26,9 +27,9 @@ const props = defineProps({
 
 const cssVariables = computed(() => {
   let variables = {}
-  if (props.backgroundColor) variables['--e-btn-background-color'] = props.backgroundColor
-  if (props.fontColor) variables['--e-btn-font-color'] = props.fontColor
-  if (props.borderColor) variables['--e-btn-border-color'] = props.borderColor
+  if (props.backgroundColor) variables['--e-btn-background-color'] = getRgbValues(props.backgroundColor)
+  if (props.fontColor) variables['--e-btn-font-color'] = getRgbValues(props.fontColor)
+  if (props.borderColor) variables['--e-btn-border-color'] = getRgbValues(props.borderColor)
   return variables
 })
 </script>
