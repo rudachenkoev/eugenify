@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-import { getRgbValues } from '@/helpers'
+import { getRgbValues, isHexOrRgb } from '@/helpers/colors.ts'
 
 const props = defineProps({
   text: { type: String, default: '' },
@@ -20,9 +20,21 @@ const props = defineProps({
     type: String as PropType<'primary' | 'secondary' | 'error' | 'success'>,
     default: 'primary'
   },
-  backgroundColor: { type: String, default: '' },
-  fontColor: { type: String, default: '' },
-  borderColor: { type: String, default: '' }
+  backgroundColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHexOrRgb(value)) || !value }
+  },
+  fontColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHexOrRgb(value)) || !value }
+  },
+  borderColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHexOrRgb(value)) || !value }
+  },
 })
 
 const cssVariables = computed(() => {

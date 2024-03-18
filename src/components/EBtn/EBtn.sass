@@ -1,5 +1,3 @@
-@import '@/assets/sass/_functions.sass'
-
 \:root
   --e-btn-icon-size: 14px
   --e-btn-icon-margin: 8px
@@ -41,15 +39,15 @@
     &-outlined
       border: 1px solid rgb(var(--e-btn-border-color))
       background-color: transparent
-      color: rgb(var(--e-btn-font-color))
+      color: rgb(var(--e-btn-border-color))
       &:hover
         border: 1px solid rgba(var(--e-btn-border-color), 0.8)
-        color: rgba(var(--e-btn-font-color), 0.8)
+        color: rgba(var(--e-btn-border-color), 0.8)
     &-text
       background-color: transparent
-      color: rgb(var(--e-btn-font-color))
+      color: rgb(var(--e-btn-background-color))
       &:hover
-        color: rgba(var(--e-btn-font-color), 0.8)
+        color: rgba(var(--e-btn-background-color), 0.8)
 
   // Icons
   &--prepend, &--append
