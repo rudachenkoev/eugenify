@@ -4,6 +4,7 @@ import eBtn from './EBtn.vue'
 export default {
   title: 'e-btn',
   component: eBtn,
+  tags: ['autodocs'],
   args: {
     text: 'Button',
     disabled: false,
