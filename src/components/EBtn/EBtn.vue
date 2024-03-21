@@ -56,29 +56,30 @@ const cssVariables = computed(() => {
 </script>
 
 <template>
-  <button
-    :class="['e-btn', `variant-${variant}`, `size-${size}`, `color-${color}`]"
-    :style="cssVariables"
-    :disabled="disabled"
-  >
-    <slot name="prepend">
-      <i
-        v-if="prependIcon"
-        class="e-btn--prepend"
-        :style="{ backgroundImage: 'url(' + prependIcon + ')' }"
-      />
-    </slot>
+  <button class="bg-amber-300">{{ text }}</button>
+<!--  <button-->
+<!--    :class="['e-btn', `variant-${variant}`, `size-${size}`, `color-${color}`]"-->
+<!--    :style="cssVariables"-->
+<!--    :disabled="disabled"-->
+<!--  >-->
+<!--    <slot name="prepend">-->
+<!--      <i-->
+<!--        v-if="prependIcon"-->
+<!--        class="e-btn&#45;&#45;prepend"-->
+<!--        :style="{ backgroundImage: 'url(' + prependIcon + ')' }"-->
+<!--      />-->
+<!--    </slot>-->
 
-    <slot>{{ text }}</slot>
+<!--    <slot>{{ text }}</slot>-->
 
-    <slot name="append">
-      <i
-        v-if="appendIcon"
-        class="e-btn--append"
-        :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
-      />
-    </slot>
-  </button>
+<!--    <slot name="append">-->
+<!--      <i-->
+<!--        v-if="appendIcon"-->
+<!--        class="e-btn&#45;&#45;append"-->
+<!--        :style="{ backgroundImage: 'url(' + appendIcon + ')' }"-->
+<!--      />-->
+<!--    </slot>-->
+<!--  </button>-->
 </template>
 
 <style lang="sass" scoped>
