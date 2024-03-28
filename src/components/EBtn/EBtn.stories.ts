@@ -24,6 +24,11 @@ export default {
       control: 'text'
     },
     disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
+    loadingText: {
+      name: 'loading-text',
+      control: 'text'
+    },
     variant: {
       control: 'select',
       options: ['default', 'outlined', 'text']
@@ -64,7 +69,7 @@ export const Default = Template.bind({})
 export const Colors = () => ({
   components: { eBtn },
   template: `
-    <div class="flex items-center gap-3">
+    <div class="flex gap-3">
       <e-btn color="primary" text="Primary" />
       <e-btn color="secondary" text="Secondary" />
       <e-btn color="success" text="Success" />
@@ -76,7 +81,7 @@ export const Colors = () => ({
 export const Variants = () => ({
   components: { eBtn },
   template: `
-    <div class="flex items-center gap-3">
+    <div class="flex gap-3">
       <e-btn variant="default" text="Default" />
       <e-btn variant="outlined" text="Outlined" />
       <e-btn variant="text" text="Text" />
@@ -87,12 +92,23 @@ export const Variants = () => ({
 export const Sizes = () => ({
   components: { eBtn },
   template: `
-    <div class="flex items-center gap-3">
+    <div class="flex gap-3">
       <e-btn size="x-large" text="X-large" />
       <e-btn size="large" text="Large" />
       <e-btn size="medium" text="Medium" />
       <e-btn size="small" text="Small" />
       <e-btn size="x-small" text="X-small" />
+    </div>
+  `
+})
+
+export const Loading = () => ({
+  components: { eBtn },
+  template: `
+    <div class="flex gap-3">
+      <e-btn variant="default" loading />
+      <e-btn variant="outlined" loading-text="Custom loading text" loading />
+      <e-btn variant="text" loading />
     </div>
   `
 })
