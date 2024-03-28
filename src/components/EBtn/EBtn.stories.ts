@@ -34,18 +34,22 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'error', 'success'],
-      // table: { disable: true }
+      options: ['primary', 'secondary', 'error', 'success']
     },
-    // backgroundColor: {
-    //   table: { disable: true }
-    // },
-    // fontColor: {
-    //   table: { disable: true }
-    // },
-    // borderColor: {
-    //   table: { disable: true }
-    // }
+    backgroundColor: {
+      name: 'background-color',
+      control: 'color',
+      if: { arg: 'variant', eq: 'default' }
+    },
+    fontColor: {
+      name: 'font-color',
+      control: 'color'
+    },
+    borderColor: {
+      name: 'border-color',
+      control: 'color',
+      if: { arg: 'variant', eq: 'outlined' }
+    }
   }
 } as Meta<typeof eBtn>
 
@@ -57,9 +61,8 @@ const Template: StoryFn<typeof eBtn> = args => ({
 
 export const Default = Template.bind({})
 
-export const Colors = args => ({
+export const Colors = () => ({
   components: { eBtn },
-  setup() { return { args } },
   template: `
     <div class="flex items-center gap-3">
       <e-btn color="primary" text="Primary" />
@@ -70,9 +73,8 @@ export const Colors = args => ({
   `
 })
 
-export const Variants = args => ({
+export const Variants = () => ({
   components: { eBtn },
-  setup() { return { args } },
   template: `
     <div class="flex items-center gap-3">
       <e-btn variant="default" text="Default" />
@@ -82,9 +84,8 @@ export const Variants = args => ({
   `
 })
 
-export const Sizes = args => ({
+export const Sizes = () => ({
   components: { eBtn },
-  setup() { return { args } },
   template: `
     <div class="flex items-center gap-3">
       <e-btn size="x-large" text="X-large" />
@@ -95,32 +96,3 @@ export const Sizes = args => ({
     </div>
   `
 })
-
-// export const Secondary = Template.bind({})
-// Secondary.args = { color: 'secondary' }
-
-// export const CustomColors = Template.bind({})
-// CustomColors.args = {
-//   backgroundColor: '#0057B7',
-//   borderColor: '#0057B7',
-//   fontColor: '#FFDD00'
-// }
-// CustomColors.argTypes = {
-//   backgroundColor: {
-//     name: 'background-color',
-//     control: 'color',
-//     table: { disable: false },
-//     if: { arg: 'variant', eq: 'default' }
-//   },
-//   fontColor: {
-//     name: 'font-color',
-//     control: 'color',
-//     table: { disable: false }
-//   },
-//   borderColor: {
-//     name: 'border-color',
-//     control: 'color',
-//     table: { disable: false },
-//     if: { arg: 'variant', eq: 'outlined' }
-//   }
-// }

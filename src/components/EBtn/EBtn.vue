@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-// import { getRgbValues, isHexOrRgb } from '@/helpers/colors.ts'
+import { isHex } from '@/helpers/colors'
 import { isURL } from '@/helpers'
 
 const props = defineProps({
@@ -29,21 +29,21 @@ const props = defineProps({
     type: String as PropType<'primary' | 'secondary' | 'error' | 'success'>,
     default: 'primary'
   },
-  // backgroundColor: {
-  //   type: String,
-  //   default: '',
-  //   validator (value) { return (value && isHexOrRgb(value)) || !value }
-  // },
-  // fontColor: {
-  //   type: String,
-  //   default: '',
-  //   validator (value) { return (value && isHexOrRgb(value)) || !value }
-  // },
-  // borderColor: {
-  //   type: String,
-  //   default: '',
-  //   validator (value) { return (value && isHexOrRgb(value)) || !value }
-  // },
+  backgroundColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHex(value)) || !value }
+  },
+  fontColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHex(value)) || !value }
+  },
+  borderColor: {
+    type: String,
+    default: '',
+    validator (value) { return (value && isHex(value)) || !value }
+  },
 })
 const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition-all'
 
@@ -105,11 +105,17 @@ const sizeClasses = computed(() => {
     default: return {}
   }
 })
+
+const customStyles = computed(() => {
+  const { backgroundColor, fontColor:color, borderColor } = props
+  return { backgroundColor, color, borderColor }
+})
 </script>
 
 <template>
   <button
     :class="[defaultClasses, colorClasses[variant], sizeClasses.btn]"
+    :style="customStyles"
     :disabled="disabled"
     type="button"
   >
@@ -132,7 +138,3 @@ const sizeClasses = computed(() => {
     </slot>
   </button>
 </template>
-
-<style lang="sass" scoped>
-//@import 'EBtn'
-</style>
