@@ -5,6 +5,13 @@ export default {
   title: 'e-loader',
   component: eLoader,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      controls: {
+        sort: 'alpha'
+      }
+    }
+  },
   args: {
     text: 'Loading...',
     size: 'medium',

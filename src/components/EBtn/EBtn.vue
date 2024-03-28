@@ -1,23 +1,15 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
 import { isHex } from '@/helpers/colors'
-import { isURL } from '@/helpers'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
 import COLORS from './colors'
 
 const props = defineProps({
   text: { type: String, default: '' },
-  prependIcon: {
-    type: String,
-    default: '',
-    validator (value) { return (value && isURL(value)) || !value }
-  },
-  appendIcon: {
-    type: String,
-    default: '',
-    validator (value) { return (value && isURL(value)) || !value }
-  },
+  icon: { type: String, default: '' },
+  prependIcon: { type: String, default: '' },
+  appendIcon: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: 'Loading...' },
@@ -70,23 +62,28 @@ const customStyles = computed(() => {
     type="button"
   >
     <slot v-if="loading" name="loader">
-      <e-loader :text="loadingText" :color="color" :size="size" />
+      <e-loader :text="loadingText" :color="color" :size="size" :no-text="!!icon" />
     </slot>
     <template v-else>
       <slot name="prepend">
         <i
-          v-if="prependIcon"
-          :class="sizeClasses.prepend"
+          v-if="!!prependIcon"
+          :class="sizeClasses.prependIcon"
           :style="{ backgroundImage: 'url(' + prependIcon + ')' }"
         />
       </slot>
 
-      <slot>{{ text }}</slot>
+      <i
+        v-if="!!icon"
+        :class="sizeClasses.icon"
+        :style="{ backgroundImage: 'url(' + icon + ')' }"
+      />
+      <slot v-else>{{ text }}</slot>
 
       <slot name="append">
         <i
-          v-if="appendIcon"
-          :class="sizeClasses.append"
+          v-if="!!appendIcon"
+          :class="[sizeClasses.appendIcon, 'fill-white']"
           :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
         />
       </slot>

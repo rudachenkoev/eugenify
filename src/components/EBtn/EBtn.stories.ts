@@ -5,6 +5,13 @@ export default {
   title: 'e-btn',
   component: eBtn,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      controls: {
+        sort: 'alpha'
+      }
+    }
+  },
   args: {
     text: 'Button',
     disabled: false,
@@ -14,7 +21,11 @@ export default {
     color: 'primary'
   },
   argTypes: {
-    text: { control: 'text' },
+    text: {
+      control: 'text',
+      if: { arg: 'icon', truthy: false }
+    },
+    icon: { control: 'text' },
     prependIcon: {
       name: 'prepend-icon',
       control: 'text'
@@ -109,6 +120,17 @@ export const Loading = () => ({
       <e-btn variant="default" loading />
       <e-btn variant="outlined" loading-text="Custom loading text" loading />
       <e-btn variant="text" loading />
+    </div>
+  `
+})
+
+export const Icons = () => ({
+  components: { eBtn },
+  template: `
+    <div class="flex gap-3">
+      <e-btn prepend-icon="/assets/icons/search.svg" text="Prepend icon" />
+      <e-btn append-icon="/assets/icons/search.svg" text="Append icon" />
+      <e-btn icon="/assets/icons/search.svg" />
     </div>
   `
 })
