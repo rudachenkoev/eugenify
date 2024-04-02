@@ -48,14 +48,14 @@ const customStyles = computed(() => {
       <slot name="prepend">
         <i
           v-if="!!prependIcon"
-          :class="sizeClasses.prependIcon"
+          :class="[sizeClasses.prependIcon, 'bg-cover']"
           :style="{ backgroundImage: 'url(' + prependIcon + ')' }"
         />
       </slot>
 
       <i
         v-if="!!icon"
-        :class="sizeClasses.icon"
+        :class="[sizeClasses.icon, 'bg-cover']"
         :style="{ backgroundImage: 'url(' + icon + ')' }"
       />
       <slot v-else>{{ text }}</slot>
@@ -63,7 +63,7 @@ const customStyles = computed(() => {
       <slot name="append">
         <i
           v-if="!!appendIcon"
-          :class="sizeClasses.appendIcon"
+          :class="[sizeClasses.appendIcon, 'bg-cover']"
           :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
         />
       </slot>

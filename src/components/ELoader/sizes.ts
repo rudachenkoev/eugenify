@@ -17,10 +17,10 @@ export default {
   },
   large: {
     spinner: large.iconSize,
-    text: `text-lg ${large.iconSize}`
+    text: `text-lg ${large.marginLeft}`
   },
   'x-large': {
     spinner: xLarge.iconSize,
-    text: `text-xl ${xLarge.iconSize}`
+    text: `text-xl ${xLarge.marginLeft}`
   }
 }

@@ -70,12 +70,5 @@ export const Sizes = () => ({
 
 export const NoText = () => ({
   components: { eLoader },
-  template: `
-    <div class="flex gap-3">
-      <e-loader color="primary" no-text />
-      <e-loader color="secondary" no-text />
-      <e-loader color="success" no-text />
-      <e-loader color="error" no-text />
-    </div>
-  `
+  template: '<e-loader color="primary" no-text />'
 })

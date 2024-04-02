@@ -5,32 +5,32 @@ const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
 export default {
   'x-small': {
     btn: `${xSmall.height} text-xs ${xSmall.padding}`,
-    icon: `${xSmall.iconSize} bg-cover`,
-    prependIcon: `${xSmall.marginRight} ${xSmall.iconSize} bg-cover`,
-    appendIcon: `${xSmall.marginLeft} ${xSmall.iconSize} bg-cover`
+    icon: xSmall.iconSize,
+    prependIcon: `${xSmall.marginRight} ${xSmall.iconSize}`,
+    appendIcon: `${xSmall.marginLeft} ${xSmall.iconSize}`
   },
   small: {
     btn: `${small.height} text-sm ${small.padding}`,
-    icon: `${small.iconSize} bg-cover`,
-    prependIcon: `${small.marginRight} ${small.iconSize} bg-cover`,
-    appendIcon: `${small.marginLeft} ${small.iconSize} bg-cover`
+    icon: small.iconSize,
+    prependIcon: `${small.marginRight} ${small.iconSize}`,
+    appendIcon: `${small.marginLeft} ${small.iconSize}`
   },
   medium: {
     btn: `${medium.height} text-base ${medium.padding}`,
-    icon: `${medium.iconSize} bg-cover`,
-    prependIcon: `${medium.marginRight} ${medium.iconSize} bg-cover`,
-    appendIcon: `${medium.marginLeft} ${medium.iconSize} bg-cover`
+    icon: medium.iconSize,
+    prependIcon: `${medium.marginRight} ${medium.iconSize}`,
+    appendIcon: `${medium.marginLeft} ${medium.iconSize}`
   },
   large: {
     btn: `${large.height} text-lg ${large.padding}`,
-    icon: `${large.iconSize} bg-cover`,
-    prependIcon: `${large.marginRight} ${large.iconSize} bg-cover`,
-    appendIcon: `${large.marginLeft} ${large.iconSize} bg-cover`
+    icon: large.iconSize,
+    prependIcon: `${large.marginRight} ${large.iconSize}`,
+    appendIcon: `${large.marginLeft} ${large.iconSize}`
   },
   'x-large': {
     btn: `${xLarge.height} text-xl ${xLarge.padding}`,
-    icon: `${xLarge.iconSize} bg-cover`,
-    prependIcon: `${xLarge.marginRight} ${xLarge.iconSize} bg-cover`,
-    appendIcon: `${xLarge.marginLeft} ${xLarge.iconSize} bg-cover`
+    icon: xLarge.iconSize,
+    prependIcon: `${xLarge.marginRight} ${xLarge.iconSize}`,
+    appendIcon: `${xLarge.marginLeft} ${xLarge.iconSize}`
   }
 }
