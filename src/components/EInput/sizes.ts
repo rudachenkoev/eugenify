@@ -1,37 +1,41 @@
+import size from '@/configs/sizes'
+
+const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
+
 export default {
   'x-small': {
-    wrapper: 'h-7',
-    input: 'text-xs placeholder:text-xs py-1 px-2',
+    wrapper: xSmall.height,
+    input: `text-xs placeholder:text-xs ${xSmall.padding}`,
     label: 'text-[0.625em] leading-3',
-    prependIcon: 'ml-2 size-3 bg-cover',
-    appendIcon: 'mr-2 size-3 bg-cover'
+    prependIcon: `${xSmall.marginLeft} ${xSmall.iconSize} bg-cover`,
+    appendIcon: `${xSmall.marginRight} ${xSmall.iconSize} bg-cover`
   },
   small: {
-    wrapper: 'h-8',
-    input: 'text-sm placeholder:text-sm py-1.5 px-2.5',
+    wrapper: small.height,
+    input: `text-sm placeholder:text-sm ${small.padding}`,
     label: 'text-xs',
-    prependIcon: 'ml-2.5 size-3.5 bg-cover',
-    appendIcon: 'mr-2.5 size-3.5 bg-cover'
+    prependIcon: `${small.marginLeft} ${small.iconSize} bg-cover`,
+    appendIcon: `${small.marginRight} ${small.iconSize} bg-cover`
   },
   medium: {
-    wrapper: 'h-10',
-    input: 'text-sm placeholder:text-sm py-2 px-3',
+    wrapper: medium.height,
+    input: `text-sm placeholder:text-sm ${medium.padding}`,
     label: 'text-xs',
-    prependIcon: 'ml-3 size-4 bg-cover',
-    appendIcon: 'mr-3 size-4 bg-cover'
+    prependIcon: `${medium.marginLeft} ${medium.iconSize} bg-cover`,
+    appendIcon: `${medium.marginRight} ${medium.iconSize} bg-cover`
   },
   large: {
-    wrapper: 'h-12',
-    input: 'text-base placeholder:text-base py-2 px-4',
+    wrapper: large.height,
+    input: `text-base placeholder:text-base ${large.padding}`,
     label: 'text-sm',
-    prependIcon: 'ml-3.5 size-5 bg-cover',
-    appendIcon: 'mr-3.5 size-5 bg-cover'
+    prependIcon: `${large.marginLeft} ${large.iconSize} bg-cover`,
+    appendIcon: `${large.marginRight} ${large.iconSize} bg-cover`
   },
   'x-large': {
-    wrapper: 'h-14',
-    input: 'text-base placeholder:text-base py-2 px-5',
+    wrapper: xLarge.height,
+    input: `text-base placeholder:text-base ${xLarge.padding}`,
     label: 'text-sm',
-    prependIcon: 'ml-5 size-5 bg-cover',
-    appendIcon: 'mr-5 size-5 bg-cover'
+    prependIcon: `${xLarge.marginLeft} ${xLarge.iconSize} bg-cover`,
+    appendIcon: `${xLarge.marginRight} ${xLarge.iconSize} bg-cover`
   }
 }

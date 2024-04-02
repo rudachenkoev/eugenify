@@ -1,32 +1,36 @@
+import size from '@/configs/sizes'
+
+const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
+
 export default {
   'x-small': {
-    btn: 'h-6 text-xs py-1 px-2',
-    icon: 'size-2.5 bg-cover',
-    prependIcon: 'mr-1 size-2.5 bg-cover',
-    appendIcon: 'ml-1 size-2.5 bg-cover'
+    btn: `${xSmall.height} text-xs ${xSmall.padding}`,
+    icon: `${xSmall.iconSize} bg-cover`,
+    prependIcon: `${xSmall.marginRight} ${xSmall.iconSize} bg-cover`,
+    appendIcon: `${xSmall.marginLeft} ${xSmall.iconSize} bg-cover`
   },
   small: {
-    btn: 'h-7 text-sm py-1.5 px-2.5',
-    icon: 'size-3 bg-cover',
-    prependIcon: 'mr-1.5 size-3 bg-cover',
-    appendIcon: 'ml-1.5 size-3 bg-cover'
+    btn: `${small.height} text-sm ${small.padding}`,
+    icon: `${small.iconSize} bg-cover`,
+    prependIcon: `${small.marginRight} ${small.iconSize} bg-cover`,
+    appendIcon: `${small.marginLeft} ${small.iconSize} bg-cover`
   },
   medium: {
-    btn: 'h-8 text-base py-2 px-3',
-    icon: 'size-3.5 bg-cover',
-    prependIcon: 'mr-2 size-3.5 bg-cover',
-    appendIcon: 'ml-2 size-3.5 bg-cover'
+    btn: `${medium.height} text-base ${medium.padding}`,
+    icon: `${medium.iconSize} bg-cover`,
+    prependIcon: `${medium.marginRight} ${medium.iconSize} bg-cover`,
+    appendIcon: `${medium.marginLeft} ${medium.iconSize} bg-cover`
   },
   large: {
-    btn: 'h-9 text-lg py-2 px-3.5',
-    icon: 'size-4 bg-cover',
-    prependIcon: 'mr-2 size-4 bg-cover',
-    appendIcon: 'ml-2 size-4 bg-cover'
+    btn: `${large.height} text-lg ${large.padding}`,
+    icon: `${large.iconSize} bg-cover`,
+    prependIcon: `${large.marginRight} ${large.iconSize} bg-cover`,
+    appendIcon: `${large.marginLeft} ${large.iconSize} bg-cover`
   },
   'x-large': {
-    btn: 'h-10 text-xl py-2 px-3.5',
-    icon: 'size-5 bg-cover',
-    prependIcon: 'mr-2 size-5 bg-cover',
-    appendIcon: 'ml-2 size-5 bg-cover'
+    btn: `${xLarge.height} text-xl ${xLarge.padding}`,
+    icon: `${xLarge.iconSize} bg-cover`,
+    prependIcon: `${xLarge.marginRight} ${xLarge.iconSize} bg-cover`,
+    appendIcon: `${xLarge.marginLeft} ${xLarge.iconSize} bg-cover`
   }
 }

@@ -1,22 +1,26 @@
+import size from '@/configs/sizes'
+
+const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
+
 export default {
   'x-small': {
-    spinner: 'size-2.5',
-    text: 'text-xs ml-1'
+    spinner: xSmall.iconSize,
+    text: `text-xs ${xSmall.marginLeft}`
   },
   small: {
-    spinner: 'size-3',
-    text: 'text-sm ml-1.5'
+    spinner: small.iconSize,
+    text: `text-sm ${small.marginLeft}`
   },
   medium: {
-    spinner: 'size-3.5',
-    text: 'text-base ml-2'
+    spinner: medium.iconSize,
+    text: `text-base ${medium.marginLeft}`
   },
   large: {
-    spinner: 'size-4',
-    text: 'text-lg ml-2'
+    spinner: large.iconSize,
+    text: `text-lg ${large.iconSize}`
   },
   'x-large': {
-    spinner: 'size-5',
-    text: 'text-xl ml-2'
+    spinner: xLarge.iconSize,
+    text: `text-xl ${xLarge.iconSize}`
   }
 }
