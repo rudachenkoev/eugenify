@@ -83,7 +83,7 @@ const customStyles = computed(() => {
       <slot name="append">
         <i
           v-if="!!appendIcon"
-          :class="[sizeClasses.appendIcon, 'fill-white']"
+          :class="sizeClasses.appendIcon"
           :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
         />
       </slot>

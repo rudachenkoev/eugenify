@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type PropType, type Ref } from 'vue'
+import { computed, ref, type PropType } from 'vue'
 // import { ErrorMessage } from '@/types'
 import COLORS from './colors'
 import SIZES from './sizes'
@@ -26,13 +26,18 @@ const props = defineProps({
   },
   // errorMessages: { type: Array as PropType<ErrorMessage[]>, default: [] },
   disabled: { type: Boolean, default: false },
-  flat: { type: Boolean, default: false }
+  flat: { type: Boolean, default: false },
+  prependIcon: { type: String, default: '' },
+  appendIcon: { type: String, default: '' }
 })
 const emit = defineEmits(['update:modelValue', 'blur', 'keyup.enter', 'focus'])
 
 const fieldType = ref(props.type)
-const isFocused:Ref<boolean> = ref(false)
-// const passwordAppendInnerIcon = computed<string>(() => fieldType.value === 'password' ? 'eye' : 'eye-slash')
+const isFocused = ref<boolean>(false)
+const passwordAppendBackgroundUrl = computed<string>(() => {
+  const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
+  return `url('/assets/icons/${passwordIcon}.svg')`
+})
 
 const handleInput = (e: Event):void => emit('update:modelValue', (e.target as HTMLInputElement).value)
 const handeFocus = (e:Event):void => {
@@ -45,7 +50,7 @@ const handleBlur = (e:Event):void => {
 }
 
 const defaultWrapperClasses = 'w-fit flex items-center transition-all'
-const defaultInputClasses = 'size-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
 // Colors
 const colorClasses = computed(() => COLORS[props.color] || {})
 // Sizes
@@ -64,8 +69,15 @@ const sizeClasses = computed(() => SIZES[props.size] || {})
         sizeClasses.wrapper
       ]"
     >
+      <slot name="prepend">
+        <i
+          v-if="!!prependIcon"
+          :class="sizeClasses.prependIcon"
+          :style="{ backgroundImage: 'url(' + prependIcon + ')' }"
+        />
+      </slot>
+
       <input
-        ref="inputRef"
         :type="fieldType"
         :value="modelValue"
         :placeholder="placeholder || label"
@@ -76,11 +88,20 @@ const sizeClasses = computed(() => SIZES[props.size] || {})
         @keyup.enter="$emit('keyup.enter')"
         @focus="handeFocus"
       />
-<!--      <i-->
-<!--        v-if="type === 'password'"-->
-<!--        :class="`fa-regular fa-${passwordAppendInnerIcon} cursor-pointer opacity-70 hover:opacity-100 transition ease-in-out duration-300`"-->
-<!--        @click="fieldType = fieldType === 'password' ? 'text' : 'password'"-->
-<!--      />-->
+
+      <slot name="append">
+        <i
+          v-if="!!appendIcon"
+          :class="sizeClasses.appendIcon"
+          :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
+        />
+        <i
+          v-else-if="type === 'password'"
+          :class="[sizeClasses.appendIcon, 'cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300']"
+          :style="{ backgroundImage: passwordAppendBackgroundUrl }"
+          @click="fieldType = fieldType === 'password' ? 'text' : 'password'"
+        />
+      </slot>
     </div>
   </div>
 </template>

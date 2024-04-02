@@ -35,6 +35,14 @@ export default {
     variant: {
       control: 'select',
       options: ['default', 'outlined', 'text']
+    },
+    prependIcon: {
+      name: 'prepend-icon',
+      control: 'text'
+    },
+    appendIcon: {
+      name: 'append-icon',
+      control: 'text'
     }
   }
 } as Meta<typeof eInput>
