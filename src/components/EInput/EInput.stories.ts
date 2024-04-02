@@ -56,39 +56,53 @@ const Template: StoryFn<typeof eInput> = args => ({
 
 export const Default = Template.bind({})
 
-// export const Colors = () => ({
-//   components: { eInput },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-input color="primary" text="Primary" />
-//       <e-input color="secondary" text="Secondary" />
-//       <e-input color="success" text="Success" />
-//       <e-input color="error" text="Error" />
-//     </div>
-//   `
-// })
-//
-// export const Sizes = () => ({
-//   components: { eInput },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-input size="x-large" text="X-large" />
-//       <e-input size="large" text="Large" />
-//       <e-input size="medium" text="Medium" />
-//       <e-input size="small" text="Small" />
-//       <e-input size="x-small" text="X-small" />
-//     </div>
-//   `
-// })
-//
-// export const NoText = () => ({
-//   components: { eInput },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-input color="primary" no-text />
-//       <e-input color="secondary" no-text />
-//       <e-input color="success" no-text />
-//       <e-input color="error" no-text />
-//     </div>
-//   `
-// })
+export const Variants = () => ({
+  components: { eInput },
+  template: `
+    <div class="flex gap-3">
+      <e-input variant="default" label="Default variant" />
+      <e-input variant="outlined" label="Outlined variant" />
+      <e-input variant="text" label="Text variant" />
+    </div>
+  `
+})
+
+export const Colors = () => ({
+  components: { eInput },
+  template: `
+    <div class="flex gap-3">
+      <e-input color="primary" label="Primary color" />
+      <e-input color="secondary" label="Secondary color" />
+      <e-input color="success" label="Success color" />
+      <e-input color="error" label="Error color" />
+    </div>
+  `
+})
+
+export const Sizes = () => ({
+  components: { eInput },
+  template: `
+    <div class="flex gap-3">
+      <e-input size="x-large" label="X-large" />
+      <e-input size="large" label="Large" />
+      <e-input size="medium" label="Medium" />
+      <e-input size="small" label="Small" />
+      <e-input size="x-small" label="X-small" />
+    </div>
+  `
+})
+
+export const Icons = () => ({
+  components: { eInput },
+  template: `
+    <div class="flex gap-3">
+      <e-input prepend-icon="/assets/icons/eye.svg" label="Prepend icon" />
+      <e-input append-icon="/assets/icons/eye-slash.svg" label="Append icon" />
+    </div>
+  `
+})
+
+export const AdvancedPasswordType = () => ({
+  components: { eInput },
+  template: '<e-input type="password" label="Password" placeholder="Enter your password"/>'
+})

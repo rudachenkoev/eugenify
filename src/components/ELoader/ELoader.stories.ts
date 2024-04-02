@@ -70,5 +70,5 @@ export const Sizes = () => ({
 
 export const NoText = () => ({
   components: { eLoader },
-  template: '<e-loader color="primary" no-text />'
+  template: '<e-loader no-text />'
 })
