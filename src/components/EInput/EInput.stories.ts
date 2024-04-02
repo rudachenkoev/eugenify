@@ -18,6 +18,7 @@ export default {
     variant: 'default',
     color: 'primary',
     size: 'medium',
+    type: 'text',
     disabled: false
   },
   argTypes: {

@@ -1,30 +1,20 @@
 <script setup lang="ts">
 import { computed, ref, type PropType } from 'vue'
-// import { ErrorMessage } from '@/types'
 import COLORS from './colors'
 import SIZES from './sizes'
+import { ColorType, SizeType, VariantType } from '@/types'
 //
 const props = defineProps({
   modelValue: { type: [String, Number] },
   label: { type: String, default: '' },
   placeholder: { type: String, default: '' },
   type: {
-    type: String as PropType<'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel'>,
+    type: String as PropType<'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'>,
     default: 'text'
   },
-  color: {
-    type: String as PropType<'primary' | 'secondary' | 'error' | 'success'>,
-    default: 'primary'
-  },
-  size: {
-    type: String as PropType<'x-small' | 'small' | 'medium' | 'large' | 'x-large'>,
-    default: 'medium'
-  },
-  variant: {
-    type: String as PropType<'default' | 'outlined' | 'text'>,
-    default: 'default'
-  },
-  // errorMessages: { type: Array as PropType<ErrorMessage[]>, default: [] },
+  color: { type: String as PropType<ColorType>, default: 'primary' },
+  size: { type: String as PropType<SizeType>, default: 'medium' },
+  variant: { type: String as PropType<VariantType>, default: 'default' },
   disabled: { type: Boolean, default: false },
   flat: { type: Boolean, default: false },
   prependIcon: { type: String, default: '' },

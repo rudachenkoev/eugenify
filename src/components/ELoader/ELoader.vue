@@ -2,17 +2,12 @@
 import { computed, PropType } from 'vue'
 import COLORS from './colors'
 import SIZES from './sizes'
+import { ColorType, SizeType } from '@/types'
 
 const props = defineProps({
   text: { type: String, default: 'Loading...' },
-  color: {
-    type: String as PropType<'primary' | 'secondary' | 'error' | 'success'>,
-    default: 'primary'
-  },
-  size: {
-    type: String as PropType<'x-small' | 'small' | 'medium' | 'large' | 'x-large'>,
-    default: 'medium'
-  },
+  color: { type: String as PropType<ColorType>, default: 'primary' },
+  size: { type: String as PropType<SizeType>,  default: 'medium' },
   noText: { type: Boolean, default: false }
 })
 

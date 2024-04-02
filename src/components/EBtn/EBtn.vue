@@ -4,6 +4,7 @@ import { isHex } from '@/helpers/colors'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
 import COLORS from './colors'
+import { ColorType, SizeType, VariantType } from '@/types'
 
 const props = defineProps({
   text: { type: String, default: '' },
@@ -13,33 +14,12 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: 'Loading...' },
-  variant: {
-    type: String as PropType<'default' | 'outlined' | 'text'>,
-    default: 'default'
-  },
-  size: {
-    type: String as PropType<'x-small' | 'small' | 'medium' | 'large' | 'x-large'>,
-    default: 'medium'
-  },
-  color: {
-    type: String as PropType<'primary' | 'secondary' | 'error' | 'success'>,
-    default: 'primary'
-  },
-  backgroundColor: {
-    type: String,
-    default: '',
-    validator (value) { return (value && isHex(value)) || !value }
-  },
-  fontColor: {
-    type: String,
-    default: '',
-    validator (value) { return (value && isHex(value)) || !value }
-  },
-  borderColor: {
-    type: String,
-    default: '',
-    validator (value) { return (value && isHex(value)) || !value }
-  }
+  variant: { type: String as PropType<VariantType>, default: 'default' },
+  size: { type: String as PropType<SizeType>, default: 'medium' },
+  color: { type: String as PropType<ColorType>, default: 'primary' },
+  backgroundColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } },
+  fontColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } },
+  borderColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } }
 })
 
 const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition-all'
