@@ -17,9 +17,9 @@ const props = defineProps({
   variant: { type: String as PropType<VariantType>, default: 'default' },
   size: { type: String as PropType<SizeType>, default: 'medium' },
   color: { type: String as PropType<ColorType>, default: 'primary' },
-  backgroundColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } },
-  fontColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } },
-  borderColor: { type: String, default: '', validator (value) { return (value && isHex(value)) || !value } }
+  backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
+  fontColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
+  borderColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } }
 })
 
 const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition-all'
