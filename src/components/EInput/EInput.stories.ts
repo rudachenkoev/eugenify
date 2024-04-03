@@ -53,9 +53,9 @@ export const Variants = () => ({
   components: { eInput },
   template: `
     <div class="flex gap-3">
-      <e-input variant="default" label="Default variant" />
-      <e-input variant="outlined" label="Outlined variant" />
-      <e-input variant="text" label="Text variant" />
+      <e-input variant="default" label="Default" />
+      <e-input variant="outlined" label="Outlined" />
+      <e-input variant="text" label="Text" />
     </div>
   `
 })
@@ -64,10 +64,10 @@ export const Colors = () => ({
   components: { eInput },
   template: `
     <div class="flex gap-3">
-      <e-input color="primary" label="Primary color" />
-      <e-input color="secondary" label="Secondary color" />
-      <e-input color="success" label="Success color" />
-      <e-input color="error" label="Error color" />
+      <e-input color="primary" label="Primary" />
+      <e-input color="secondary" label="Secondary" />
+      <e-input color="success" label="Success" />
+      <e-input color="error" label="Error" />
     </div>
   `
 })
