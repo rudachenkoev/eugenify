@@ -20,29 +20,27 @@ const props = defineProps({
   prependIcon: { type: String, default: '' },
   appendIcon: { type: String, default: '' }
 })
-const emit = defineEmits(['update:modelValue', 'blur', 'keyup.enter', 'focus'])
+const emit = defineEmits(['input', 'blur', 'keyup.enter', 'focus'])
+const modelValue = defineModel()
 
 const fieldType = ref<InputType>(props.type)
 const passwordAppendBackgroundUrl = computed<string>(() => {
   const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
   return `url('/assets/icons/${passwordIcon}.svg')`
 })
-
-const defaultWrapperClasses = 'w-fit flex items-center transition-all'
-const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
-// Colors
-const colorClasses = computed(() => COLORS[props.color] || {})
-// Sizes
-const sizeClasses = computed(() => SIZES[props.size] || {})
-
 const isFocused = ref<boolean>(false)
+
+// Classes
+const defaultWrapperClasses = 'w-fit flex items-center transition'
+const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const colorClasses = computed(() => COLORS[props.color] || {})
+const sizeClasses = computed(() => SIZES[props.size] || {})
 const behaviorClasses = computed<string>(() => {
   if (props.disabled) return 'opacity-50'
   else return colorClasses.value[props.variant][isFocused.value ? 'focused' : 'unfocused']
 })
 
-const handleInput = (e: Event):void => emit('update:modelValue', (e.target as HTMLInputElement).value)
-const handeFocus = (e:Event):void => {
+const handleFocus = (e:Event):void => {
   isFocused.value = true
   emit('focus', e)
 }
@@ -78,16 +76,15 @@ const changeInputType = (type:InputType):void => {
       </slot>
 
       <input
+        v-model="modelValue"
         :type="fieldType"
-        :value="modelValue"
         :placeholder="placeholder || label"
         :disabled="disabled"
         :readonly="readonly"
         :class="[defaultInputClasses, sizeClasses.input]"
-        @input="handleInput"
         @blur="handleBlur"
         @keyup.enter="$emit('keyup.enter')"
-        @focus="handeFocus"
+        @focus="handleFocus"
       />
 
       <slot name="append">

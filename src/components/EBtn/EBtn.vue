@@ -23,10 +23,9 @@ const props = defineProps({
   borderColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } }
 })
 
-const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition-all'
-// Colors
+// Classes
+const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition'
 const colorClasses = computed(() => COLORS[props.color] || {})
-// Sizes
 const sizeClasses = computed(() => SIZES[props.size] || {})
 // Colors customization
 const customStyles = computed(() => {

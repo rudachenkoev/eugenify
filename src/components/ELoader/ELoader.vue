@@ -11,7 +11,7 @@ const props = defineProps({
   noText: { type: Boolean, default: false }
 })
 
-// Colors
+// Classes
 const colorClasses = computed(() => COLORS[props.color])
 const sizeClasses = computed(() => SIZES[props.size] || {})
 </script>
