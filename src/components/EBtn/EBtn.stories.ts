@@ -36,6 +36,7 @@ export default {
     },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
+    flat: { control: 'boolean' },
     loadingText: {
       name: 'loading-text',
       control: 'text'

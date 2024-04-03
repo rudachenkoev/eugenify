@@ -13,6 +13,7 @@ const props = defineProps({
   appendIcon: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
+  flat: { type: Boolean, default: false },
   loadingText: { type: String, default: 'Loading...' },
   variant: { type: String as PropType<VariantType>, default: 'default' },
   size: { type: String as PropType<SizeType>, default: 'medium' },
@@ -36,7 +37,13 @@ const customStyles = computed(() => {
 
 <template>
   <button
-    :class="[defaultClasses, colorClasses[variant], sizeClasses.btn, loading && 'pointer-events-none']"
+    :class="[
+      defaultClasses,
+      colorClasses[variant],
+      sizeClasses.btn,
+      loading && 'pointer-events-none',
+      !flat && 'shadow-sm'
+    ]"
     :style="customStyles"
     :disabled="disabled"
     type="button"
