@@ -1,7 +1,7 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eLoader from './ELoader.vue'
-import { Values as SizeValues} from '@/configs/sizes'
-import { Values as ColorValues } from '@/configs/colors'
+import { Values as SizeValues} from '@configs/sizes'
+import { Values as ColorValues } from '@configs/colors'
 
 export default {
   title: 'e-loader',

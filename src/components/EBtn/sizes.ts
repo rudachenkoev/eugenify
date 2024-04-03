@@ -1,4 +1,4 @@
-import size from '@/configs/sizes'
+import size from '@configs/sizes'
 
 const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
 

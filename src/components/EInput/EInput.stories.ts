@@ -1,8 +1,8 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eInput from './EInput.vue'
-import { Values as SizeValues } from '@/configs/sizes'
-import { Values as ColorValues } from '@/configs/colors'
-import { Values as VariantValues } from '@/configs/variants'
+import { Values as SizeValues } from '@configs/sizes'
+import { Values as ColorValues } from '@configs/colors'
+import { Values as VariantValues } from '@configs/variants'
 
 export default {
   title: 'e-input',
