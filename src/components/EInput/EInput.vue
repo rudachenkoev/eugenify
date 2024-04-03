@@ -73,7 +73,7 @@ const changeInputType = (type:InputType):void => {
         <i
           v-if="!!prependIcon"
           :class="[sizeClasses.prependIcon, 'bg-cover']"
-          :style="{ backgroundImage: 'url(' + prependIcon + ')' }"
+          :style="{ backgroundImage: `url('${prependIcon}')` }"
         />
       </slot>
 
@@ -94,7 +94,7 @@ const changeInputType = (type:InputType):void => {
         <i
           v-if="!!appendIcon"
           :class="[sizeClasses.appendIcon, 'bg-cover']"
-          :style="{ backgroundImage: 'url(' + appendIcon + ')' }"
+          :style="{ backgroundImage: `url('${appendIcon}')` }"
         />
         <i
           v-else-if="type === 'password'"
