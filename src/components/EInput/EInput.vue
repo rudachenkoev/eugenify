@@ -4,29 +4,41 @@ import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, SizeType, VariantType } from '@/types'
 //
+type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
+
 const props = defineProps({
   modelValue: { type: [String, Number] },
   label: { type: String, default: '' },
   placeholder: { type: String, default: '' },
-  type: {
-    type: String as PropType<'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'>,
-    default: 'text'
-  },
+  type: { type: String as PropType<InputType>, default: 'text' },
   color: { type: String as PropType<ColorType>, default: 'primary' },
   size: { type: String as PropType<SizeType>, default: 'medium' },
   variant: { type: String as PropType<VariantType>, default: 'default' },
   disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false },
   flat: { type: Boolean, default: false },
   prependIcon: { type: String, default: '' },
   appendIcon: { type: String, default: '' }
 })
 const emit = defineEmits(['update:modelValue', 'blur', 'keyup.enter', 'focus'])
 
-const fieldType = ref(props.type)
-const isFocused = ref<boolean>(false)
+const fieldType = ref<InputType>(props.type)
 const passwordAppendBackgroundUrl = computed<string>(() => {
   const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
   return `url('/assets/icons/${passwordIcon}.svg')`
+})
+
+const defaultWrapperClasses = 'w-fit flex items-center transition-all'
+const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+// Colors
+const colorClasses = computed(() => COLORS[props.color] || {})
+// Sizes
+const sizeClasses = computed(() => SIZES[props.size] || {})
+
+const isFocused = ref<boolean>(false)
+const behaviorClasses = computed<string>(() => {
+  if (props.disabled) return 'opacity-50'
+  else return colorClasses.value[props.variant][isFocused.value ? 'focused' : 'unfocused']
 })
 
 const handleInput = (e: Event):void => emit('update:modelValue', (e.target as HTMLInputElement).value)
@@ -39,12 +51,10 @@ const handleBlur = (e:Event):void => {
   emit('blur', e)
 }
 
-const defaultWrapperClasses = 'w-fit flex items-center transition-all'
-const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
-// Colors
-const colorClasses = computed(() => COLORS[props.color] || {})
-// Sizes
-const sizeClasses = computed(() => SIZES[props.size] || {})
+const changeInputType = (type:InputType):void => {
+  if (props.disabled) return
+  fieldType.value = type
+}
 </script>
 
 <template>
@@ -53,10 +63,10 @@ const sizeClasses = computed(() => SIZES[props.size] || {})
     <div
       :class="[
         defaultWrapperClasses,
-        !flat && 'shadow-sm',
         colorClasses[variant].initial,
-        colorClasses[variant][isFocused ? 'focused' : 'unfocused'],
-        sizeClasses.wrapper
+        sizeClasses.wrapper,
+        !flat && 'shadow-sm',
+        behaviorClasses
       ]"
     >
       <slot name="prepend">
@@ -72,6 +82,7 @@ const sizeClasses = computed(() => SIZES[props.size] || {})
         :value="modelValue"
         :placeholder="placeholder || label"
         :disabled="disabled"
+        :readonly="readonly"
         :class="[defaultInputClasses, sizeClasses.input]"
         @input="handleInput"
         @blur="handleBlur"
@@ -87,9 +98,9 @@ const sizeClasses = computed(() => SIZES[props.size] || {})
         />
         <i
           v-else-if="type === 'password'"
-          :class="[sizeClasses.appendIcon, 'cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300']"
+          :class="[sizeClasses.appendIcon, 'cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300 bg-cover']"
           :style="{ backgroundImage: passwordAppendBackgroundUrl }"
-          @click="fieldType = fieldType === 'password' ? 'text' : 'password'"
+          @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"
         />
       </slot>
     </div>

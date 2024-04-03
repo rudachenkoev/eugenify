@@ -19,32 +19,20 @@ export default {
     color: 'primary',
     size: 'medium',
     type: 'text',
-    disabled: false
+    disabled: false,
+    readonly: false
   },
   argTypes: {
     label: { control: 'text' },
     placeholder: { control: 'text' },
-    size: {
-      control: 'select',
-      options: ['x-small', 'small', 'medium', 'large', 'x-large']
-    },
+    size: { control: 'select', options: ['x-small', 'small', 'medium', 'large', 'x-large'] },
+    type: { control: 'select', options: ['text', 'number', 'date', 'email', 'password', 'search', 'tel', 'url'] },
     disabled: { control: 'boolean' },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'error', 'success']
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'outlined', 'text']
-    },
-    prependIcon: {
-      name: 'prepend-icon',
-      control: 'text'
-    },
-    appendIcon: {
-      name: 'append-icon',
-      control: 'text'
-    }
+    readonly: { control: 'boolean' },
+    color: { control: 'select', options: ['primary', 'secondary', 'error', 'success'] },
+    variant: { control: 'select', options: ['default', 'outlined', 'text'] },
+    prependIcon: { name: 'prepend-icon', control: 'text' },
+    appendIcon: { name: 'append-icon', control: 'text' }
   }
 } as Meta<typeof eInput>
 
