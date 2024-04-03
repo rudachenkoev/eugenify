@@ -7,23 +7,35 @@ import { ColorType, SizeType, VariantType } from '@/types'
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
 const props = defineProps({
-  modelValue: { type: [String, Number] },
+  /** Sets the label text. */
   label: { type: String, default: '' },
+  /** Sets the input’s placeholder text. */
   placeholder: { type: String, default: '' },
+  /** Default input’s <b>type</b> attribute. Some of the options have predefined configurations.  */
   type: { type: String as PropType<InputType>, default: 'text' },
+  /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
+  /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
+  /** Applies a distinct style to the component. */
   variant: { type: String as PropType<VariantType>, default: 'default' },
+  /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
+  /** Puts input in readonly state. */
   readonly: { type: Boolean, default: false },
+  /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
+  /** Prepends an icon inside the component’s input. Use the file path or a link to the icon. */
   prependIcon: { type: String, default: '' },
+  /** Appends an icon inside the component’s input. Use the file path or a link to the icon. */
   appendIcon: { type: String, default: '' }
 })
 const emit = defineEmits(['input', 'blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
+// Used to override the type of input
 const fieldType = ref<InputType>(props.type)
+// Icon-indicator of the status of an input with type "password"
 const passwordAppendBackgroundUrl = computed<string>(() => {
   const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
   return `url('/assets/icons/${passwordIcon}.svg')`

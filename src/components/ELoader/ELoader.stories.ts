@@ -1,5 +1,7 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eLoader from './ELoader.vue'
+import { Values as SizeValues} from '@/configs/sizes'
+import { Values as ColorValues } from '@/configs/colors'
 
 export default {
   title: 'e-loader',
@@ -20,18 +22,9 @@ export default {
   },
   argTypes: {
     text: { control: 'text' },
-    size: {
-      control: 'select',
-      options: ['x-small', 'small', 'medium', 'large', 'x-large']
-    },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'error', 'success']
-    },
-    noText: {
-      name: 'no-text',
-      control: 'boolean'
-    }
+    size: { control: 'select', options: SizeValues },
+    color: { control: 'select', options: ColorValues },
+    noText: { name: 'no-text', control: 'boolean' }
   }
 } as Meta<typeof eLoader>
 

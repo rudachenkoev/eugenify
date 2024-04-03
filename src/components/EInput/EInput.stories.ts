@@ -1,5 +1,8 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eInput from './EInput.vue'
+import { Values as SizeValues } from '@/configs/sizes'
+import { Values as ColorValues } from '@/configs/colors'
+import { Values as VariantValues } from '@/configs/variants'
 
 export default {
   title: 'e-input',
@@ -20,17 +23,19 @@ export default {
     size: 'medium',
     type: 'text',
     disabled: false,
-    readonly: false
+    readonly: false,
+    flat: false
   },
   argTypes: {
+    modelValue: { control: false },
     label: { control: 'text' },
     placeholder: { control: 'text' },
-    size: { control: 'select', options: ['x-small', 'small', 'medium', 'large', 'x-large'] },
     type: { control: 'select', options: ['text', 'number', 'date', 'email', 'password', 'search', 'tel', 'url'] },
     disabled: { control: 'boolean' },
     readonly: { control: 'boolean' },
-    color: { control: 'select', options: ['primary', 'secondary', 'error', 'success'] },
-    variant: { control: 'select', options: ['default', 'outlined', 'text'] },
+    size: { control: 'select', options: SizeValues },
+    color: { control: 'select', options: ColorValues },
+    variant: { control: 'select', options: VariantValues },
     prependIcon: { name: 'prepend-icon', control: 'text' },
     appendIcon: { name: 'append-icon', control: 'text' }
   }

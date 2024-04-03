@@ -1,5 +1,8 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eBtn from './EBtn.vue'
+import { Values as SizeValues } from '@/configs/sizes'
+import { Values as ColorValues } from '@/configs/colors'
+import { Values as VariantValues } from '@/configs/variants'
 
 export default {
   title: 'e-btn',
@@ -16,57 +19,26 @@ export default {
     text: 'Button',
     disabled: false,
     loading: false,
+    flat: false,
     variant: 'default',
     size: 'medium',
     color: 'primary'
   },
   argTypes: {
-    text: {
-      control: 'text',
-      if: { arg: 'icon', truthy: false }
-    },
+    text: { control: 'text', if: { arg: 'icon', truthy: false } },
     icon: { control: 'text' },
-    prependIcon: {
-      name: 'prepend-icon',
-      control: 'text'
-    },
-    appendIcon: {
-      name: 'append-icon',
-      control: 'text'
-    },
+    prependIcon: { name: 'prepend-icon', control: 'text' },
+    appendIcon: { name: 'append-icon', control: 'text' },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
     flat: { control: 'boolean' },
-    loadingText: {
-      name: 'loading-text',
-      control: 'text'
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'outlined', 'text']
-    },
-    size: {
-      control: 'select',
-      options: ['x-small', 'small', 'medium', 'large', 'x-large']
-    },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'error', 'success']
-    },
-    backgroundColor: {
-      name: 'background-color',
-      control: 'color',
-      if: { arg: 'variant', eq: 'default' }
-    },
-    fontColor: {
-      name: 'font-color',
-      control: 'color'
-    },
-    borderColor: {
-      name: 'border-color',
-      control: 'color',
-      if: { arg: 'variant', eq: 'outlined' }
-    }
+    loadingText: { name: 'loading-text', control: 'text' },
+    size: { control: 'select', options: SizeValues },
+    color: { control: 'select', options: ColorValues },
+    variant: { control: 'select', options: VariantValues },
+    backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
+    fontColor: { name: 'font-color', control: 'color' },
+    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } }
   }
 } as Meta<typeof eBtn>
 

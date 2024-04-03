@@ -5,9 +5,13 @@ import SIZES from './sizes'
 import { ColorType, SizeType } from '@/types'
 
 const props = defineProps({
+  /** Specify content text for the component. */
   text: { type: String, default: 'Loading...' },
+  /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
+  /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>,  default: 'medium' },
+  /** Removes the component text leaving only the spinner.  */
   noText: { type: Boolean, default: false }
 })
 

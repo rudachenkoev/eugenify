@@ -35,3 +35,4 @@ export default {
     marginRight: 'mr-5'
   }
 }
+export const Values = ['x-small', 'small', 'medium', 'large', 'x-large']
