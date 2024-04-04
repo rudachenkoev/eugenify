@@ -37,7 +37,9 @@ export default {
     color: { control: 'select', options: ColorValues },
     variant: { control: 'select', options: VariantValues },
     prependIcon: { name: 'prepend-icon', control: 'text' },
-    appendIcon: { name: 'append-icon', control: 'text' }
+    appendIcon: { name: 'append-icon', control: 'text' },
+    backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
+    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } }
   }
 } as Meta<typeof eInput>
 

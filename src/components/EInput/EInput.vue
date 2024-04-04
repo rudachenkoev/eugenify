@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, type PropType } from 'vue'
+import { isHex } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, SizeType, VariantType } from '@/types'
@@ -28,7 +29,11 @@ const props = defineProps({
   /** Prepends an icon inside the component’s input. Use the file path or a link to the icon. */
   prependIcon: { type: String, default: '' },
   /** Appends an icon inside the component’s input. Use the file path or a link to the icon. */
-  appendIcon: { type: String, default: '' }
+  appendIcon: { type: String, default: '' },
+  /** Changes the HEX value of the background color. Available only in conjunction with <b>variant-default</b>. */
+  backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
+  /** Changes the HEX value of the border color. Available only in conjunction with <b>variant-outlined</b>. */
+  borderColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
@@ -44,13 +49,18 @@ const passwordAppendBackgroundUrl = computed<string>(() => {
 const isFocused = ref<boolean>(false)
 
 // Classes
-const defaultWrapperClasses = 'w-fit flex items-center transition'
-const defaultInputClasses = 'h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition'
+const defaultInputClasses = 'e-input__input h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 const behaviorClasses = computed<string>(() => {
   if (props.disabled) return 'opacity-50'
   else return colorClasses.value[props.variant][isFocused.value ? 'focused' : 'unfocused']
+})
+// Colors customization
+const customStyles = computed(() => {
+  const { backgroundColor, borderColor } = props
+  return { backgroundColor, borderColor }
 })
 
 const handleFocus = (e:Event):void => {
@@ -69,8 +79,8 @@ const changeInputType = (type:InputType):void => {
 </script>
 
 <template>
-  <div>
-    <div :class="['text-secondary font-light mb-1', sizeClasses.label]">{{ label }}</div>
+  <div class="e-input">
+    <div :class="['e-input__label text-secondary font-light mb-1', sizeClasses.label]">{{ label }}</div>
     <div
       :class="[
         defaultWrapperClasses,
@@ -79,11 +89,12 @@ const changeInputType = (type:InputType):void => {
         !flat && 'shadow-sm',
         behaviorClasses
       ]"
+      :style="customStyles"
     >
       <slot name="prepend">
         <i
           v-if="!!prependIcon"
-          :class="[sizeClasses.prependIcon, 'bg-cover']"
+          :class="['e-input__prepend bg-cover', sizeClasses.prependIcon]"
           :style="{ backgroundImage: `url('${prependIcon}')` }"
         />
       </slot>
@@ -103,12 +114,12 @@ const changeInputType = (type:InputType):void => {
       <slot name="append">
         <i
           v-if="!!appendIcon"
-          :class="[sizeClasses.appendIcon, 'bg-cover']"
+          :class="['e-input__append bg-cover', sizeClasses.appendIcon]"
           :style="{ backgroundImage: `url('${appendIcon}')` }"
         />
         <i
           v-else-if="type === 'password'"
-          :class="[sizeClasses.appendIcon, 'cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300 bg-cover']"
+          :class="['e-input__append cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300 bg-cover', sizeClasses.appendIcon]"
           :style="{ backgroundImage: passwordAppendBackgroundUrl }"
           @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"
         />

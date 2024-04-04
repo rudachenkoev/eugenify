@@ -38,7 +38,7 @@ const props = defineProps({
 })
 
 // Classes
-const defaultClasses = 'flex items-center w-fit outline-none rounded disabled:opacity-50 transition'
+const defaultClasses = 'e-btn flex items-center w-fit outline-none rounded disabled:opacity-50 transition'
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 // Colors customization
@@ -68,22 +68,22 @@ const customStyles = computed(() => {
       <slot name="prepend">
         <i
           v-if="!!prependIcon"
-          :class="[sizeClasses.prependIcon, 'bg-cover']"
+          :class="['e-btn__prepend bg-cover', sizeClasses.prependIcon]"
           :style="{ backgroundImage: `url('${prependIcon}')` }"
         />
       </slot>
 
       <i
         v-if="!!icon"
-        :class="[sizeClasses.icon, 'bg-cover']"
+        :class="['e-btn__icon bg-cover', sizeClasses.icon]"
         :style="{ backgroundImage: `url('${icon}')` }"
       />
-      <slot v-else>{{ text }}</slot>
+      <slot v-else class="e-btn__text">{{ text }}</slot>
 
       <slot name="append">
         <i
           v-if="!!appendIcon"
-          :class="[sizeClasses.appendIcon, 'bg-cover']"
+          :class="['e-btn__append bg-cover', sizeClasses.appendIcon]"
           :style="{ backgroundImage: `url('${appendIcon}')` }"
         />
       </slot>
