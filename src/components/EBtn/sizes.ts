@@ -5,32 +5,27 @@ const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
 export default {
   'x-small': {
     btn: `${xSmall.height} text-xs ${xSmall.padding}`,
-    icon: xSmall.iconSize,
-    prependIcon: `${xSmall.marginRight} ${xSmall.iconSize}`,
-    appendIcon: `${xSmall.marginLeft} ${xSmall.iconSize}`
+    prependIcon: xSmall.marginRight,
+    appendIcon: xSmall.marginLeft
   },
   small: {
     btn: `${small.height} text-sm ${small.padding}`,
-    icon: small.iconSize,
-    prependIcon: `${small.marginRight} ${small.iconSize}`,
-    appendIcon: `${small.marginLeft} ${small.iconSize}`
+    prependIcon: small.marginRight,
+    appendIcon: small.marginLeft
   },
   medium: {
     btn: `${medium.height} text-base ${medium.padding}`,
-    icon: medium.iconSize,
-    prependIcon: `${medium.marginRight} ${medium.iconSize}`,
-    appendIcon: `${medium.marginLeft} ${medium.iconSize}`
+    prependIcon: medium.marginRight,
+    appendIcon: medium.marginLeft
   },
   large: {
     btn: `${large.height} text-lg ${large.padding}`,
-    icon: large.iconSize,
-    prependIcon: `${large.marginRight} ${large.iconSize}`,
-    appendIcon: `${large.marginLeft} ${large.iconSize}`
+    prependIcon: large.marginRight,
+    appendIcon: large.marginLeft
   },
   'x-large': {
     btn: `${xLarge.height} text-xl ${xLarge.padding}`,
-    icon: xLarge.iconSize,
-    prependIcon: `${xLarge.marginRight} ${xLarge.iconSize}`,
-    appendIcon: `${xLarge.marginLeft} ${xLarge.iconSize}`
+    prependIcon: xLarge.marginRight,
+    appendIcon: xLarge.marginLeft
   }
 }

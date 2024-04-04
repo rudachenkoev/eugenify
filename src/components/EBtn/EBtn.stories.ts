@@ -101,9 +101,9 @@ export const Icons = () => ({
   components: { eBtn },
   template: `
     <div class="flex gap-3">
-      <e-btn prepend-icon="/assets/icons/search.svg" text="Prepend icon" />
-      <e-btn append-icon="/assets/icons/search.svg" text="Append icon" />
-      <e-btn icon="/assets/icons/search.svg" />
+      <e-btn prepend-icon="bookmarks" text="Prepend material icon" />
+      <e-btn append-icon="/assets/icons/search.svg" text="Append local icon" />
+      <e-btn icon="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>
   `
 })

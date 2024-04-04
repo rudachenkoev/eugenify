@@ -5,15 +5,16 @@ import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
 import COLORS from './colors'
 import { ColorType, SizeType, VariantType } from '@/types'
+import eIcon from '@/components/EIcon/EIcon.vue'
 
 const props = defineProps({
   /** Specify content text for the component. */
   text: { type: String, default: '' },
-  /** Icon to be used instead of the button text. Use the file path or a link to the icon.  */
+  /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the <b>source</b> prop from <b>e-icon</b>  */
   icon: { type: String, default: '' },
-  /** Prepends an icon inside the component. Use the file path or a link to the icon. */
+  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
-  /** Appends an icon inside the component. Use the file path or a link to the icon. */
+  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
   /** Removes the ability to click or target the button. */
   disabled: { type: Boolean, default: false },
@@ -66,25 +67,28 @@ const customStyles = computed(() => {
     </slot>
     <template v-else>
       <slot name="prepend">
-        <i
+        <e-icon
           v-if="!!prependIcon"
-          :class="['e-btn__prepend bg-cover', sizeClasses.prependIcon]"
-          :style="{ backgroundImage: `url('${prependIcon}')` }"
+          :class="['e-btn__prepend', sizeClasses.prependIcon]"
+          :source="prependIcon"
+          :size="size"
         />
       </slot>
 
-      <i
+      <e-icon
         v-if="!!icon"
-        :class="['e-btn__icon bg-cover', sizeClasses.icon]"
-        :style="{ backgroundImage: `url('${icon}')` }"
+        class="e-btn__icon"
+        :source="icon"
+        :size="size"
       />
-      <slot v-else class="e-btn__text">{{ text }}</slot>
+      <slot v-else>{{ text }}</slot>
 
       <slot name="append">
-        <i
+        <e-icon
           v-if="!!appendIcon"
-          :class="['e-btn__append bg-cover', sizeClasses.appendIcon]"
-          :style="{ backgroundImage: `url('${appendIcon}')` }"
+          :class="['e-btn__append', sizeClasses.appendIcon]"
+          :source="appendIcon"
+          :size="size"
         />
       </slot>
     </template>

@@ -91,8 +91,8 @@ export const Icons = () => ({
   components: { eInput },
   template: `
     <div class="flex gap-3">
-      <e-input prepend-icon="/assets/icons/eye.svg" label="Prepend icon" />
-      <e-input append-icon="/assets/icons/eye-slash.svg" label="Append icon" />
+      <e-input prepend-icon="call" label="Prepend icon" />
+      <e-input append-icon="euro_symbol" label="Append icon" />
     </div>
   `
 })

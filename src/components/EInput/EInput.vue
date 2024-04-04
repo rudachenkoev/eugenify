@@ -4,6 +4,7 @@ import { isHex } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, SizeType, VariantType } from '@/types'
+import eIcon from '@/components/EIcon/EIcon.vue'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
@@ -26,9 +27,9 @@ const props = defineProps({
   readonly: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
-  /** Prepends an icon inside the component’s input. Use the file path or a link to the icon. */
+  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
-  /** Appends an icon inside the component’s input. Use the file path or a link to the icon. */
+  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
   /** Changes the HEX value of the background color. Available only in conjunction with <b>variant-default</b>. */
   backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
@@ -41,11 +42,7 @@ const modelValue = defineModel()
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
 watch(() => props.type, value => fieldType.value = value)
-// Icon-indicator of the status of an input with type "password"
-const passwordAppendBackgroundUrl = computed<string>(() => {
-  const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
-  return `url('/assets/icons/${passwordIcon}.svg')`
-})
+
 const isFocused = ref<boolean>(false)
 
 // Classes
@@ -92,10 +89,11 @@ const changeInputType = (type:InputType):void => {
       :style="customStyles"
     >
       <slot name="prepend">
-        <i
+        <e-icon
           v-if="!!prependIcon"
-          :class="['e-input__prepend bg-cover', sizeClasses.prependIcon]"
-          :style="{ backgroundImage: `url('${prependIcon}')` }"
+          :class="['e-input__prepend', sizeClasses.prependIcon]"
+          :source="prependIcon"
+          :size="size"
         />
       </slot>
 
@@ -112,15 +110,17 @@ const changeInputType = (type:InputType):void => {
       />
 
       <slot name="append">
-        <i
+        <e-icon
           v-if="!!appendIcon"
-          :class="['e-input__append bg-cover', sizeClasses.appendIcon]"
-          :style="{ backgroundImage: `url('${appendIcon}')` }"
+          :class="['e-input__append', sizeClasses.appendIcon]"
+          :source="appendIcon"
+          :size="size"
         />
-        <i
+        <e-icon
           v-else-if="type === 'password'"
-          :class="['e-input__append cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300 bg-cover', sizeClasses.appendIcon]"
-          :style="{ backgroundImage: passwordAppendBackgroundUrl }"
+          :class="['cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300', sizeClasses.appendIcon]"
+          :source="fieldType === 'password' ? 'visibility' : 'visibility_off'"
+          :size="size"
           @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"
         />
       </slot>
