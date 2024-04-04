@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type PropType } from 'vue'
+import { computed, ref, watch, type PropType } from 'vue'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, SizeType, VariantType } from '@/types'
@@ -30,11 +30,12 @@ const props = defineProps({
   /** Appends an icon inside the component’s input. Use the file path or a link to the icon. */
   appendIcon: { type: String, default: '' }
 })
-const emit = defineEmits(['input', 'blur', 'keyup.enter', 'focus'])
+const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
+watch(() => props.type, value => fieldType.value = value)
 // Icon-indicator of the status of an input with type "password"
 const passwordAppendBackgroundUrl = computed<string>(() => {
   const passwordIcon = fieldType.value === 'password' ? 'eye' : 'eye-slash'
