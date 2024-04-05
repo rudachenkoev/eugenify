@@ -16,7 +16,13 @@ const props = defineProps({
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** Sets the color of the icon. */
-  color: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } }
+  color: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  }
 })
 
 const isPathOrUrl = computed<boolean>(() => {
@@ -43,11 +49,7 @@ const customStyles = computed(() => {
     :class="['e-icon block bg-cover', sizeClasses]"
     :style="{ backgroundImage: `url('${source}')` }"
   />
-  <span
-    v-else
-    :class="['e-icon', iconClass, sizeClasses]"
-    :style="customStyles"
-  >
+  <span v-else :class="['e-icon', iconClass, sizeClasses]" :style="customStyles">
     {{ source }}
   </span>
 </template>

@@ -28,7 +28,9 @@ export default {
 
 const Template: StoryFn<typeof eIcon> = args => ({
   components: { eIcon },
-  setup() { return { args } },
+  setup() {
+    return { args }
+  },
   template: '<e-icon v-bind="args" />'
 })
 

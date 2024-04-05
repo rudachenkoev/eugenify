@@ -34,30 +34,58 @@ const props = defineProps({
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
-  prependIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  prependIconColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
   appendIcon: { type: String, default: '' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
-  appendIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  appendIconColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  },
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
-  backgroundColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  backgroundColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  },
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
-  borderColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } }
+  borderColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
-watch(() => props.type, value => fieldType.value = value)
+watch(
+  () => props.type,
+  value => (fieldType.value = value)
+)
 
 const isFocused = ref<boolean>(false)
 
 // Classes
 const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition'
-const defaultInputClasses = 'e-input__input h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const defaultInputClasses =
+  'e-input__input h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 const behaviorClasses = computed<string>(() => {
@@ -70,16 +98,16 @@ const customStyles = computed(() => {
   return { backgroundColor, borderColor }
 })
 
-const handleFocus = (e:Event):void => {
+const handleFocus = (e: Event): void => {
   isFocused.value = true
   emit('focus', e)
 }
-const handleBlur = (e:Event):void => {
+const handleBlur = (e: Event): void => {
   isFocused.value = false
   emit('blur', e)
 }
 
-const changeInputType = (type:InputType):void => {
+const changeInputType = (type: InputType): void => {
   if (props.disabled) return
   fieldType.value = type
 }
@@ -87,7 +115,9 @@ const changeInputType = (type:InputType):void => {
 
 <template>
   <div class="e-input">
-    <div :class="['e-input__label text-secondary font-light mb-1', sizeClasses.label]">{{ label }}</div>
+    <div :class="['e-input__label mb-1 font-light text-secondary', sizeClasses.label]">
+      {{ label }}
+    </div>
     <div
       :class="[
         defaultWrapperClasses,
@@ -132,7 +162,10 @@ const changeInputType = (type:InputType):void => {
         />
         <e-icon
           v-else-if="type === 'password'"
-          :class="['cursor-pointer opacity-60 hover:opacity-100 transition ease-in-out duration-300', sizeClasses.appendIcon]"
+          :class="[
+            'cursor-pointer opacity-60 transition duration-300 ease-in-out hover:opacity-100',
+            sizeClasses.appendIcon
+          ]"
           :source="fieldType === 'password' ? 'visibility' : 'visibility_off'"
           :size="size"
           @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"

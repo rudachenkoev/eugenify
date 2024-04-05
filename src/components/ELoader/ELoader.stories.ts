@@ -29,7 +29,9 @@ export default {
 
 const Template: StoryFn<typeof eLoader> = args => ({
   components: { eLoader },
-  setup() { return { args } },
+  setup() {
+    return { args }
+  },
   template: '<e-loader v-bind="args" />'
 })
 

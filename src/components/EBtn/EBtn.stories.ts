@@ -72,13 +72,15 @@ export default {
     variant: { control: 'select', options: VariantValues },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
     fontColor: { name: 'font-color', control: 'color' },
-    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } }
+    borderColor: { name: 'border-color', control: 'color', if: { arg: 'variant', eq: 'outlined' } }
   }
 } as Meta<typeof eBtn>
 
 const Template: StoryFn<typeof eBtn> = args => ({
   components: { eBtn },
-  setup() { return { args } },
+  setup() {
+    return { args }
+  },
   template: '<e-btn v-bind="args" />'
 })
 

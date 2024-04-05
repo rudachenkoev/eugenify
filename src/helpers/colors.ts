@@ -10,7 +10,7 @@ function isRGBAColor(str: string): boolean {
   return /^rgba\((\s*\d{1,3}\s*,){3}\s*[\d.]+\s*\)$/i.test(str)
 }
 
-export function isColorSet (str: string): boolean {
+export function isColorSet(str: string): boolean {
   if (!str) return false
   return isHexColor(str) || isRGBColor(str) || isRGBAColor(str)
 }

@@ -62,14 +62,16 @@ export default {
       if: { arg: 'appendIcon' }
     },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
-    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } },
-    hideSpinButtons: { name: 'hide-spin-buttons',  control: 'boolean', if: { arg: 'type', eq: 'number' } }
+    borderColor: { name: 'border-color', control: 'color', if: { arg: 'variant', eq: 'outlined' } },
+    hideSpinButtons: { name: 'hide-spin-buttons', control: 'boolean', if: { arg: 'type', eq: 'number' } }
   }
 } as Meta<typeof eInput>
 
 const Template: StoryFn<typeof eInput> = args => ({
   components: { eInput },
-  setup() { return { args } },
+  setup() {
+    return { args }
+  },
   template: '<e-input v-bind="args" />'
 })
 
