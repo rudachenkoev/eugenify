@@ -10,19 +10,19 @@ import eIcon from '@/components/EIcon/EIcon.vue'
 const props = defineProps({
   /** Specify content text for the component. */
   text: { type: String, default: '' },
-  /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the <b>source</b> prop from <b>e-icon</b>  */
+  /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the source prop from <b>e-icon</b>.  */
   icon: { type: String, default: '' },
   /** Sets e-icon type. <u>Applies to Material Icons only</u>. */
   iconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets e-icon color. <u>Applies to Material Icons only</u>. */
   iconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
-  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
+  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the source prop from <b>e-icon</b>. */
   prependIcon: { type: String, default: '' },
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
-  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
+  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
   appendIcon: { type: String, default: '' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -34,7 +34,7 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
-  /** The loading text used with the e-loader component. */
+  /** The loading text used with the <b>e-loader</b> component. */
   loadingText: { type: String, default: 'Loading...' },
   /** Applies a distinct style to the component. */
   variant: { type: String as PropType<VariantType>, default: 'default' },

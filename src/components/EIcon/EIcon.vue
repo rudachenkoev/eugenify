@@ -6,17 +6,16 @@ import { isColorSet } from '@/helpers/colors'
 //
 const props = defineProps({
   /**
-   * Can take on multiple values: <br/>
-   * the name of the Material icon. You can see more details here https://fonts.google.com/icons?icon.set=Material+Icons;<br/>
-   * path to the local file;<br/>
-   * external link to the image.
-   */
+   * Can take on several different values:
+   * name of the <a href="https://fonts.google.com/icons?icon.set=Material+Icons" target="_blank">Material icon</a>,
+   * path to the local file,
+   * external link to the image. */
   source: { type: String },
   /** Sets icon lettering type */
   type: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
-  /** Changes the HEX color of the icon. */
+  /** Sets the color of the icon. */
   color: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } }
 })
 

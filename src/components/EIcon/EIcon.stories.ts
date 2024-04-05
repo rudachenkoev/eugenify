@@ -1,7 +1,6 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eIcon from './EIcon.vue'
-import { Values as SizeValues } from '@configs/sizes'
-import { IconTypeValues } from '@/configs'
+import { IconTypeValues, SizeValues } from '@/configs'
 
 export default {
   title: 'e-icon',
@@ -40,7 +39,7 @@ export const Sources = () => ({
   template: `
     <div class="flex gap-3">
       <e-icon source="bookmarks" />
-      <e-icon source="/assets/icons/eye.svg" />
+      <e-icon source="/vite.svg" />
       <e-icon source="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>
   `

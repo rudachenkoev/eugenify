@@ -13,7 +13,7 @@ const props = defineProps({
   label: { type: String, default: '' },
   /** Sets the input’s placeholder text. */
   placeholder: { type: String, default: '' },
-  /** Default input’s <b>type</b> attribute. Some of the options have predefined configurations.  */
+  /** Default input’s type attribute. Some of the options have predefined configurations.  */
   type: { type: String as PropType<InputType>, default: 'text' },
   /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
@@ -23,17 +23,19 @@ const props = defineProps({
   variant: { type: String as PropType<VariantType>, default: 'default' },
   /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
+  /** Removes spin buttons. <u>Applies to type with value "number"</u>. */
+  hideSpinButtons: { type: Boolean, default: false },
   /** Puts input in readonly state. */
   readonly: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
-  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
+  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the source prop from <b>e-icon</b>. */
   prependIcon: { type: String, default: '' },
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
-  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
+  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
   appendIcon: { type: String, default: '' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -113,7 +115,7 @@ const changeInputType = (type:InputType):void => {
         :placeholder="placeholder || label"
         :disabled="disabled"
         :readonly="readonly"
-        :class="[defaultInputClasses, sizeClasses.input]"
+        :class="[defaultInputClasses, sizeClasses.input, hideSpinButtons && 'hide-spin-buttons']"
         @blur="handleBlur"
         @keyup.enter="$emit('keyup.enter')"
         @focus="handleFocus"

@@ -1,9 +1,6 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eInput from './EInput.vue'
-import { Values as SizeValues } from '@configs/sizes'
-import { Values as ColorValues } from '@configs/colors'
-import { Values as VariantValues } from '@configs/variants'
-import { IconTypeValues } from '@/configs'
+import { IconTypeValues, ColorValues, VariantValues, SizeValues } from '@/configs'
 
 export default {
   title: 'e-input',
@@ -27,6 +24,7 @@ export default {
     appendIconType: 'filled',
     disabled: false,
     readonly: false,
+    hideSpinButtons: false,
     flat: false
   },
   argTypes: {
@@ -64,7 +62,8 @@ export default {
       if: { arg: 'appendIcon' }
     },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
-    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } }
+    borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } },
+    hideSpinButtons: { name: 'hide-spin-buttons',  control: 'boolean', if: { arg: 'type', eq: 'number' } }
   }
 } as Meta<typeof eInput>
 

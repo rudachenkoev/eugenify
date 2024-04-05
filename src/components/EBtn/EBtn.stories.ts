@@ -1,9 +1,6 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eBtn from './EBtn.vue'
-import { Values as SizeValues } from '@configs/sizes'
-import { Values as ColorValues } from '@configs/colors'
-import { Values as VariantValues } from '@configs/variants'
-import { IconTypeValues } from '@/configs'
+import { IconTypeValues, ColorValues, VariantValues, SizeValues } from '@/configs'
 
 export default {
   title: 'e-btn',
@@ -142,7 +139,7 @@ export const Icons = () => ({
         <e-btn prepend-icon="bookmarks" text="Prepend material icon" />
         <e-btn prepend-icon="bookmarks" prepend-icon-type="outlined" text="Prepend outlined material icon" />
       </div>
-      <e-btn append-icon="/assets/icons/search.svg" text="Append local icon" />
+      <e-btn append-icon="/vite.svg" text="Append local icon" />
       <e-btn icon="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>
   `
