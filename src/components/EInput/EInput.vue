@@ -3,7 +3,7 @@ import { computed, ref, watch, type PropType } from 'vue'
 import { isHex } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
-import { ColorType, SizeType, VariantType } from '@/types'
+import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
@@ -29,8 +29,12 @@ const props = defineProps({
   flat: { type: Boolean, default: false },
   /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
+  /** Sets prepend e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
+  /** Sets append e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Changes the HEX value of the background color. Available only in conjunction with <b>variant-default</b>. */
   backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
   /** Changes the HEX value of the border color. Available only in conjunction with <b>variant-outlined</b>. */
@@ -93,6 +97,7 @@ const changeInputType = (type:InputType):void => {
           v-if="!!prependIcon"
           :class="['e-input__prepend', sizeClasses.prependIcon]"
           :source="prependIcon"
+          :type="prependIconType"
           :size="size"
         />
       </slot>
@@ -114,6 +119,7 @@ const changeInputType = (type:InputType):void => {
           v-if="!!appendIcon"
           :class="['e-input__append', sizeClasses.appendIcon]"
           :source="appendIcon"
+          :type="appendIconType"
           :size="size"
         />
         <e-icon

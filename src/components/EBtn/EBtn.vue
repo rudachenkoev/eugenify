@@ -4,7 +4,7 @@ import { isHex } from '@/helpers/colors'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
 import COLORS from './colors'
-import { ColorType, SizeType, VariantType } from '@/types'
+import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 
 const props = defineProps({
@@ -12,10 +12,16 @@ const props = defineProps({
   text: { type: String, default: '' },
   /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the <b>source</b> prop from <b>e-icon</b>  */
   icon: { type: String, default: '' },
+  /** Sets e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  iconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
+  /** Sets prepend e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
+  /** Sets append e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Removes the ability to click or target the button. */
   disabled: { type: Boolean, default: false },
   /** Load Indicator. The <b>e-loader</b> component is used by default. */
@@ -71,6 +77,7 @@ const customStyles = computed(() => {
           v-if="!!prependIcon"
           :class="['e-btn__prepend', sizeClasses.prependIcon]"
           :source="prependIcon"
+          :type="prependIconType"
           :size="size"
         />
       </slot>
@@ -79,6 +86,7 @@ const customStyles = computed(() => {
         v-if="!!icon"
         class="e-btn__icon"
         :source="icon"
+        :type="iconType"
         :size="size"
       />
       <slot v-else>{{ text }}</slot>
@@ -88,6 +96,7 @@ const customStyles = computed(() => {
           v-if="!!appendIcon"
           :class="['e-btn__append', sizeClasses.appendIcon]"
           :source="appendIcon"
+          :type="appendIconType"
           :size="size"
         />
       </slot>

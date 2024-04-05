@@ -3,6 +3,7 @@ import eInput from './EInput.vue'
 import { Values as SizeValues } from '@configs/sizes'
 import { Values as ColorValues } from '@configs/colors'
 import { Values as VariantValues } from '@configs/variants'
+import { IconTypeValues } from '@/configs'
 
 export default {
   title: 'e-input',
@@ -22,6 +23,8 @@ export default {
     color: 'primary',
     size: 'medium',
     type: 'text',
+    prependIconType: 'filled',
+    appendIconType: 'filled',
     disabled: false,
     readonly: false,
     flat: false
@@ -37,7 +40,19 @@ export default {
     color: { control: 'select', options: ColorValues },
     variant: { control: 'select', options: VariantValues },
     prependIcon: { name: 'prepend-icon', control: 'text' },
+    prependIconType: {
+      name: 'prepend-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'prependIcon' }
+    },
     appendIcon: { name: 'append-icon', control: 'text' },
+    appendIconType: {
+      name: 'append-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'appendIcon' }
+    },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
     borderColor: { name: 'border-color',  control: 'color', if: { arg: 'variant', eq: 'outlined' } }
   }
@@ -91,8 +106,14 @@ export const Icons = () => ({
   components: { eInput },
   template: `
     <div class="flex gap-3">
-      <e-input prepend-icon="call" label="Prepend icon" />
-      <e-input append-icon="euro_symbol" label="Append icon" />
+      <div class="flex flex-col gap-y-3">
+        <e-input prepend-icon="call" label="Prepend icon" />
+        <e-input prepend-icon="call" prepend-icon-type="outlined" label="Prepend outlined icon" />
+      </div>
+      <div class="flex flex-col gap-y-3">
+        <e-input append-icon="paid" label="Append icon" />
+        <e-input append-icon="paid" append-icon-type="outlined" label="Append two-tone icon" />
+      </div>
     </div>
   `
 })

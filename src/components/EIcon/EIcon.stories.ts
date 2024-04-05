@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eIcon from './EIcon.vue'
 import { Values as SizeValues } from '@configs/sizes'
+import { IconTypeValues } from '@/configs'
 
 export default {
   title: 'e-icon',
@@ -20,7 +21,7 @@ export default {
   },
   argTypes: {
     source: { control: 'text' },
-    type: { control: 'select', options: ['filled', 'outlined', 'round', 'sharp', 'two-tone'] },
+    type: { control: 'select', options: IconTypeValues },
     size: { control: 'select', options: SizeValues }
   }
 } as Meta<typeof eIcon>
@@ -33,7 +34,7 @@ const Template: StoryFn<typeof eIcon> = args => ({
 
 export const Default = Template.bind({})
 
-export const Source = () => ({
+export const Sources = () => ({
   components: { eIcon },
   template: `
     <div class="flex gap-3">

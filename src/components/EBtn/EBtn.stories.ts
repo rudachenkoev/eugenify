@@ -3,6 +3,7 @@ import eBtn from './EBtn.vue'
 import { Values as SizeValues } from '@configs/sizes'
 import { Values as ColorValues } from '@configs/colors'
 import { Values as VariantValues } from '@configs/variants'
+import { IconTypeValues } from '@/configs'
 
 export default {
   title: 'e-btn',
@@ -22,13 +23,34 @@ export default {
     flat: false,
     variant: 'default',
     size: 'medium',
-    color: 'primary'
+    color: 'primary',
+    prependIconType: 'filled',
+    appendIconType: 'filled',
+    iconType: 'filled'
   },
   argTypes: {
     text: { control: 'text', if: { arg: 'icon', truthy: false } },
     icon: { control: 'text' },
+    iconType: {
+      name: 'icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'icon' }
+    },
     prependIcon: { name: 'prepend-icon', control: 'text' },
+    prependIconType: {
+      name: 'prepend-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'prependIcon' }
+    },
     appendIcon: { name: 'append-icon', control: 'text' },
+    appendIconType: {
+      name: 'append-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'appendIcon' }
+    },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
     flat: { control: 'boolean' },
@@ -101,7 +123,10 @@ export const Icons = () => ({
   components: { eBtn },
   template: `
     <div class="flex gap-3">
-      <e-btn prepend-icon="bookmarks" text="Prepend material icon" />
+      <div class="flex flex-col gap-y-3">
+        <e-btn prepend-icon="bookmarks" text="Prepend material icon" />
+        <e-btn prepend-icon="bookmarks" prepend-icon-type="outlined" text="Prepend outlined material icon" />
+      </div>
       <e-btn append-icon="/assets/icons/search.svg" text="Append local icon" />
       <e-btn icon="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>

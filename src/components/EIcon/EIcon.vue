@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
-import { SizeType } from '@/types'
+import { IconType, SizeType } from '@/types'
 import SIZES from './sizes.ts'
 //
-type IconType = 'filled' | 'outlined' | 'round' | 'sharp' | 'two-tone'
-
 const props = defineProps({
   /**
    * Can take on multiple values: <br/>
