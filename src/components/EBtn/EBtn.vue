@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-import { isHex } from '@/helpers/colors'
+import { isColorSet } from '@/helpers/colors'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
 import COLORS from './colors'
@@ -12,16 +12,22 @@ const props = defineProps({
   text: { type: String, default: '' },
   /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the <b>source</b> prop from <b>e-icon</b>  */
   icon: { type: String, default: '' },
-  /** Sets e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  /** Sets e-icon type. <u>Applies to Material Icons only</u>. */
   iconType: { type: String as PropType<IconType>, default: 'filled' },
+  /** Sets e-icon color. <u>Applies to Material Icons only</u>. */
+  iconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
   /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
-  /** Sets prepend e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
+  /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
+  prependIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
-  /** Sets append e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
+  /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
+  appendIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
   /** Removes the ability to click or target the button. */
   disabled: { type: Boolean, default: false },
   /** Load Indicator. The <b>e-loader</b> component is used by default. */
@@ -36,12 +42,12 @@ const props = defineProps({
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
-  /** Changes the HEX value of the background color. Available only in conjunction with <b>variant-default</b>. */
-  backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
-  /** Changes the HEX value of the font color. */
-  fontColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
-  /** Changes the HEX value of the border color. Available only in conjunction with <b>variant-outlined</b>. */
-  borderColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } }
+  /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
+  backgroundColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  /** Changes the value of the font color. */
+  fontColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
+  borderColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } }
 })
 
 // Classes
@@ -79,6 +85,7 @@ const customStyles = computed(() => {
           :source="prependIcon"
           :type="prependIconType"
           :size="size"
+          :color="prependIconColor"
         />
       </slot>
 
@@ -88,6 +95,7 @@ const customStyles = computed(() => {
         :source="icon"
         :type="iconType"
         :size="size"
+        :color="iconColor"
       />
       <slot v-else>{{ text }}</slot>
 
@@ -98,6 +106,7 @@ const customStyles = computed(() => {
           :source="appendIcon"
           :type="appendIconType"
           :size="size"
+          :color="appendIconColor"
         />
       </slot>
     </template>

@@ -37,6 +37,11 @@ export default {
       options: IconTypeValues,
       if: { arg: 'icon' }
     },
+    iconColor: {
+      name: 'icon-color',
+      control: 'color',
+      if: { arg: 'icon' }
+    },
     prependIcon: { name: 'prepend-icon', control: 'text' },
     prependIconType: {
       name: 'prepend-icon-type',
@@ -44,11 +49,21 @@ export default {
       options: IconTypeValues,
       if: { arg: 'prependIcon' }
     },
+    prependIconColor: {
+      name: 'prepend-icon-color',
+      control: 'color',
+      if: { arg: 'prependIcon' }
+    },
     appendIcon: { name: 'append-icon', control: 'text' },
     appendIconType: {
       name: 'append-icon-type',
       control: 'select',
       options: IconTypeValues,
+      if: { arg: 'appendIcon' }
+    },
+    appendIconColor: {
+      name: 'append-icon-color',
+      control: 'color',
       if: { arg: 'appendIcon' }
     },
     disabled: { control: 'boolean' },

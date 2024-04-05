@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, type PropType } from 'vue'
-import { isHex } from '@/helpers/colors'
+import { isColorSet } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
@@ -29,16 +29,20 @@ const props = defineProps({
   flat: { type: Boolean, default: false },
   /** Creates <b>e-icon</b> component before default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   prependIcon: { type: String, default: '' },
-  /** Sets prepend e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
+  /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
+  prependIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the <b>source</b> prop from <b>e-icon</b> */
   appendIcon: { type: String, default: '' },
-  /** Sets append e-icon type. Equivalent to the <b>type</b> prop from <b>e-icon</b>. <u>Applies to Material Icons only</u>. */
+  /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
-  /** Changes the HEX value of the background color. Available only in conjunction with <b>variant-default</b>. */
-  backgroundColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } },
-  /** Changes the HEX value of the border color. Available only in conjunction with <b>variant-outlined</b>. */
-  borderColor: { type: String, default: '', validator (value:string) { return (value && isHex(value)) || !value } }
+  /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
+  appendIconColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
+  backgroundColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } },
+  /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
+  borderColor: { type: String, default: '', validator (value:string) { return value ? isColorSet(value) : true } }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
@@ -99,6 +103,7 @@ const changeInputType = (type:InputType):void => {
           :source="prependIcon"
           :type="prependIconType"
           :size="size"
+          :color="prependIconColor"
         />
       </slot>
 
@@ -121,6 +126,7 @@ const changeInputType = (type:InputType):void => {
           :source="appendIcon"
           :type="appendIconType"
           :size="size"
+          :color="appendIconColor"
         />
         <e-icon
           v-else-if="type === 'password'"

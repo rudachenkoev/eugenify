@@ -46,11 +46,21 @@ export default {
       options: IconTypeValues,
       if: { arg: 'prependIcon' }
     },
+    prependIconColor: {
+      name: 'prepend-icon-color',
+      control: 'color',
+      if: { arg: 'prependIcon' }
+    },
     appendIcon: { name: 'append-icon', control: 'text' },
     appendIconType: {
       name: 'append-icon-type',
       control: 'select',
       options: IconTypeValues,
+      if: { arg: 'appendIcon' }
+    },
+    appendIconColor: {
+      name: 'append-icon-color',
+      control: 'color',
       if: { arg: 'appendIcon' }
     },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },

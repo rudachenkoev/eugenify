@@ -22,7 +22,8 @@ export default {
   argTypes: {
     source: { control: 'text' },
     type: { control: 'select', options: IconTypeValues },
-    size: { control: 'select', options: SizeValues }
+    size: { control: 'select', options: SizeValues },
+    color: { control: 'color' }
   }
 } as Meta<typeof eIcon>
 
