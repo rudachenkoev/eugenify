@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eInput from './EInput.vue'
 import { IconTypeValues, ColorValues, VariantValues, SizeValues } from '@/configs'
+import { ref } from 'vue'
 
 export default {
   title: 'e-input',
@@ -25,7 +26,10 @@ export default {
     disabled: false,
     readonly: false,
     hideSpinButtons: false,
-    flat: false
+    flat: false,
+    errorMessages: [],
+    messages: [],
+    displayedMessages: 1
   },
   argTypes: {
     modelValue: { control: false },
@@ -63,7 +67,10 @@ export default {
     },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
     borderColor: { name: 'border-color', control: 'color', if: { arg: 'variant', eq: 'outlined' } },
-    hideSpinButtons: { name: 'hide-spin-buttons', control: 'boolean', if: { arg: 'type', eq: 'number' } }
+    hideSpinButtons: { name: 'hide-spin-buttons', control: 'boolean', if: { arg: 'type', eq: 'number' } },
+    errorMessages: { name: 'error-messages', control: 'object' },
+    messages: { control: 'object' },
+    displayedMessages: { name: 'displayed-messages', control: 'number', min: 1 }
   }
 } as Meta<typeof eInput>
 
@@ -132,4 +139,19 @@ export const Icons = () => ({
 export const AdvancedPasswordType = () => ({
   components: { eInput },
   template: '<e-input type="password" label="Password" placeholder="Enter your password"/>'
+})
+
+export const Messages = () => ({
+  components: { eInput },
+  setup () {
+    const messages = ref(['First message', 'Second message'])
+    return { messages }
+  },
+  template: `
+    <div class="flex gap-3">
+      <e-input label="Default messages" :messages="messages" />
+      <e-input label="Multiple messages" :messages="messages" :displayed-messages="2" />
+      <e-input label="Error messages" :error-messages="messages" />
+    </div>
+  `
 })

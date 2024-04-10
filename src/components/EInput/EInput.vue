@@ -5,6 +5,7 @@ import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
+import eMessages from '@/components/EMessages/EMessages.vue'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
@@ -68,7 +69,13 @@ const props = defineProps({
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
-  }
+  },
+  /** Sets input in errors state and displays a list of messages */
+  errorMessages: { type: Array as PropType<string[]>, default: [] },
+  /** Displays a list of messages */
+  messages: { type: Array as PropType<string[]>, default: [] },
+  /** Amount of displayed messages */
+  displayedMessages: { type: Number, default: 1 }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
@@ -81,6 +88,12 @@ watch(
 )
 
 const isFocused = ref<boolean>(false)
+
+const messagesItems = computed<string[]>(() => {
+  if (props.errorMessages?.length) return props.errorMessages
+  else if (props.messages?.length) return props.messages
+  else return []
+})
 
 // Classes
 const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition'
@@ -118,6 +131,7 @@ const changeInputType = (type: InputType): void => {
     <div :class="['e-input__label mb-1 font-light text-secondary', sizeClasses.label]">
       {{ label }}
     </div>
+
     <div
       :class="[
         defaultWrapperClasses,
@@ -172,5 +186,12 @@ const changeInputType = (type: InputType): void => {
         />
       </slot>
     </div>
+
+    <e-messages
+      v-if="messagesItems.length"
+      :items="messagesItems"
+      :type="errorMessages?.length ? 'error' : 'default'"
+      :displayedMessages="displayedMessages"
+    />
   </div>
 </template>
