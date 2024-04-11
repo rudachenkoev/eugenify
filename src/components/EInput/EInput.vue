@@ -96,14 +96,22 @@ const messagesItems = computed<string[]>(() => {
 })
 
 // Classes
-const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition'
+const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition-all'
 const defaultInputClasses =
   'e-input__input h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
-const colorClasses = computed(() => COLORS[props.color] || {})
+
 const sizeClasses = computed(() => SIZES[props.size] || {})
+
 const behaviorClasses = computed<string>(() => {
-  if (props.disabled) return 'opacity-50'
-  else return colorClasses.value[props.variant][isFocused.value ? 'focused' : 'unfocused']
+  let inputColor = COLORS[props.color]
+  if (props.errorMessages?.length) inputColor = COLORS.error
+
+  let inputClasses = []
+  inputClasses.push(inputColor[props.variant].initial)
+  if (props.disabled) inputClasses.push('opacity-50')
+  else inputClasses.push(inputColor[props.variant][isFocused.value ? 'focused' : 'unfocused'])
+
+  return inputClasses.join(' ')
 })
 // Colors customization
 const customStyles = computed(() => {
@@ -135,7 +143,6 @@ const changeInputType = (type: InputType): void => {
     <div
       :class="[
         defaultWrapperClasses,
-        colorClasses[variant].initial,
         sizeClasses.wrapper,
         !flat && 'shadow-sm',
         behaviorClasses

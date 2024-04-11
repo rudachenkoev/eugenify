@@ -41,14 +41,14 @@ export default {
       unfocused: 'hover:bg-success/10'
     },
     outlined: {
-      initial: 'bg-transparent border border-secondary/70 rounded',
+      initial: 'bg-transparent border border-success/70 rounded',
       focused: 'outline outline-success/50',
-      unfocused: 'hover:bg-success/[.03] hover:border-secondary/50'
+      unfocused: 'hover:bg-success/[.03] hover:border-success/50'
     },
     text: {
       initial: 'bg-transparent border-b',
       focused: 'border-success/50',
-      unfocused: 'border-secondary/70 hover:border-secondary/50'
+      unfocused: 'border-success/70 hover:border-success/50'
     }
   },
   error: {
@@ -58,14 +58,14 @@ export default {
       unfocused: 'hover:bg-error/10'
     },
     outlined: {
-      initial: 'bg-transparent border border-secondary/70 rounded',
+      initial: 'bg-transparent border border-error/70 rounded',
       focused: 'outline outline-error/50',
-      unfocused: 'hover:bg-error/[.03] hover:border-secondary/50'
+      unfocused: 'hover:bg-error/[.03] hover:border-error/50'
     },
     text: {
       initial: 'bg-transparent border-b',
       focused: 'border-error/50',
-      unfocused: 'border-secondary/70 hover:border-secondary/50'
+      unfocused: 'border-error/70 hover:border-error/50'
     }
   }
 }

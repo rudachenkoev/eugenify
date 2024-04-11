@@ -22,7 +22,7 @@ const sizeClasses = computed(() => SIZES[props.size] || '')
     :key="`e-message-${index}`"
     v-for="(message, index) in items.slice(0, displayedMessages)"
     :class="[
-      'e-message transition duration-300 ease-in-out',
+      'e-message font-light transition duration-300 ease-in-out',
       sizeClasses,
       type === 'error' ? 'text-error' : 'text-secondary'
     ]"
