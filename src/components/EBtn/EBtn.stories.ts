@@ -141,7 +141,7 @@ export const Icons = () => ({
         <e-btn prepend-icon="bookmarks" text="Prepend material icon" />
         <e-btn prepend-icon="bookmarks" prepend-icon-type="outlined" text="Prepend outlined material icon" />
       </div>
-      <e-btn append-icon="/vite.svg" text="Append local icon" />
+      <e-btn append-icon="bookmarks" text="Append local icon" />
       <e-btn icon="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>
   `

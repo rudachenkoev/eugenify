@@ -8,7 +8,6 @@ const props = defineProps({
   /**
    * Can take on several different values:
    * name of the <a href="https://fonts.google.com/icons?icon.set=Material+Icons" target="_blank">Material icon</a>,
-   * path to the local file,
    * external link to the image. */
   source: { type: String },
   /** Sets icon lettering type */
@@ -25,10 +24,8 @@ const props = defineProps({
   }
 })
 
-const isPathOrUrl = computed<boolean>(() => {
-  const isPath = /^(\/|\\|[A-Za-z]:\\|[\w\-]+\/)+[\w\-]+\.[\w]+$/.test(<string>props.source)
-  const isUrl = /^(?:https?|ftp):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/.test(<string>props.source)
-  return isPath || isUrl
+const isUrl = computed<boolean>(() => {
+  return /^(?:https?|ftp):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/.test(<string>props.source)
 })
 const iconClass = computed<string>(() => {
   let str = 'material-icons'
@@ -45,7 +42,7 @@ const customStyles = computed(() => {
 
 <template>
   <i
-    v-if="isPathOrUrl"
+    v-if="isUrl"
     :class="['e-icon block bg-cover', sizeClasses]"
     :style="{ backgroundImage: `url('${source}')` }"
   />

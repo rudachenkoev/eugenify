@@ -41,7 +41,6 @@ export const Sources = () => ({
   template: `
     <div class="flex gap-3">
       <e-icon source="bookmarks" />
-      <e-icon source="/vite.svg" />
       <e-icon source="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
     </div>
   `
