@@ -22,7 +22,7 @@ export default {
     items: { control: 'object' },
     size: { control: false },
     type: { control: 'select', options: ['default', 'error'] },
-    displayedMessages: { name: 'displayed-messages', control: 'number', min: 1 }
+    displayedMessages: { name: 'displayed-messages', control: { type: 'number', min: 1 } }
   }
 } as Meta<typeof eMessages>
 

@@ -70,7 +70,7 @@ export default {
     hideSpinButtons: { name: 'hide-spin-buttons', control: 'boolean', if: { arg: 'type', eq: 'number' } },
     errorMessages: { name: 'error-messages', control: 'object' },
     messages: { control: 'object' },
-    displayedMessages: { name: 'displayed-messages', control: 'number', min: 1 }
+    displayedMessages: { name: 'displayed-messages', control: { type: 'number', min: 1 } }
   }
 } as Meta<typeof eInput>
 
