@@ -141,12 +141,7 @@ const changeInputType = (type: InputType): void => {
     </div>
 
     <div
-      :class="[
-        defaultWrapperClasses,
-        sizeClasses.wrapper,
-        !flat && 'shadow-sm',
-        behaviorClasses
-      ]"
+      :class="[defaultWrapperClasses, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
       :style="customStyles"
     >
       <slot name="prepend">

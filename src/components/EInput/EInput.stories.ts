@@ -143,7 +143,7 @@ export const AdvancedPasswordType = () => ({
 
 export const Messages = () => ({
   components: { eInput },
-  setup () {
+  setup() {
     const messages = ref(['First message', 'Second message'])
     return { messages }
   },

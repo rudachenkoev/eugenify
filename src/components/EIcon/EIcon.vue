@@ -41,11 +41,7 @@ const customStyles = computed(() => {
 </script>
 
 <template>
-  <i
-    v-if="isUrl"
-    :class="['e-icon block bg-cover', sizeClasses]"
-    :style="{ backgroundImage: `url('${source}')` }"
-  />
+  <i v-if="isUrl" :class="['e-icon block bg-cover', sizeClasses]" :style="{ backgroundImage: `url('${source}')` }" />
   <span v-else :class="['e-icon', iconClass, sizeClasses]" :style="customStyles">
     {{ source }}
   </span>
