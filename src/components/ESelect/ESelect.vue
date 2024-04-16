@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, type PropType } from 'vue'
+import { computed, ref, type PropType } from 'vue'
 import { isColorSet } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
@@ -7,15 +7,11 @@ import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 //
-type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
-
 const props = defineProps({
   /** Sets the label text. */
   label: { type: String, default: '' },
   /** Sets the input’s placeholder text. */
   placeholder: { type: String, default: '' },
-  /** Default input’s type attribute. Some of the options have predefined configurations.  */
-  type: { type: String as PropType<InputType>, default: 'text' },
   /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Sets the size of the component. */
@@ -24,10 +20,6 @@ const props = defineProps({
   variant: { type: String as PropType<VariantType>, default: 'default' },
   /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
-  /** Removes spin buttons. <u>Applies to type with value "number"</u>. */
-  hideSpinButtons: { type: Boolean, default: false },
-  /** Puts input in readonly state. */
-  readonly: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
   /** Creates <b>e-icon</b> component before default text slot. Equivalent to the source prop from <b>e-icon</b>. */
@@ -43,7 +35,7 @@ const props = defineProps({
     }
   },
   /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
-  appendIcon: { type: String, default: '' },
+  appendIcon: { type: String, default: 'expand_more' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
@@ -75,18 +67,14 @@ const props = defineProps({
   /** Displays a list of messages */
   messages: { type: Array as PropType<string[]>, default: [] },
   /** Amount of displayed messages */
-  displayedMessages: { type: Number, default: 1 }
+  displayedMessages: { type: Number, default: 1 },
+  /** List of sample items. */
+  items: { type: Array as PropType<any[]>, default: [] }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
-// Used to override the type of input
-const fieldType = ref<InputType>(props.type)
-watch(
-  () => props.type,
-  value => (fieldType.value = value)
-)
-
+const isOpenOptions = ref<boolean>(false)
 const isFocused = ref<boolean>(false)
 
 const messagesItems = computed<string[]>(() => {
@@ -96,9 +84,12 @@ const messagesItems = computed<string[]>(() => {
 })
 
 // Classes
-const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition-all'
-const defaultInputClasses =
-  'e-input__field h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const defaultClasses = {
+  wrapper: 'e-select__wrapper flex items-center relative transition-all',
+  field: 'e-select__field size-full flex items-center',
+  checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
+  checklistItem: 'checklist-item font-light hover:bg-secondary/10'
+}
 
 const sizeClasses = computed(() => SIZES[props.size] || {})
 
@@ -109,7 +100,7 @@ const behaviorClasses = computed<string>(() => {
   let inputClasses = []
   inputClasses.push(inputColor[props.variant].initial)
   if (props.disabled) inputClasses.push('opacity-50')
-  else inputClasses.push(inputColor[props.variant][isFocused.value ? 'focused' : 'unfocused'])
+  else inputClasses.push(inputColor[props.variant][isFocused.value ? 'focused' : 'unfocused'], 'cursor-pointer')
 
   return inputClasses.join(' ')
 })
@@ -119,35 +110,42 @@ const customStyles = computed(() => {
   return { backgroundColor, borderColor }
 })
 
+const toggleSelect = (): void => {
+  if (props.disabled) return
+  isOpenOptions.value = !isOpenOptions.value
+}
+const handleSelect = (item: any): void => {
+  modelValue.value = modelValue.value === item ? null : item
+  handleBlur()
+}
 const handleFocus = (e: Event): void => {
+  if (props.disabled) return
   isFocused.value = true
+  toggleSelect()
   emit('focus', e)
 }
-const handleBlur = (e: Event): void => {
+const handleBlur = (e?: Event): void => {
+  isOpenOptions.value = false
   isFocused.value = false
   emit('blur', e)
-}
-
-const changeInputType = (type: InputType): void => {
-  if (props.disabled) return
-  fieldType.value = type
 }
 </script>
 
 <template>
-  <div class="e-input">
-    <div :class="['e-input__label mb-1 font-light text-secondary', sizeClasses.label]">
+  <div class="e-select">
+    <div :class="['e-select__label mb-1 font-light text-secondary', sizeClasses.label]">
       {{ label }}
     </div>
 
     <div
-      :class="[defaultWrapperClasses, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
+      :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
       :style="customStyles"
+      @click="handleFocus"
     >
       <slot name="prepend">
         <e-icon
           v-if="!!prependIcon"
-          :class="['e-input__prepend', sizeClasses.prependIcon]"
+          :class="['e-select__prepend', sizeClasses.prependIcon]"
           :source="prependIcon"
           :type="prependIconType"
           :size="size"
@@ -155,36 +153,37 @@ const changeInputType = (type: InputType): void => {
         />
       </slot>
 
-      <input
-        v-model="modelValue"
-        :type="fieldType"
-        :placeholder="placeholder || label"
-        :disabled="disabled"
-        :readonly="readonly"
-        :class="[defaultInputClasses, sizeClasses.input, hideSpinButtons && 'hide-spin-buttons']"
-        @blur="handleBlur"
-        @keyup.enter="$emit('keyup.enter')"
-        @focus="handleFocus"
-      />
+      <div :class="[defaultClasses.field, sizeClasses.field]">
+        <span v-if="!modelValue" class="font-light text-secondary/40 truncate">{{ placeholder || label }}</span>
+        <span v-else class="truncate">{{ modelValue }}</span>
+      </div>
 
-      <slot name="append">
+      <div
+        v-if="isOpenOptions"
+        :class="[defaultClasses.checklist, sizeClasses.checklist]"
+      >
+        <div
+          v-for="item in items"
+          :class="[
+            defaultClasses.checklistItem,
+            item === modelValue && 'font-normal bg-secondary/5',
+            sizeClasses.checklistItem
+          ]"
+          @click.stop="handleSelect(item)"
+        >
+          {{ item }}
+        </div>
+      </div>
+
+      <slot name="append" v-bind="{ isOpenOptions }">
         <e-icon
           v-if="!!appendIcon"
-          :class="['e-input__append', sizeClasses.appendIcon]"
+          :class="['e-select__append transition-transform', isOpenOptions && 'rotate-180', sizeClasses.appendIcon]"
           :source="appendIcon"
           :type="appendIconType"
           :size="size"
           :color="appendIconColor"
-        />
-        <e-icon
-          v-else-if="type === 'password'"
-          :class="[
-            'cursor-pointer opacity-60 transition duration-300 ease-in-out hover:opacity-100',
-            sizeClasses.appendIcon
-          ]"
-          :source="fieldType === 'password' ? 'visibility' : 'visibility_off'"
-          :size="size"
-          @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"
+          @click.stop="toggleSelect"
         />
       </slot>
     </div>

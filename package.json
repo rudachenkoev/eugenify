@@ -14,7 +14,6 @@
     "./styles": "./dist/style.css"
   },
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -28,8 +27,6 @@
     "@storybook/addon-essentials": "^8.0.5",
     "@storybook/addon-interactions": "^8.0.5",
     "@storybook/addon-links": "^8.0.5",
-    "@storybook/blocks": "^8.0.5",
-    "@storybook/test": "^8.0.5",
     "@storybook/vue3": "^8.0.5",
     "@storybook/vue3-vite": "^8.0.5",
     "@vitejs/plugin-vue": "^5.0.4",
