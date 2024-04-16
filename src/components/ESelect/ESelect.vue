@@ -153,19 +153,16 @@ const handleBlur = (e?: Event): void => {
       </slot>
 
       <div :class="[defaultClasses.field, sizeClasses.field]">
-        <span v-if="!modelValue" class="font-light text-secondary/40 truncate">{{ placeholder || label }}</span>
+        <span v-if="!modelValue" class="truncate font-light text-secondary/40">{{ placeholder || label }}</span>
         <span v-else class="truncate">{{ modelValue }}</span>
       </div>
 
-      <div
-        v-if="isOpenOptions"
-        :class="[defaultClasses.checklist, sizeClasses.checklist]"
-      >
+      <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">
         <div
           v-for="item in items"
           :class="[
             defaultClasses.checklistItem,
-            item === modelValue && 'font-normal bg-secondary/5',
+            item === modelValue && 'bg-secondary/5 font-normal',
             sizeClasses.checklistItem
           ]"
           @click.stop="handleSelect(item)"

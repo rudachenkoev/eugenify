@@ -2,9 +2,20 @@ import { StoryFn, Meta } from '@storybook/vue3'
 import eSelect from './ESelect.vue'
 import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/configs'
 
-const defaultItems = ['First option', 'Second option', 'Third option', 'Fourth option', 'Fifth option',
-  'Sixth option', 'Seventh option', 'Eighth option', 'Ninth option', 'Tenth option', 'Eleventh option',
-  'The title is too long to fit everything on one line without hyphenation.']
+const defaultItems = [
+  'First option',
+  'Second option',
+  'Third option',
+  'Fourth option',
+  'Fifth option',
+  'Sixth option',
+  'Seventh option',
+  'Eighth option',
+  'Ninth option',
+  'Tenth option',
+  'Eleventh option',
+  'The title is too long to fit everything on one line without hyphenation.'
+]
 
 export default {
   title: 'e-select',

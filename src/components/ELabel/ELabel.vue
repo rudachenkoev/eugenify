@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <div :class="['e-label font-light text-secondary mb-1', SIZES[size]]">
+  <div :class="['e-label mb-1 font-light text-secondary', SIZES[size]]">
     <slot>
       {{ text }}
     </slot>
