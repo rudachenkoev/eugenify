@@ -6,6 +6,7 @@ import SIZES from './sizes'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
+import eLabel from '@/components/ELabel/ELabel.vue'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
@@ -96,9 +97,10 @@ const messagesItems = computed<string[]>(() => {
 })
 
 // Classes
-const defaultWrapperClasses = 'e-input__wrapper w-fit flex items-center transition-all'
-const defaultInputClasses =
-  'e-input__field h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+const defaultClasses = {
+  wrapper: 'e-input__wrapper w-fit flex items-center transition-all',
+  field: 'e-input__field h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+}
 
 const sizeClasses = computed(() => SIZES[props.size] || {})
 
@@ -136,12 +138,10 @@ const changeInputType = (type: InputType): void => {
 
 <template>
   <div class="e-input">
-    <div :class="['e-input__label mb-1 font-light text-secondary', sizeClasses.label]">
-      {{ label }}
-    </div>
+    <e-label :text="label" :size="size" />
 
     <div
-      :class="[defaultWrapperClasses, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
+      :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
       :style="customStyles"
     >
       <slot name="prepend">
@@ -161,7 +161,7 @@ const changeInputType = (type: InputType): void => {
         :placeholder="placeholder || label"
         :disabled="disabled"
         :readonly="readonly"
-        :class="[defaultInputClasses, sizeClasses.input, hideSpinButtons && 'hide-spin-buttons']"
+        :class="[defaultClasses.field, sizeClasses.field, hideSpinButtons && 'hide-spin-buttons']"
         @blur="handleBlur"
         @keyup.enter="$emit('keyup.enter')"
         @focus="handleFocus"

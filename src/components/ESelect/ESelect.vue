@@ -6,6 +6,7 @@ import SIZES from './sizes'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
+import eLabel from '@/components/ELabel/ELabel.vue'
 //
 const props = defineProps({
   /** Sets the label text. */
@@ -133,9 +134,7 @@ const handleBlur = (e?: Event): void => {
 
 <template>
   <div class="e-select">
-    <div :class="['e-select__label mb-1 font-light text-secondary', sizeClasses.label]">
-      {{ label }}
-    </div>
+    <e-label :text="label" :size="size" />
 
     <div
       :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
