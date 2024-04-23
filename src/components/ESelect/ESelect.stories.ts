@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/vue3'
 import eSelect from './ESelect.vue'
 import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/configs'
+import { ref } from 'vue'
 
 const defaultItems = [
   'First option',
@@ -87,78 +88,84 @@ export default {
 const Template: StoryFn<typeof eSelect> = args => ({
   components: { eSelect },
   setup() {
-    return { args }
+    return { defaultItems, args }
   },
-  template: `<div class="max-w-48 min-h-64">
-    <e-select v-bind="args" />
+  template: `<div class="max-w-40 min-h-64">
+    <e-select :items="defaultItems" v-bind="args" />
   </div>`
 })
 
 export const Default = Template.bind({})
 
-// export const Variants = () => ({
-//   components: { eSelect },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-select variant="default" label="Default" />
-//       <e-select variant="outlined" label="Outlined" />
-//       <e-select variant="text" label="Text" />
-//     </div>
-//   `
-// })
-//
-// export const Colors = () => ({
-//   components: { eSelect },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-select color="primary" label="Primary" />
-//       <e-select color="secondary" label="Secondary" />
-//       <e-select color="success" label="Success" />
-//       <e-select color="error" label="Error" />
-//     </div>
-//   `
-// })
-//
-// export const Sizes = () => ({
-//   components: { eSelect },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-select size="x-large" label="X-large" />
-//       <e-select size="large" label="Large" />
-//       <e-select size="medium" label="Medium" />
-//       <e-select size="small" label="Small" />
-//       <e-select size="x-small" label="X-small" />
-//     </div>
-//   `
-// })
-//
-// export const Icons = () => ({
-//   components: { eSelect },
-//   template: `
-//     <div class="flex gap-3">
-//       <div class="flex flex-col gap-y-3">
-//         <e-select prepend-icon="call" label="Prepend icon" />
-//         <e-select prepend-icon="call" prepend-icon-type="outlined" label="Prepend outlined icon" />
-//       </div>
-//       <div class="flex flex-col gap-y-3">
-//         <e-select append-icon="paid" label="Append icon" />
-//         <e-select append-icon="paid" append-icon-type="outlined" label="Append two-tone icon" />
-//       </div>
-//     </div>
-//   `
-// })
+export const Variants = () => ({
+  components: { eSelect },
+  setup() {
+    return { defaultItems }
+  },
+  template: `
+    <div class="min-h-64 flex gap-3">
+      <e-select :items="defaultItems" variant="default" label="Default" />
+      <e-select :items="defaultItems" variant="outlined" label="Outlined" />
+      <e-select :items="defaultItems" variant="text" label="Text" />
+    </div>
+  `
+})
 
-// export const Messages = () => ({
-//   components: { eSelect },
-//   setup() {
-//     const messages = ref(['First message', 'Second message'])
-//     return { messages }
-//   },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-select label="Default messages" :messages="messages" />
-//       <e-select label="Multiple messages" :messages="messages" :displayed-messages="2" />
-//       <e-select label="Error messages" :error-messages="messages" />
-//     </div>
-//   `
-// })
+export const Colors = () => ({
+  components: { eSelect },
+  setup() {
+    return { defaultItems }
+  },
+  template: `
+    <div class="min-h-64 flex gap-3">
+      <e-select :items="defaultItems" color="primary" label="Primary" />
+      <e-select :items="defaultItems" color="secondary" label="Secondary" />
+      <e-select :items="defaultItems" color="success" label="Success" />
+      <e-select :items="defaultItems" color="error" label="Error" />
+    </div>
+  `
+})
+
+export const Sizes = () => ({
+  components: { eSelect },
+  setup() {
+    return { defaultItems }
+  },
+  template: `
+    <div class="min-h-64 flex gap-3">
+      <e-select :items="defaultItems" size="x-large" label="X-large" />
+      <e-select :items="defaultItems" size="large" label="Large" />
+      <e-select :items="defaultItems" size="medium" label="Medium" />
+      <e-select :items="defaultItems" size="small" label="Small" />
+      <e-select :items="defaultItems" size="x-small" label="X-small" />
+    </div>
+  `
+})
+
+export const Icons = () => ({
+  components: { eSelect },
+  setup() {
+    return { defaultItems }
+  },
+  template: `
+    <div class="min-h-64 flex gap-3">
+      <e-select :items="defaultItems" prepend-icon="location_on" label="Prepend icon" />
+      <e-select :items="defaultItems" append-icon="arrow_drop_down" label="Append icon" />
+    </div>
+  `
+})
+
+export const Messages = () => ({
+  components: { eSelect },
+  setup() {
+    const messages = ref(['First message', 'Second message'])
+    return { messages, defaultItems }
+  },
+  template: `
+    <div class="min-h-64 flex gap-3">
+      <e-select :items="defaultItems" label="Default messages" :messages="messages" />
+      <e-select :items="defaultItems" label="Multiple messages" :messages="messages" :displayed-messages="2" />
+      <e-select :items="defaultItems" label="Error messages" :error-messages="messages" />
+    </div>
+  `
+})

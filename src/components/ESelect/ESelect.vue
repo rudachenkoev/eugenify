@@ -86,8 +86,8 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-select__wrapper flex items-center relative transition-all',
-  field: 'e-select__field size-full flex items-center',
+  wrapper: 'e-select__wrapper min-w-40 flex items-center relative transition-all',
+  field: 'e-select__field h-full flex flex-1 items-center overflow-hidden',
   checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
   checklistItem: 'checklist-item font-light hover:bg-secondary/10'
 }
