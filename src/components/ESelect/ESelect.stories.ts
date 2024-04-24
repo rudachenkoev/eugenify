@@ -4,18 +4,22 @@ import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/config
 import { ref } from 'vue'
 
 const defaultItems = [
-  'First option',
-  'Second option',
-  'Third option',
-  'Fourth option',
-  'Fifth option',
-  'Sixth option',
-  'Seventh option',
-  'Eighth option',
-  'Ninth option',
-  'Tenth option',
-  'Eleventh option',
-  'The title is too long to fit everything on one line without hyphenation.'
+  { id: 1, name: 'First option' },
+  { id: 2, name: 'Second option' },
+  { id: 3, name: 'Third option' },
+  { id: 4, name: 'Fourth option' },
+  { id: 5, name: 'Fifth option' },
+  { id: 6, name: 'Sixth option' },
+  { id: 7, name: 'Seventh option' },
+  { id: 8, name: 'Eighth option' },
+  { id: 9, name: 'Ninth option' },
+  { id: 10, name: 'Tenth option' },
+  { id: 11, name: 'Eleventh option' },
+  // 'Some data',
+  // 'Some data',
+  // null,
+  { id: 12, name: 'The title is too long to fit everything on one line without hyphenation.' },
+  // { id: 12, name: 'Duplicate' }
 ]
 
 export default {
@@ -42,7 +46,9 @@ export default {
     errorMessages: [],
     messages: [],
     displayedMessages: 1,
-    items: defaultItems
+    items: defaultItems,
+    itemLabel: 'name',
+    itemValue: 'id'
   },
   argTypes: {
     modelValue: { control: false },
@@ -81,17 +87,24 @@ export default {
     errorMessages: { name: 'error-messages', control: 'object' },
     messages: { control: 'object' },
     displayedMessages: { name: 'displayed-messages', control: { type: 'number', min: 1 } },
-    items: { control: 'object' }
+    items: { control: 'object' },
+    itemLabel: { name: 'item-label', control: 'text' },
+    itemValue: { name: 'item-value', control: 'text' }
   }
 } as Meta<typeof eSelect>
 
 const Template: StoryFn<typeof eSelect> = args => ({
   components: { eSelect },
   setup() {
-    return { defaultItems, args }
+    const selected = ref(null)
+    return { selected, defaultItems, args }
   },
-  template: `<div class="max-w-40 min-h-64">
-    <e-select :items="defaultItems" v-bind="args" />
+  template: `<div class="min-h-64">
+    <p class="font-light text-sm mb-3">
+      Selected value:
+      <span class="font-medium">{{ selected }}</span>
+    </p>
+    <e-select v-model="selected" :items="defaultItems" class="max-w-40" v-bind="args" />
   </div>`
 })
 
@@ -104,9 +117,9 @@ export const Variants = () => ({
   },
   template: `
     <div class="min-h-64 flex gap-3">
-      <e-select :items="defaultItems" variant="default" label="Default" />
-      <e-select :items="defaultItems" variant="outlined" label="Outlined" />
-      <e-select :items="defaultItems" variant="text" label="Text" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" variant="default" label="Default" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" variant="outlined" label="Outlined" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" variant="text" label="Text" />
     </div>
   `
 })
@@ -118,10 +131,10 @@ export const Colors = () => ({
   },
   template: `
     <div class="min-h-64 flex gap-3">
-      <e-select :items="defaultItems" color="primary" label="Primary" />
-      <e-select :items="defaultItems" color="secondary" label="Secondary" />
-      <e-select :items="defaultItems" color="success" label="Success" />
-      <e-select :items="defaultItems" color="error" label="Error" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" color="primary" label="Primary" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" color="secondary" label="Secondary" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" color="success" label="Success" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" color="error" label="Error" />
     </div>
   `
 })
@@ -133,11 +146,11 @@ export const Sizes = () => ({
   },
   template: `
     <div class="min-h-64 flex gap-3">
-      <e-select :items="defaultItems" size="x-large" label="X-large" />
-      <e-select :items="defaultItems" size="large" label="Large" />
-      <e-select :items="defaultItems" size="medium" label="Medium" />
-      <e-select :items="defaultItems" size="small" label="Small" />
-      <e-select :items="defaultItems" size="x-small" label="X-small" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" size="x-large" label="X-large" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" size="large" label="Large" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" size="medium" label="Medium" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" size="small" label="Small" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" size="x-small" label="X-small" />
     </div>
   `
 })
@@ -149,8 +162,8 @@ export const Icons = () => ({
   },
   template: `
     <div class="min-h-64 flex gap-3">
-      <e-select :items="defaultItems" prepend-icon="location_on" label="Prepend icon" />
-      <e-select :items="defaultItems" append-icon="arrow_drop_down" label="Append icon" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" prepend-icon="location_on" label="Prepend icon" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" append-icon="arrow_drop_down" label="Append icon" />
     </div>
   `
 })
@@ -163,9 +176,9 @@ export const Messages = () => ({
   },
   template: `
     <div class="min-h-64 flex gap-3">
-      <e-select :items="defaultItems" label="Default messages" :messages="messages" />
-      <e-select :items="defaultItems" label="Multiple messages" :messages="messages" :displayed-messages="2" />
-      <e-select :items="defaultItems" label="Error messages" :error-messages="messages" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" label="Default messages" :messages="messages" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" label="Multiple messages" :messages="messages" :displayed-messages="2" />
+      <e-select :items="defaultItems" item-value="id" item-label="name" label="Error messages" :error-messages="messages" />
     </div>
   `
 })

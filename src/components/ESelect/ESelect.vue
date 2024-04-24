@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type PropType } from 'vue'
+import { computed, type PropType, ref } from 'vue'
 import { isColorSet } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
@@ -7,7 +7,9 @@ import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
+import { getDuplicates } from '@/helpers'
 //
+type OptionItem = object | string | number
 const props = defineProps({
   /** Sets the label text. */
   label: { type: String, default: '' },
@@ -70,8 +72,31 @@ const props = defineProps({
   /** Amount of displayed messages */
   displayedMessages: { type: Number, default: 1 },
   /** List of sample items. */
-  items: { type: Array as PropType<any[]>, default: [] }
+  items: { type: Array as PropType<OptionItem[]>, default: [] },
+  /** The object key from the items array displayed as an option label. */
+  itemLabel: { type: String },
+  /** The object key from the items array used for v-model. If no value is specified, the item value from items will be returned. */
+  itemValue: { type: String }
 })
+
+const availableItems = computed<OptionItem[]>(() => {
+  if (props.items.some(item => !item)) {
+    console.warn('Empty values were found in the items array.')
+  }
+
+  const duplicates = getDuplicates(props.items, props.itemValue)
+  if (duplicates.length > 0) {
+    console.warn('Duplicates were found in the items array.', duplicates)
+  }
+
+  const types = new Set(props.items.map(item => typeof item))
+  if (types.size > 1) {
+    console.warn('In the items array, not all values have the same data type.', types)
+  }
+
+  return props.items.filter(item => item && !duplicates.includes(item))
+})
+
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
@@ -105,18 +130,53 @@ const behaviorClasses = computed<string>(() => {
 
   return inputClasses.join(' ')
 })
+
 // Colors customization
 const customStyles = computed(() => {
   const { backgroundColor, borderColor } = props
   return { backgroundColor, borderColor }
 })
 
+// Returns the title of the items in the drop-down list
+const getOptionLabel = (item: OptionItem) => {
+  if (props.itemLabel && typeof item === 'object') return item[props.itemLabel]
+  else return item
+}
+
+// Returns the title of the selected value
+const modelValueLabel = computed(() => {
+  if (props.itemValue) {
+    const modelObj = availableItems.value.find(item => item[props.itemValue] === modelValue.value)
+    // Object with itemValue key found
+    if (modelObj) {
+      if (props.itemLabel) return modelObj[props.itemLabel]
+      else return modelObj
+    }
+    // Non-existing itemValue key in the object
+    else return modelValue.value
+  }
+  // Specified itemLabel, but did not specify itemValue
+  else if (modelValue.value && typeof modelValue.value === 'object' && props.itemLabel) {
+    return modelValue.value[props.itemLabel]
+  }
+  else return modelValue
+})
+
+// Checking for the selected menu item in the drop-down list
+const checkActiveOption = (item: OptionItem): boolean => {
+  if (typeof item === 'object' && props.itemValue) {
+    return modelValue.value === item[props.itemValue]
+  } else return modelValue.value === item
+}
+
 const toggleSelect = (): void => {
   if (props.disabled) return
   isOpenOptions.value = !isOpenOptions.value
 }
-const handleSelect = (item: any): void => {
-  modelValue.value = modelValue.value === item ? null : item
+const handleSelect = (item: OptionItem): void => {
+  let selectedValue = item
+  if (props.itemValue && typeof item === 'object') selectedValue = item[props.itemValue]
+  modelValue.value = modelValue.value === selectedValue ? null : selectedValue
   handleBlur()
 }
 const handleFocus = (e: Event): void => {
@@ -154,20 +214,20 @@ const handleBlur = (e?: Event): void => {
 
       <div :class="[defaultClasses.field, sizeClasses.field]">
         <span v-if="!modelValue" class="truncate font-light text-secondary/40">{{ placeholder || label }}</span>
-        <span v-else class="truncate">{{ modelValue }}</span>
+        <span v-else class="truncate">{{ modelValueLabel }}</span>
       </div>
 
       <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">
         <div
-          v-for="item in items"
+          v-for="item in availableItems"
           :class="[
             defaultClasses.checklistItem,
-            item === modelValue && 'bg-secondary/5 font-normal',
+            checkActiveOption(item) && 'bg-secondary/5 font-normal',
             sizeClasses.checklistItem
           ]"
           @click.stop="handleSelect(item)"
         >
-          {{ item }}
+          {{ getOptionLabel(item) }}
         </div>
       </div>
 
