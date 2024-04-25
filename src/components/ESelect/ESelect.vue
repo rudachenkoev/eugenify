@@ -8,6 +8,7 @@ import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import { getDuplicates } from '@/helpers'
+import vClickOutside from '@/directives/clickOutside'
 //
 type OptionItem = object | string | number
 const props = defineProps({
@@ -97,7 +98,7 @@ const availableItems = computed<OptionItem[]>(() => {
   return props.items.filter(item => item && !duplicates.includes(item))
 })
 
-const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
+const emit = defineEmits(['close', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
 
 const isOpenOptions = ref<boolean>(false)
@@ -177,7 +178,7 @@ const handleSelect = (item: OptionItem): void => {
   let selectedValue = item
   if (props.itemValue && typeof item === 'object') selectedValue = item[props.itemValue]
   modelValue.value = modelValue.value === selectedValue ? null : selectedValue
-  handleBlur()
+  handleOptionsClosing()
 }
 const handleFocus = (e: Event): void => {
   if (props.disabled) return
@@ -185,15 +186,15 @@ const handleFocus = (e: Event): void => {
   toggleSelect()
   emit('focus', e)
 }
-const handleBlur = (e?: Event): void => {
+const handleOptionsClosing = (e?: Event): void => {
   isOpenOptions.value = false
   isFocused.value = false
-  emit('blur', e)
+  emit('close', e)
 }
 </script>
 
 <template>
-  <div class="e-select">
+  <div class="e-select" v-click-outside="handleOptionsClosing">
     <e-label :text="label" :size="size" />
 
     <div
