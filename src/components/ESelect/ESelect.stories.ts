@@ -89,7 +89,13 @@ export default {
     displayedMessages: { name: 'displayed-messages', control: { type: 'number', min: 1 } },
     items: { control: 'object' },
     itemLabel: { name: 'item-label', control: 'text' },
-    itemValue: { name: 'item-value', control: 'text' }
+    itemValue: { name: 'item-value', control: 'text' },
+    width: { control: 'text' },
+    height: { control: 'text' },
+    maxWidth: { name: 'max-width', control: 'text' },
+    minWidth: { name: 'min-width', control: 'text' },
+    maxHeight: { name: 'max-height', control: 'text' },
+    minHeight: { name: 'min-height', control: 'text' }
   }
 } as Meta<typeof eSelect>
 

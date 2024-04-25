@@ -76,7 +76,19 @@ const props = defineProps({
   /** Displays a list of messages */
   messages: { type: Array as PropType<string[]>, default: [] },
   /** Amount of displayed messages */
-  displayedMessages: { type: Number, default: 1 }
+  displayedMessages: { type: Number, default: 1 },
+  /** Sets field's width. Takes a value along with the unit. */
+  width: { type: String },
+  /** Sets field's height. Takes a value along with the unit. */
+  height: { type: String },
+  /** Sets field's max-width. Takes a value along with the unit. */
+  maxWidth: { type: String },
+  /** Sets field's min-width. Takes a value along with the unit. */
+  minWidth: { type: String },
+  /** Sets field's max-height. Takes a value along with the unit. */
+  maxHeight: { type: String },
+  /** Sets field's min-height. Takes a value along with the unit. */
+  minHeight: { type: String }
 })
 const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
 const modelValue = defineModel()
@@ -117,8 +129,8 @@ const behaviorClasses = computed<string>(() => {
 })
 // Colors customization
 const customStyles = computed(() => {
-  const { backgroundColor, borderColor } = props
-  return { backgroundColor, borderColor }
+  const { backgroundColor, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight } = props
+  return { backgroundColor, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight }
 })
 
 const handleFocus = (e: Event): void => {

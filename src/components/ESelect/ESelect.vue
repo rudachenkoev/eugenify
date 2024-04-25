@@ -78,7 +78,19 @@ const props = defineProps({
   /** The object key from the items array displayed as an option label. */
   itemLabel: { type: String },
   /** The object key from the items array used for v-model. If no value is specified, the item value from items will be returned. */
-  itemValue: { type: String }
+  itemValue: { type: String },
+  /** Sets field's width. Takes a value along with the unit. */
+  width: { type: String },
+  /** Sets field's height. Takes a value along with the unit. */
+  height: { type: String },
+  /** Sets field's max-width. Takes a value along with the unit. */
+  maxWidth: { type: String },
+  /** Sets field's min-width. Takes a value along with the unit. */
+  minWidth: { type: String },
+  /** Sets field's max-height. Takes a value along with the unit. */
+  maxHeight: { type: String },
+  /** Sets field's min-height. Takes a value along with the unit. */
+  minHeight: { type: String }
 })
 
 const availableItems = computed<OptionItem[]>(() => {
@@ -135,8 +147,8 @@ const behaviorClasses = computed<string>(() => {
 
 // Colors customization
 const customStyles = computed(() => {
-  const { backgroundColor, borderColor } = props
-  return { backgroundColor, borderColor }
+  const { backgroundColor, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight } = props
+  return { backgroundColor, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight }
 })
 
 // Returns the title of the items in the drop-down list
