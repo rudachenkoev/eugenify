@@ -8,7 +8,7 @@ interface ClickOutsideBinding {
 
 const clickOutsideDirective = {
   beforeMount(el: HTMLElement, binding: ClickOutsideBinding) {
-    el.clickOutsideEvent = function(event: MouseEvent) {
+    el.clickOutsideEvent = function (event: MouseEvent) {
       // Check if the clicked element is neither the element to which the directive is applied nor its child
       if (!(el === event.target || (el as any).contains(event.target as Node))) {
         // Invoke the provided method

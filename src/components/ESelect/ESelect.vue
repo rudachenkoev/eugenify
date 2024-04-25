@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { computed, type PropType, ref } from 'vue'
 import { isColorSet } from '@/helpers/colors'
+import { getDuplicates } from '@/helpers'
+import vClickOutside from '@/directives/clickOutside'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
-import { getDuplicates } from '@/helpers'
-import vClickOutside from '@/directives/clickOutside'
 //
-type OptionItem = object | string | number
+type NotDeclaredObjKey = { [key: string]: string | number }
+type OptionItem = NotDeclaredObjKey | string | number
 const props = defineProps({
   /** Sets the label text. */
   label: { type: String, default: '' },
@@ -147,9 +148,11 @@ const getOptionLabel = (item: OptionItem) => {
 // Returns the title of the selected value
 const modelValueLabel = computed(() => {
   if (props.itemValue) {
-    const modelObj = availableItems.value.find(item => item[props.itemValue] === modelValue.value)
+    const modelObj = availableItems.value.find((item: OptionItem) => {
+      return props.itemValue && typeof item === 'object' && item[props.itemValue] === modelValue.value
+    })
     // Object with itemValue key found
-    if (modelObj) {
+    if (modelObj && typeof modelObj === 'object') {
       if (props.itemLabel) return modelObj[props.itemLabel]
       else return modelObj
     }
@@ -158,9 +161,8 @@ const modelValueLabel = computed(() => {
   }
   // Specified itemLabel, but did not specify itemValue
   else if (modelValue.value && typeof modelValue.value === 'object' && props.itemLabel) {
-    return modelValue.value[props.itemLabel]
-  }
-  else return modelValue
+    return (modelValue.value as any)[props.itemLabel]
+  } else return modelValue
 })
 
 // Checking for the selected menu item in the drop-down list

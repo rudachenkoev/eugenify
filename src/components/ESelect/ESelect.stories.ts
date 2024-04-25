@@ -18,7 +18,7 @@ const defaultItems = [
   // 'Some data',
   // 'Some data',
   // null,
-  { id: 12, name: 'The title is too long to fit everything on one line without hyphenation.' },
+  { id: 12, name: 'The title is too long to fit everything on one line without hyphenation.' }
   // { id: 12, name: 'Duplicate' }
 ]
 
