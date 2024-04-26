@@ -24,7 +24,7 @@ defineProps({
     :class="[
       'e-message font-light transition duration-300 ease-in-out',
       SIZES[size],
-      type === 'error' ? 'text-error' : 'text-secondary'
+      type === 'error' ? 'text-error dark:text-error-dark' : 'text-secondary dark:text-secondary-dark'
     ]"
   >
     {{ message }}

@@ -228,8 +228,10 @@ const handleOptionsClosing = (e?: Event): void => {
       </slot>
 
       <div :class="[defaultClasses.field, sizeClasses.field]">
-        <span v-if="!modelValue" class="truncate font-light text-secondary/40">{{ placeholder || label }}</span>
-        <span v-else class="truncate">{{ modelValueLabel }}</span>
+        <span v-if="!modelValue" class="truncate font-light text-secondary/40 dark:text-secondary-dark/40">
+          {{ placeholder || label }}
+        </span>
+        <span v-else class="truncate text-gray-950 dark:text-gray-100">{{ modelValueLabel }}</span>
       </div>
 
       <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">
@@ -237,7 +239,7 @@ const handleOptionsClosing = (e?: Event): void => {
           v-for="item in availableItems"
           :class="[
             defaultClasses.checklistItem,
-            checkActiveOption(item) && 'bg-secondary/5 font-normal',
+            checkActiveOption(item) && 'bg-secondary/10 font-normal dark:bg-secondary-dark/20',
             sizeClasses.checklistItem
           ]"
           @click.stop="handleSelect(item)"

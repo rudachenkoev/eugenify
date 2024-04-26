@@ -111,7 +111,8 @@ const messagesItems = computed<string[]>(() => {
 // Classes
 const defaultClasses = {
   wrapper: 'e-input__wrapper w-fit flex items-center transition-all',
-  field: 'e-input__field h-full bg-transparent focus-visible:outline-0 font-light placeholder:text-secondary/40'
+  field:
+    'e-input__field h-full bg-transparent focus-visible:outline-0 font-light text-gray-950 dark:text-gray-100 caret-gray-950 dark:caret-gray-100 placeholder:text-secondary/40 dark:placeholder:text-secondary-dark/40'
 }
 
 const sizeClasses = computed(() => SIZES[props.size] || {})
