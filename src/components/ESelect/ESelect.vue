@@ -128,7 +128,7 @@ const defaultClasses = {
   wrapper: 'e-select__wrapper min-w-40 flex items-center relative transition-all',
   field: 'e-select__field h-full flex flex-1 items-center overflow-hidden',
   checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
-  checklistItem: 'checklist-item font-light hover:bg-secondary-500/10'
+  checklistItem: 'checklist-item font-light text-neutral-950 hover:bg-secondary-50'
 }
 
 const sizeClasses = computed(() => SIZES[props.size] || {})
@@ -228,10 +228,10 @@ const handleOptionsClosing = (e?: Event): void => {
       </slot>
 
       <div :class="[defaultClasses.field, sizeClasses.field]">
-        <span v-if="!modelValue" class="truncate font-light text-secondary-500/40 dark:text-secondary-200/40">
+        <span v-if="!modelValue" class="truncate font-light text-secondary-200">
           {{ placeholder || label }}
         </span>
-        <span v-else class="truncate text-gray-950 dark:text-gray-100">{{ modelValueLabel }}</span>
+        <span v-else class="truncate text-neutral-950">{{ modelValueLabel }}</span>
       </div>
 
       <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">
@@ -239,7 +239,7 @@ const handleOptionsClosing = (e?: Event): void => {
           v-for="item in availableItems"
           :class="[
             defaultClasses.checklistItem,
-            checkActiveOption(item) && 'bg-secondary-500/10 font-normal dark:bg-secondary-200/20',
+            checkActiveOption(item) && 'bg-secondary-75 font-normal',
             sizeClasses.checklistItem
           ]"
           @click.stop="handleSelect(item)"
