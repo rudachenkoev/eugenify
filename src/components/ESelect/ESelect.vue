@@ -231,7 +231,7 @@ const handleOptionsClosing = (e?: Event): void => {
         <span v-if="!modelValue" class="truncate font-light text-secondary-200">
           {{ placeholder || label }}
         </span>
-        <span v-else class="truncate text-neutral-950">{{ modelValueLabel }}</span>
+        <span v-else class="truncate font-light text-neutral-950">{{ modelValueLabel }}</span>
       </div>
 
       <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">
