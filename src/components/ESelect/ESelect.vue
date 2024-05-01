@@ -27,7 +27,7 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
-  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the source prop from <b>e-icon</b>. */
+  /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   prependIcon: { type: String, default: '' },
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -39,7 +39,7 @@ const props = defineProps({
       return value ? isColorSet(value) : true
     }
   },
-  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
+  /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   appendIcon: { type: String, default: 'expand_more' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },

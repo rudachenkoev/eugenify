@@ -10,7 +10,7 @@ import eIcon from '@/components/EIcon/EIcon.vue'
 const props = defineProps({
   /** Specify content text for the component. */
   text: { type: String, default: '' },
-  /** Creates <b>e-icon</b> component instead of the button text. Equivalent to the source prop from <b>e-icon</b>.  */
+  /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component instead of the button text. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>.  */
   icon: { type: String, default: '' },
   /** Sets e-icon type. <u>Applies to Material Icons only</u>. */
   iconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -22,7 +22,7 @@ const props = defineProps({
       return value ? isColorSet(value) : true
     }
   },
-  /** Creates <b>e-icon</b> component before default text slot. Equivalent to the source prop from <b>e-icon</b>. */
+  /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   prependIcon: { type: String, default: '' },
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -34,7 +34,7 @@ const props = defineProps({
       return value ? isColorSet(value) : true
     }
   },
-  /** Creates <b>e-icon</b> component after default text slot. Equivalent to the source prop from <b>e-icon</b>. */
+  /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   appendIcon: { type: String, default: '' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
@@ -48,11 +48,11 @@ const props = defineProps({
   },
   /** Removes the ability to click or target the button. */
   disabled: { type: Boolean, default: false },
-  /** Load Indicator. The <b>e-loader</b> component is used by default. */
+  /** Load Indicator. The <a href="/?path=/docs/e-loader--docs" target="_blank">e-loader</a> component is used by default. */
   loading: { type: Boolean, default: false },
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
-  /** The loading text used with the <b>e-loader</b> component. */
+  /** The loading text used with the <a href="/?path=/docs/e-loader--docs" target="_blank">e-loader</a> component. */
   loadingText: { type: String, default: 'Loading...' },
   /** Applies a distinct style to the component. */
   variant: { type: String as PropType<VariantType>, default: 'default' },
