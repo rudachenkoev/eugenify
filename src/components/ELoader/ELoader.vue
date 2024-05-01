@@ -16,14 +16,14 @@ const props = defineProps({
 })
 
 // Classes
-const colorClasses = computed(() => COLORS[props.color])
+const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 </script>
 
 <template>
   <div class="e-loader flex items-center" role="status">
     <svg
-      :class="['e-loader__spinner animate-spin', sizeClasses.spinner, colorClasses]"
+      :class="['e-loader__spinner animate-spin', sizeClasses.spinner, colorClasses.spinner]"
       aria-hidden="true"
       viewBox="0 0 100 101"
       fill="none"

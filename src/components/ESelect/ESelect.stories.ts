@@ -106,7 +106,7 @@ const Template: StoryFn<typeof eSelect> = args => ({
     return { selected, defaultItems, args }
   },
   template: `<div class="min-h-64">
-    <p class="font-light text-sm mb-3">
+    <p class="font-light text-sm text-neutral-950 dark:text-neutral-100 mb-3">
       Selected value:
       <span class="font-medium">{{ selected }}</span>
     </p>

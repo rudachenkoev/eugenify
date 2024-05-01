@@ -1,71 +1,70 @@
 export default {
   primary: {
     default: {
-      initial: 'bg-primary/[.06] rounded',
-      focused: 'outline outline-primary/50',
-      unfocused: 'hover:bg-primary/10'
+      initial: 'bg-primary-50 border-b border-secondary-200 rounded',
+      focused: 'bg-primary-75 outline outline-primary-300',
+      unfocused: 'hover:bg-primary-75 hover:placeholder:text-secondary-300'
     },
     outlined: {
-      initial: 'bg-transparent border border-secondary/70 rounded',
-      focused: 'outline outline-primary/50',
-      unfocused: 'hover:bg-primary/[.03] hover:border-secondary/50'
+      initial: 'bg-transparent border border-secondary-200 rounded',
+      focused: 'border-primary-300 outline outline-primary-300',
+      unfocused: 'hover:border-primary-300'
     },
     text: {
       initial: 'bg-transparent border-b',
-      focused: 'border-primary/50',
-      unfocused: 'border-secondary/70 hover:border-secondary/50'
+      focused: 'border-primary-300',
+      unfocused: 'border-secondary-200 hover:border-primary-300'
     }
   },
-
   secondary: {
     default: {
-      initial: 'bg-secondary/[.06] rounded',
-      focused: 'outline outline-secondary/50',
-      unfocused: 'hover:bg-secondary/10'
+      initial: 'bg-secondary-50 border-b border-secondary-200 rounded',
+      focused: 'bg-secondary-75 outline outline-secondary-300',
+      unfocused: 'hover:bg-secondary-75 hover:placeholder:text-secondary-300'
     },
     outlined: {
-      initial: 'bg-transparent border border-secondary/70 rounded',
-      focused: 'outline outline-secondary/50',
-      unfocused: 'hover:bg-secondary/[.03] hover:border-secondary/50'
+      initial: 'bg-transparent border border-secondary-200 rounded',
+      focused: 'border-secondary-300 outline outline-secondary-300',
+      unfocused: 'hover:border-secondary-300'
     },
     text: {
       initial: 'bg-transparent border-b',
-      focused: 'border-secondary/50',
-      unfocused: 'border-secondary/70 hover:border-secondary/50'
+      focused: 'border-secondary-300',
+      unfocused: 'border-secondary-200 hover:border-secondary-300'
     }
   },
   success: {
     default: {
-      initial: 'bg-success/[.06] rounded',
-      focused: 'outline outline-success/50',
-      unfocused: 'hover:bg-success/10'
+      initial: 'bg-success-50 border-b border-secondary-200 rounded',
+      focused: 'bg-success-75 outline outline-success-300',
+      unfocused: 'hover:bg-success-75 hover:placeholder:text-secondary-300'
     },
     outlined: {
-      initial: 'bg-transparent border border-success/70 rounded',
-      focused: 'outline outline-success/50',
-      unfocused: 'hover:bg-success/[.03] hover:border-success/50'
+      initial: 'bg-transparent border border-secondary-200 rounded',
+      focused: 'border-success-300 outline outline-success-300',
+      unfocused: 'hover:border-success-300'
     },
     text: {
       initial: 'bg-transparent border-b',
-      focused: 'border-success/50',
-      unfocused: 'border-success/70 hover:border-success/50'
+      focused: 'border-success-300',
+      unfocused: 'border-secondary-200 hover:border-success-300'
     }
   },
   error: {
     default: {
-      initial: 'bg-error/[.06] rounded',
-      focused: 'outline outline-error/50',
-      unfocused: 'hover:bg-error/10'
+      initial: 'bg-error-50 border-b border-secondary-200 rounded',
+      focused: 'bg-error-75 outline outline-error-300',
+      unfocused: 'hover:bg-error-75 hover:placeholder:text-secondary-300'
     },
     outlined: {
-      initial: 'bg-transparent border border-error/70 rounded',
-      focused: 'outline outline-error/50',
-      unfocused: 'hover:bg-error/[.03] hover:border-error/50'
+      initial: 'bg-transparent border border-secondary-200 rounded',
+      focused: 'border-error-300 outline outline-error-300',
+      unfocused: 'hover:border-error-300'
     },
     text: {
       initial: 'bg-transparent border-b',
-      focused: 'border-error/50',
-      unfocused: 'border-error/70 hover:border-error/50'
+      focused: 'border-error-300',
+      unfocused: 'border-secondary-200 hover:border-error-300'
     }
   }
 }
