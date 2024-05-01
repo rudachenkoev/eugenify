@@ -72,11 +72,17 @@ const props = defineProps({
     }
   },
   /** Sets input in errors state and displays a list of messages */
-  errorMessages: { type: Array as PropType<string[]>, default: [] },
+  errorMessages: { type: Array as PropType<string[]>, default: () => [] },
   /** Displays a list of messages */
-  messages: { type: Array as PropType<string[]>, default: [] },
+  messages: { type: Array as PropType<string[]>, default: () => [] },
   /** Amount of displayed messages */
-  displayedMessages: { type: Number, default: 1 },
+  displayedMessages: {
+    type: Number,
+    default: 1,
+    validator(value: number) {
+      return value >= 1
+    }
+  },
   /** Sets field's width. Takes a value along with the unit. */
   width: { type: String },
   /** Sets field's height. Takes a value along with the unit. */
@@ -90,8 +96,8 @@ const props = defineProps({
   /** Sets field's min-height. Takes a value along with the unit. */
   minHeight: { type: String }
 })
-const emit = defineEmits(['blur', 'keyup.enter', 'focus'])
-const modelValue = defineModel()
+const emit = defineEmits(['blur', 'keyup', 'focus'])
+const model = defineModel()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
@@ -110,7 +116,7 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-input__wrapper w-fit flex items-center transition-colors',
+  wrapper: 'e-input__wrapper w-fit flex items-center transition',
   field:
     'e-input__field h-full bg-transparent focus-visible:outline-0 font-light text-neutral-950 caret-neutral-950 placeholder:text-secondary-200'
 }
@@ -169,14 +175,14 @@ const changeInputType = (type: InputType): void => {
       </slot>
 
       <input
-        v-model="modelValue"
+        v-model="model"
         :type="fieldType"
         :placeholder="placeholder || label"
         :disabled="disabled"
         :readonly="readonly"
         :class="[defaultClasses.field, sizeClasses.field, hideSpinButtons && 'hide-spin-buttons']"
         @blur="handleBlur"
-        @keyup.enter="$emit('keyup.enter')"
+        @keyup="e => $emit('keyup', e)"
         @focus="handleFocus"
       />
 
@@ -192,7 +198,7 @@ const changeInputType = (type: InputType): void => {
         <e-icon
           v-else-if="type === 'password'"
           :class="[
-            'cursor-pointer opacity-60 transition duration-300 ease-in-out hover:opacity-100',
+            'cursor-pointer opacity-60 duration-300 ease-in-out hover:opacity-100',
             sizeClasses.appendIcon
           ]"
           :source="fieldType === 'password' ? 'visibility' : 'visibility_off'"

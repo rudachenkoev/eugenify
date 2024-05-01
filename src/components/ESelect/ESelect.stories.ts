@@ -95,7 +95,8 @@ export default {
     maxWidth: { name: 'max-width', control: 'text' },
     minWidth: { name: 'min-width', control: 'text' },
     maxHeight: { name: 'max-height', control: 'text' },
-    minHeight: { name: 'min-height', control: 'text' }
+    minHeight: { name: 'min-height', control: 'text' },
+    tabindex: { control: { type: 'number', min: -1 } }
   }
 } as Meta<typeof eSelect>
 

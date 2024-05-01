@@ -68,13 +68,19 @@ const props = defineProps({
     }
   },
   /** Sets input in errors state and displays a list of messages */
-  errorMessages: { type: Array as PropType<string[]>, default: [] },
+  errorMessages: { type: Array as PropType<string[]>, default: () => [] },
   /** Displays a list of messages */
-  messages: { type: Array as PropType<string[]>, default: [] },
+  messages: { type: Array as PropType<string[]>, default: () => [] },
   /** Amount of displayed messages */
-  displayedMessages: { type: Number, default: 1 },
+  displayedMessages: {
+    type: Number,
+    default: 1,
+    validator(value: number) {
+      return value >= 1
+    }
+  },
   /** List of sample items. */
-  items: { type: Array as PropType<OptionItem[]>, default: [] },
+  items: { type: Array as PropType<OptionItem[]>, default: () => [] },
   /** The object key from the items array displayed as an option label. */
   itemLabel: { type: String },
   /** The object key from the items array used for v-model. If no value is specified, the item value from items will be returned. */
@@ -90,8 +96,12 @@ const props = defineProps({
   /** Sets field's max-height. Takes a value along with the unit. */
   maxHeight: { type: String },
   /** Sets field's min-height. Takes a value along with the unit. */
-  minHeight: { type: String }
+  minHeight: { type: String },
+  /** Allows to make HTML elements focusable, allow or prevent them from being sequentially focusable and determine their relative ordering for sequential focus navigation. */
+  tabindex: { type: Number, default: 0 }
 })
+const emit = defineEmits(['close', 'focus'])
+const model = defineModel()
 
 const availableItems = computed<OptionItem[]>(() => {
   if (props.items.some(item => !item)) {
@@ -111,9 +121,6 @@ const availableItems = computed<OptionItem[]>(() => {
   return props.items.filter(item => item && !duplicates.includes(item))
 })
 
-const emit = defineEmits(['close', 'keyup.enter', 'focus'])
-const modelValue = defineModel()
-
 const isOpenOptions = ref<boolean>(false)
 const isFocused = ref<boolean>(false)
 
@@ -125,7 +132,7 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-select__wrapper min-w-40 flex items-center relative transition-all',
+  wrapper: 'e-select__wrapper min-w-40 flex items-center relative transition',
   field: 'e-select__field h-full flex flex-1 items-center overflow-hidden',
   checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
   checklistItem: 'checklist-item font-light text-neutral-950 hover:bg-secondary-50'
@@ -158,10 +165,10 @@ const getOptionLabel = (item: OptionItem) => {
 }
 
 // Returns the title of the selected value
-const modelValueLabel = computed(() => {
+const modelLabel = computed(() => {
   if (props.itemValue) {
     const modelObj = availableItems.value.find((item: OptionItem) => {
-      return props.itemValue && typeof item === 'object' && item[props.itemValue] === modelValue.value
+      return props.itemValue && typeof item === 'object' && item[props.itemValue] === model.value
     })
     // Object with itemValue key found
     if (modelObj && typeof modelObj === 'object') {
@@ -169,19 +176,19 @@ const modelValueLabel = computed(() => {
       else return modelObj
     }
     // Non-existing itemValue key in the object
-    else return modelValue.value
+    else return model.value
   }
   // Specified itemLabel, but did not specify itemValue
-  else if (modelValue.value && typeof modelValue.value === 'object' && props.itemLabel) {
-    return (modelValue.value as any)[props.itemLabel]
-  } else return modelValue
+  else if (model.value && typeof model.value === 'object' && props.itemLabel) {
+    return (model.value as any)[props.itemLabel]
+  } else return model
 })
 
 // Checking for the selected menu item in the drop-down list
 const checkActiveOption = (item: OptionItem): boolean => {
   if (typeof item === 'object' && props.itemValue) {
-    return modelValue.value === item[props.itemValue]
-  } else return modelValue.value === item
+    return model.value === item[props.itemValue]
+  } else return model.value === item
 }
 
 const toggleSelect = (): void => {
@@ -191,7 +198,7 @@ const toggleSelect = (): void => {
 const handleSelect = (item: OptionItem): void => {
   let selectedValue = item
   if (props.itemValue && typeof item === 'object') selectedValue = item[props.itemValue]
-  modelValue.value = modelValue.value === selectedValue ? null : selectedValue
+  model.value = model.value === selectedValue ? null : selectedValue
   handleOptionsClosing()
 }
 const handleFocus = (e: Event): void => {
@@ -214,6 +221,7 @@ const handleOptionsClosing = (e?: Event): void => {
     <div
       :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
       :style="customStyles"
+      :tabindex="tabindex"
       @click="handleFocus"
     >
       <slot name="prepend">
@@ -228,10 +236,10 @@ const handleOptionsClosing = (e?: Event): void => {
       </slot>
 
       <div :class="[defaultClasses.field, sizeClasses.field]">
-        <span v-if="!modelValue" class="truncate font-light text-secondary-200">
+        <span v-if="!model" class="field-placeholder truncate font-light text-secondary-200">
           {{ placeholder || label }}
         </span>
-        <span v-else class="truncate font-light text-neutral-950">{{ modelValueLabel }}</span>
+        <span v-else class="field-value truncate font-light text-neutral-950">{{ modelLabel }}</span>
       </div>
 
       <div v-if="isOpenOptions" :class="[defaultClasses.checklist, sizeClasses.checklist]">

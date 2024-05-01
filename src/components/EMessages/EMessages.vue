@@ -9,11 +9,17 @@ defineProps({
   /** Size inheritance from parent component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** List of messages. */
-  items: { type: Array as PropType<string[]>, default: [] },
+  items: { type: Array as PropType<string[]>, default: () => [] },
   /** Sets type of messages. */
   type: { type: String as PropType<'default' | 'error'>, default: 'default' },
   /** Amount of displayed messages. */
-  displayedMessages: { type: Number, default: 1 }
+  displayedMessages: {
+    type: Number,
+    default: 1,
+    validator(value: number) {
+      return value >= 1
+    }
+  }
 })
 </script>
 
