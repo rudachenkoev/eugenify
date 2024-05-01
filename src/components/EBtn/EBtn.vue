@@ -83,17 +83,29 @@ const props = defineProps({
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
-  }
+  },
+  /** Sets button's width. Takes a value along with the unit. */
+  width: { type: String },
+  /** Sets button's height. Takes a value along with the unit. */
+  height: { type: String },
+  /** Sets button's max-width. Takes a value along with the unit. */
+  maxWidth: { type: String },
+  /** Sets button's min-width. Takes a value along with the unit. */
+  minWidth: { type: String },
+  /** Sets button's max-height. Takes a value along with the unit. */
+  maxHeight: { type: String },
+  /** Sets button's min-height. Takes a value along with the unit. */
+  minHeight: { type: String }
 })
 
 // Classes
-const defaultClasses = 'e-btn flex items-center w-fit outline-none rounded disabled:opacity-50 transition'
+const defaultClasses = 'e-btn flex justify-center items-center w-fit outline-none rounded disabled:opacity-50 transition'
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 // Colors customization
 const customStyles = computed(() => {
-  const { backgroundColor, fontColor: color, borderColor } = props
-  return { backgroundColor, color, borderColor }
+  const { backgroundColor, fontColor: color, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight } = props
+  return { backgroundColor, color, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight }
 })
 </script>
 

@@ -72,7 +72,13 @@ export default {
     variant: { control: 'select', options: VariantValues },
     backgroundColor: { name: 'background-color', control: 'color', if: { arg: 'variant', eq: 'default' } },
     fontColor: { name: 'font-color', control: 'color' },
-    borderColor: { name: 'border-color', control: 'color', if: { arg: 'variant', eq: 'outlined' } }
+    borderColor: { name: 'border-color', control: 'color', if: { arg: 'variant', eq: 'outlined' } },
+    width: { control: 'text' },
+    height: { control: 'text' },
+    maxWidth: { name: 'max-width', control: 'text' },
+    minWidth: { name: 'min-width', control: 'text' },
+    maxHeight: { name: 'max-height', control: 'text' },
+    minHeight: { name: 'min-height', control: 'text' }
   }
 } as Meta<typeof eBtn>
 
