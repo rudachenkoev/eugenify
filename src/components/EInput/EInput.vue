@@ -197,10 +197,7 @@ const changeInputType = (type: InputType): void => {
         />
         <e-icon
           v-else-if="type === 'password'"
-          :class="[
-            'cursor-pointer opacity-60 duration-300 ease-in-out hover:opacity-100',
-            sizeClasses.appendIcon
-          ]"
+          :class="['cursor-pointer opacity-60 duration-300 ease-in-out hover:opacity-100', sizeClasses.appendIcon]"
           :source="fieldType === 'password' ? 'visibility' : 'visibility_off'"
           :size="size"
           @click="changeInputType(fieldType === 'password' ? 'text' : 'password')"

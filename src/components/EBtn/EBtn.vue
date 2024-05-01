@@ -99,12 +99,23 @@ const props = defineProps({
 })
 
 // Classes
-const defaultClasses = 'e-btn flex justify-center items-center w-fit outline-none rounded disabled:opacity-50 transition'
+const defaultClasses =
+  'e-btn flex justify-center items-center w-fit outline-none rounded disabled:opacity-50 transition'
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 // Colors customization
 const customStyles = computed(() => {
-  const { backgroundColor, fontColor: color, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight } = props
+  const {
+    backgroundColor,
+    fontColor: color,
+    borderColor,
+    width,
+    height,
+    minWidth,
+    maxWidth,
+    minHeight,
+    maxHeight
+  } = props
   return { backgroundColor, color, borderColor, width, height, minWidth, maxWidth, minHeight, maxHeight }
 })
 </script>

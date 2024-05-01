@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{vue,js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{vue,js,jsx,ts,tsx}', './node_modules/eugenify/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'selector',
   theme: {
     extend: {
