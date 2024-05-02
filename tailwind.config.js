@@ -4,6 +4,10 @@ export default {
   darkMode: 'selector',
   theme: {
     extend: {
+      fontSize: {
+        '2xs': ['0.625rem', '.75rem'],
+        '3xs': ['0.5rem', '.5rem']
+      },
       colors: {
         primary: {
           50: '#eff7ff',

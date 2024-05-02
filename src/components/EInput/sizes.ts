@@ -4,32 +4,32 @@ const { 'x-small': xSmall, small, medium, large, 'x-large': xLarge } = size
 
 export default {
   'x-small': {
-    wrapper: xSmall.height,
-    field: `text-xs placeholder:text-xs ${xSmall.padding}`,
+    wrapper: `min-w-32 ${xSmall.height}`,
+    field: `text-xs ${xSmall.padding}`,
     prependIcon: xSmall.marginLeft,
     appendIcon: xSmall.marginRight
   },
   small: {
-    wrapper: small.height,
-    field: `text-sm placeholder:text-sm ${small.padding}`,
+    wrapper: `min-w-36 ${small.height}`,
+    field: `text-sm ${small.padding}`,
     prependIcon: small.marginLeft,
     appendIcon: small.marginRight
   },
   medium: {
-    wrapper: medium.height,
-    field: `text-sm placeholder:text-sm ${medium.padding}`,
+    wrapper: `min-w-40 ${medium.height}`,
+    field: `text-base ${medium.padding}`,
     prependIcon: medium.marginLeft,
     appendIcon: medium.marginRight
   },
   large: {
-    wrapper: large.height,
-    field: `text-base placeholder:text-base ${large.padding}`,
+    wrapper: `min-w-44 ${large.height}`,
+    field: `text-lg ${large.padding}`,
     prependIcon: large.marginLeft,
     appendIcon: large.marginRight
   },
   'x-large': {
-    wrapper: xLarge.height,
-    field: `text-base placeholder:text-base ${xLarge.padding}`,
+    wrapper: `min-w-48 ${xLarge.height}`,
+    field: `text-xl ${xLarge.padding}`,
     prependIcon: xLarge.marginLeft,
     appendIcon: xLarge.marginRight
   }

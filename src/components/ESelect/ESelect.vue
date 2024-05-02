@@ -132,7 +132,7 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-select__wrapper min-w-40 flex items-center relative transition',
+  wrapper: 'e-select__wrapper flex items-center relative transition',
   field: 'e-select__field h-full flex flex-1 items-center overflow-hidden',
   checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
   checklistItem: 'checklist-item font-light text-neutral-950 hover:bg-secondary-50'
@@ -216,7 +216,9 @@ const handleOptionsClosing = (e?: Event): void => {
 
 <template>
   <div class="e-select" v-click-outside="handleOptionsClosing">
-    <e-label :text="label" :size="size" />
+    <slot name="label">
+      <e-label v-if="label" :text="label" :size="size" />
+    </slot>
 
     <div
       :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
@@ -269,11 +271,14 @@ const handleOptionsClosing = (e?: Event): void => {
       </slot>
     </div>
 
-    <e-messages
-      v-if="messagesItems.length"
-      :items="messagesItems"
-      :type="errorMessages?.length ? 'error' : 'default'"
-      :displayedMessages="displayedMessages"
-    />
+    <slot name="messages">
+      <e-messages
+        v-if="messagesItems.length"
+        :items="messagesItems"
+        :size="size"
+        :type="errorMessages?.length ? 'error' : 'default'"
+        :displayedMessages="displayedMessages"
+      />
+    </slot>
   </div>
 </template>

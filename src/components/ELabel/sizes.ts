@@ -1,7 +1,7 @@
 export default {
-  'x-small': 'text-[0.625em] leading-3',
+  'x-small': 'text-2xs',
   small: 'text-xs',
-  medium: 'text-xs',
-  large: 'text-sm',
-  'x-large': 'text-sm'
+  medium: 'text-sm',
+  large: 'text-base',
+  'x-large': 'text-lg'
 }

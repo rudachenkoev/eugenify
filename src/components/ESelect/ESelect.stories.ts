@@ -48,7 +48,8 @@ export default {
     displayedMessages: 1,
     items: defaultItems,
     itemLabel: 'name',
-    itemValue: 'id'
+    itemValue: 'id',
+    maxWidth: '168px'
   },
   argTypes: {
     modelValue: { control: false },
@@ -103,15 +104,10 @@ export default {
 const Template: StoryFn<typeof eSelect> = args => ({
   components: { eSelect },
   setup() {
-    const selected = ref(null)
-    return { selected, defaultItems, args }
+    return { defaultItems, args }
   },
   template: `<div class="min-h-64">
-    <p class="font-light text-sm text-neutral-950 dark:text-neutral-100 mb-3">
-      Selected value:
-      <span class="font-medium">{{ selected }}</span>
-    </p>
-    <e-select v-model="selected" :items="defaultItems" class="max-w-40" v-bind="args" />
+    <e-select :items="defaultItems" v-bind="args" />
   </div>`
 })
 
