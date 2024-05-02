@@ -19,8 +19,12 @@ defineProps({
     validator(value: number) {
       return value >= 1
     }
-  }
+  },
+  /** Removes the indentation for the component */
+  noIndents: { type: Boolean, default: false }
 })
+
+const defaultClasses = 'e-message font-light transition duration-300 ease-in-out'
 </script>
 
 <template>
@@ -28,7 +32,8 @@ defineProps({
     :key="`e-message-${index}`"
     v-for="(message, index) in items.slice(0, displayedMessages)"
     :class="[
-      'e-message font-light transition duration-300 ease-in-out',
+      defaultClasses,
+      !noIndents && 'mt-1',
       SIZES[size],
       type === 'error' ? 'text-error-500 dark:text-error-200' : 'text-secondary-500 dark:text-secondary-200'
     ]"

@@ -157,7 +157,9 @@ const changeInputType = (type: InputType): void => {
 
 <template>
   <div class="e-input">
-    <e-label :text="label" :size="size" />
+    <slot name="label">
+      <e-label v-if="label" :text="label" :size="size" />
+    </slot>
 
     <div
       :class="[defaultClasses.wrapper, sizeClasses.wrapper, !flat && 'shadow-sm', behaviorClasses]"
@@ -205,11 +207,14 @@ const changeInputType = (type: InputType): void => {
       </slot>
     </div>
 
-    <e-messages
-      v-if="messagesItems.length"
-      :items="messagesItems"
-      :type="errorMessages?.length ? 'error' : 'default'"
-      :displayedMessages="displayedMessages"
-    />
+    <slot name="messages">
+      <e-messages
+        v-if="messagesItems.length"
+        :items="messagesItems"
+        :size="size"
+        :type="errorMessages?.length ? 'error' : 'default'"
+        :displayedMessages="displayedMessages"
+      />
+    </slot>
   </div>
 </template>
