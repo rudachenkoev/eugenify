@@ -1,18 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# Eugenify
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+UI components library written with Vue 3 Composition API, Typescript, and Tailwind CSS.
+It offers flexible customization of components, SSR support, and is lightweight with no dependencies.
+Additionally, it supports the Material Design Icons plugin.
+The project utilizes Storybook for component development and documentation and is published on Chromatic for visual regression testing and UI review.
 
-## Recommended IDE Setup
+## Features
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- **Vue 3 Composition API**: Utilizes the latest Vue.js features for efficient and concise code.
+- **Typescript**: Ensures type safety and improved development experience.
+- **Tailwind CSS**: Provides utility-first CSS framework for rapid UI development.
+- **Flexible Customization**: Components are highly customizable to fit various design needs.
+- **SSR Support**: Seamless integration with server-side rendering for improved performance and SEO.
+- **Lightweight and No Dependencies**: Minimal footprint and no external dependencies for easier integration.
+- **Material Design Icons**: Includes support for [Material Design Icons](https://fonts.google.com/icons?icon.set=Material+Icons) for enhanced iconography.
 
-## Type Support For `.vue` Imports in TS
+## Contribution
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/rudachenkoev/eugenify).
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## License
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/rudachenkoev/eugenify/blob/master/LICENSE) file for details.

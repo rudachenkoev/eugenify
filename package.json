@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "material-icons": "^1.13.12",
-    "vue": ">=3"
+    "vue": ">=3.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.9",
@@ -45,6 +45,6 @@
     "vue-tsc": "^1.8.27"
   },
   "peerDependencies": {
-    "vue": ">=3"
+    "vue": ">=3.4"
   }
 }
