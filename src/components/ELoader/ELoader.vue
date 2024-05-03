@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, PropType } from 'vue'
+import { computed, type PropType } from 'vue'
 import COLORS from './colors'
 import SIZES from './sizes'
 import { ColorType, SizeType } from '@/types'

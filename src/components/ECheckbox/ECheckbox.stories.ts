@@ -66,38 +66,37 @@ const Template: StoryFn<typeof eCheckbox> = args => ({
 
 export const Default = Template.bind({})
 
-// export const Sources = () => ({
-//   components: { eCheckbox },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-checkbox source="bookmarks" />
-//       <e-checkbox source="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg" />
-//     </div>
-//   `
-// })
-//
-// export const Types = () => ({
-//   components: { eCheckbox },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-checkbox source="bookmarks" />
-//       <e-checkbox source="bookmarks" type="outlined" />
-//       <e-checkbox source="bookmarks" type="round" />
-//       <e-checkbox source="bookmarks" type="sharp" />
-//       <e-checkbox source="bookmarks" type="two-tone" />
-//     </div>
-//   `
-// })
-//
-// export const Sizes = () => ({
-//   components: { eCheckbox },
-//   template: `
-//     <div class="flex gap-3">
-//       <e-checkbox source="bookmarks" size="x-large" />
-//       <e-checkbox source="bookmarks" size="large" />
-//       <e-checkbox source="bookmarks" size="medium" />
-//       <e-checkbox source="bookmarks" size="small" />
-//       <e-checkbox source="bookmarks" size="x-small" />
-//     </div>
-//   `
-// })
+export const Colors = () => ({
+  components: { eCheckbox },
+  template: `
+    <div class="flex gap-3">
+      <e-checkbox :model-value="true" color="primary" label="Primary" />
+      <e-checkbox :model-value="true" color="secondary" label="Secondary" />
+      <e-checkbox :model-value="true" color="success" label="Success" />
+      <e-checkbox :model-value="true" color="error" label="Error" />
+    </div>
+  `
+})
+
+export const Sizes = () => ({
+  components: { eCheckbox },
+  template: `
+    <div class="flex gap-3">
+      <e-checkbox :model-value="true" size="x-large" label="X-large" />
+      <e-checkbox :model-value="true" size="large" label="Large" />
+      <e-checkbox :model-value="true" size="medium" label="Medium" />
+      <e-checkbox :model-value="true" size="small" label="Small" />
+      <e-checkbox :model-value="true" size="x-small" label="X-small" />
+    </div>
+  `
+})
+
+export const CustomIcons = () => ({
+  components: { eCheckbox },
+  template: `
+    <div class="flex gap-3">
+      <e-checkbox :model-value="false" false-icon="remove" true-icon="add" label="Custom false icon" />
+      <e-checkbox :model-value="true" false-icon="remove" true-icon="add" label="Custom true icon" />
+    </div>
+  `
+})

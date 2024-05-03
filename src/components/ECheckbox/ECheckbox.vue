@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {computed, type PropType} from 'vue'
-import {ColorType, IconType, SizeType} from '@/types'
+import { computed, type PropType } from 'vue'
+import { ColorType, IconType, SizeType } from '@/types'
 import SIZES from './sizes'
 import COLORS from './colors'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
-import {generateUniqueId} from '@/helpers'
-import {isColorSet} from '@/helpers/colors'
+import { generateUniqueId } from '@/helpers'
+import { isColorSet } from '@/helpers/colors'
 
 const props = defineProps({
   /** Sets the label text. */
@@ -44,6 +44,7 @@ const props = defineProps({
     }
   }
 })
+const model = defineModel()
 const inputId = generateUniqueId()
 
 // Classes
@@ -63,6 +64,7 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     <div :class="[defaultClasses.field, sizeClasses]">
       <input
         :id="inputId"
+        v-model="model"
         :class="[defaultClasses.fieldInput, colorClasses, sizeClasses]"
         type="checkbox"
         :disabled="disabled"

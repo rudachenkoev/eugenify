@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {computed, type PropType, ref, watch} from 'vue'
-import {isColorSet} from '@/helpers/colors'
+import { computed, type PropType, ref, watch } from 'vue'
+import { isColorSet } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
-import {ColorType, IconType, SizeType, VariantType} from '@/types'
+import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'

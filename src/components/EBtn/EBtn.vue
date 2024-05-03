@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { computed, type PropType } from 'vue'
 import { isColorSet } from '@/helpers/colors'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'

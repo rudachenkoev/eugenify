@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /** Internal component used for other control components */
 
-import {PropType} from 'vue'
-import {SizeType} from '@/types'
+import { type PropType } from 'vue'
+import { SizeType } from '@/types'
 import SIZES from './sizes'
 //
 defineProps({
