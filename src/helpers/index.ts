@@ -14,6 +14,6 @@ export function getDuplicates<T>(arr: T[], key: string = 'id'): T[] {
   return duplicates
 }
 
-export function generateUniqueId(): string {
+export function generateRandomIdentifier(): string {
   return Math.random().toString(36).substring(2, 11)
 }

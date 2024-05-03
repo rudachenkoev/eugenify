@@ -6,7 +6,7 @@ import COLORS from './colors'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
-import { generateUniqueId } from '@/helpers'
+import { generateRandomIdentifier } from '@/helpers'
 import { isColorSet } from '@/helpers/colors'
 
 const props = defineProps({
@@ -56,7 +56,7 @@ const props = defineProps({
   }
 })
 const model = defineModel()
-const inputId = generateUniqueId()
+const identifier = generateRandomIdentifier()
 
 const messagesItems = computed<string[]>(() => {
   if (props.errorMessages?.length) return props.errorMessages
@@ -80,7 +80,7 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     <div :class="['flex w-fit items-center', reversed && 'flex-row-reverse']">
       <div :class="[defaultClasses.wrapper, sizeClasses]">
         <input
-          :id="inputId"
+          :id="identifier"
           v-model="model"
           :class="[defaultClasses.field, colorClasses, sizeClasses]"
           type="checkbox"
@@ -103,11 +103,11 @@ const colorClasses = computed(() => COLORS[props.color] || '')
           :color="falseIconColor"
         />
       </div>
-      <slot name="label" v-bind="{ inputId }">
+      <slot name="label" v-bind="{ identifier }">
         <e-label
           v-if="label"
           :class="[reversed ? 'pe-2' : 'ps-2', !disabled && 'cursor-pointer']"
-          :for="inputId"
+          :for="identifier"
           :text="label"
           :size="size"
           no-indents

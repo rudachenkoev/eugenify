@@ -7,6 +7,7 @@ import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
+import { generateRandomIdentifier } from '@/helpers'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
@@ -94,6 +95,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['blur', 'keyup', 'focus'])
 const model = defineModel()
+const identifier = generateRandomIdentifier()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
@@ -154,7 +156,7 @@ const changeInputType = (type: InputType): void => {
 <template>
   <div class="e-input">
     <slot name="label">
-      <e-label v-if="label" :text="label" :size="size" />
+      <e-label v-if="label" :for="identifier" :text="label" :size="size" />
     </slot>
 
     <div
@@ -173,6 +175,7 @@ const changeInputType = (type: InputType): void => {
       </slot>
 
       <input
+        :id="identifier"
         v-model="model"
         :class="[defaultClasses.field, sizeClasses.field, hideSpinButtons && 'hide-spin-buttons']"
         :type="fieldType"
