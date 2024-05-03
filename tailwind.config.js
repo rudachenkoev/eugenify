@@ -8,6 +8,9 @@ export default {
         '2xs': ['0.625rem', '.75rem'],
         '3xs': ['0.5rem', '.5rem']
       },
+      spacing: {
+        4.5: '1.125rem'
+      },
       colors: {
         primary: {
           50: '#eff7ff',

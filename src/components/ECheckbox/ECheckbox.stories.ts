@@ -1,6 +1,6 @@
-import { StoryFn, Meta } from '@storybook/vue3'
+import { ColorValues, IconTypeValues, SizeValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
 import eCheckbox from './ECheckbox.vue'
-import { ColorValues, SizeValues } from '@/configs'
 
 export default {
   title: 'e-checkbox',
@@ -14,16 +14,45 @@ export default {
     }
   },
   args: {
-    label: 'Default label',
+    label: 'Label text',
     disabled: false,
     color: 'primary',
-    size: 'medium'
+    size: 'medium',
+    reversed: false,
+    trueIcon: 'check',
+    trueIconType: 'outlined',
+    falseIconType: 'outlined'
   },
   argTypes: {
     label: { control: 'text' },
     disabled: { control: 'boolean' },
     color: { control: 'select', options: ColorValues },
     size: { control: 'select', options: SizeValues },
+    reversed: { control: 'boolean' },
+    trueIcon: { name: 'true-icon', control: 'text' },
+    trueIconType: {
+      name: 'true-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'trueIcon' }
+    },
+    trueIconColor: {
+      name: 'true-icon-color',
+      control: 'color',
+      if: { arg: 'trueIcon' }
+    },
+    falseIcon: { name: 'false-icon', control: 'text' },
+    falseIconType: {
+      name: 'false-icon-type',
+      control: 'select',
+      options: IconTypeValues,
+      if: { arg: 'falseIcon' }
+    },
+    falseIconColor: {
+      name: 'false-icon-color',
+      control: 'color',
+      if: { arg: 'falseIcon' }
+    }
   }
 } as Meta<typeof eCheckbox>
 

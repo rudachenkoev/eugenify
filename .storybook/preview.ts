@@ -1,5 +1,5 @@
-import type { Preview, VueRenderer } from '@storybook/vue3'
 import { withThemeByClassName } from '@storybook/addon-themes'
+import type { Preview, VueRenderer } from '@storybook/vue3'
 import '../src/styles.css'
 
 const preview: Preview = {

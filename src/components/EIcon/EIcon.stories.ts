@@ -1,6 +1,6 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import eIcon from './EIcon.vue'
 import { IconTypeValues, SizeValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
+import eIcon from './EIcon.vue'
 
 export default {
   title: 'e-icon',

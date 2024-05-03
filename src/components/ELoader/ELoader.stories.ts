@@ -1,6 +1,6 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import eLoader from './ELoader.vue'
 import { ColorValues, SizeValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
+import eLoader from './ELoader.vue'
 
 export default {
   title: 'e-loader',

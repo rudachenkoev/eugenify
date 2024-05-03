@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { type PropType } from 'vue'
-import { ColorType, SizeType } from '@/types'
+import { computed, type PropType } from 'vue'
+import { ColorType, SizeType, IconType } from '@/types'
+import SIZES from './sizes'
+import COLORS from './colors'
 import eLabel from '@/components/ELabel/ELabel.vue'
+import eIcon from '@/components/EIcon/EIcon.vue'
+import { generateUniqueId } from '@/helpers'
+import { isColorSet } from '@/helpers/colors'
 
-defineProps({
+const props = defineProps({
   /** Sets the label text. */
   label: { type: String, default: '' },
   /** Removes the ability to click or target the input. */
@@ -12,19 +17,82 @@ defineProps({
   color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
-
-  reversed: { type: Boolean, default: false }
+  /** Reverses the position of the input and label. */
+  reversed: { type: Boolean, default: false },
+  /** Icon used for the active state. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
+  trueIcon: { type: String, default: 'check' },
+  /** Sets true-icon type. <u>Applies to Material Icons only</u>. */
+  trueIconType: { type: String as PropType<IconType>, default: 'outlined' },
+  /** Sets true-icon color. <u>Applies to Material Icons only</u>. */
+  trueIconColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  },
+  /** Icon used for the inactive state. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
+  falseIcon: { type: String },
+  /** Sets false-icon type. <u>Applies to Material Icons only</u>. */
+  falseIconType: { type: String as PropType<IconType>, default: 'outlined' },
+  /** Sets false-icon color. <u>Applies to Material Icons only</u>. */
+  falseIconColor: {
+    type: String,
+    default: '',
+    validator(value: string) {
+      return value ? isColorSet(value) : true
+    }
+  }
 })
+const inputId = generateUniqueId()
 
 // Classes
-const defaultClasses = 'e-checkbox w-fit flex items-center cursor-pointer'
+const defaultClasses = {
+  root: 'e-checkbox w-fit flex items-center',
+  field: 'e-checkbox__field relative',
+  fieldInput:
+    'field-input absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 appearance-none bg-neutral-50 peer border rounded cursor-pointer disabled:opacity-50 disabled:cursor-default transition',
+  fieldIcon: 'absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transition-opacity pointer-events-none'
+}
+const sizeClasses = computed(() => SIZES[props.size] || '')
+const colorClasses = computed(() => COLORS[props.color] || '')
 </script>
 
 <template>
-<label :class="[defaultClasses, !reversed && 'flex-row-reverse']">
-  <slot name="label">
-    <e-label v-if="label" :text="label" :size="size" no-indents />
-  </slot>
-  <input type="checkbox" :disabled="disabled" />
-</label>
+  <div :class="[defaultClasses.root, reversed && 'flex-row-reverse']">
+    <div :class="[defaultClasses.field, sizeClasses]">
+      <input
+        :id="inputId"
+        type="checkbox"
+        :disabled="disabled"
+        :class="[defaultClasses.fieldInput, colorClasses, sizeClasses]"
+      />
+      <e-icon
+        v-if="trueIcon"
+        :source="trueIcon"
+        :type="trueIconType"
+        :size="size"
+        :color="trueIconColor"
+        :class="['field-true-icon text-neutral-100 opacity-0 peer-checked:opacity-100', defaultClasses.fieldIcon]"
+      />
+      <e-icon
+        v-if="falseIcon"
+        :source="falseIcon"
+        :type="falseIconType"
+        :size="size"
+        :color="falseIconColor"
+        :class="['field-true-icon text-neutral-950 opacity-100 peer-checked:opacity-0', defaultClasses.fieldIcon]"
+      />
+    </div>
+    <slot name="label" v-bind="{ inputId }">
+      <e-label
+        v-if="label"
+        :for="inputId"
+        :text="label"
+        :size="size"
+        :class="[reversed ? 'pe-2' : 'ps-2', !disabled && 'cursor-pointer']"
+        no-indents
+      />
+    </slot>
+  </div>
 </template>

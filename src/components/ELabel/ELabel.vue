@@ -18,9 +18,9 @@ const defaultClasses = 'e-label font-light text-secondary-500 dark:text-secondar
 </script>
 
 <template>
-  <div :class="[defaultClasses, !noIndents && 'mb-1', SIZES[size]]">
+  <label :class="[defaultClasses, !noIndents && 'mb-1', SIZES[size]]">
     <slot>
       {{ text }}
     </slot>
-  </div>
+  </label>
 </template>
