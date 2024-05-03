@@ -17,7 +17,6 @@ const props = defineProps({
   /** Sets the color of the icon. */
   color: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }

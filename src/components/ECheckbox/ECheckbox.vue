@@ -11,7 +11,7 @@ import { isColorSet } from '@/helpers/colors'
 
 const props = defineProps({
   /** Sets the label text. */
-  label: { type: String, default: '' },
+  label: String,
   /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
   /** Sets the color of the component. */
@@ -27,7 +27,6 @@ const props = defineProps({
   /** Sets true-icon color. <u>Applies to Material Icons only</u>. */
   trueIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -39,7 +38,6 @@ const props = defineProps({
   /** Sets false-icon color. <u>Applies to Material Icons only</u>. */
   falseIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }

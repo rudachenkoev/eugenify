@@ -7,7 +7,7 @@ import SIZES from './sizes'
 //
 defineProps({
   /** Specify content text for the component. */
-  text: { type: String, default: '' },
+  text: String,
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** Removes the indentation for the component */

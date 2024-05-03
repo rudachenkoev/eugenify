@@ -12,9 +12,9 @@ type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 
 
 const props = defineProps({
   /** Sets the label text. */
-  label: { type: String, default: '' },
+  label: String,
   /** Sets the input’s placeholder text. */
-  placeholder: { type: String, default: '' },
+  placeholder: String,
   /** Default input’s type attribute. Some of the options have predefined configurations.  */
   type: { type: String as PropType<InputType>, default: 'text' },
   /** Sets the color of the component. */
@@ -32,25 +32,23 @@ const props = defineProps({
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  prependIcon: { type: String, default: '' },
+  prependIcon: String,
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
   },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  appendIcon: { type: String, default: '' },
+  appendIcon: String,
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
   appendIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -58,7 +56,6 @@ const props = defineProps({
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
   backgroundColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -66,7 +63,6 @@ const props = defineProps({
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
   borderColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }

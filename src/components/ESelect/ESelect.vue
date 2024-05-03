@@ -14,9 +14,9 @@ type NotDeclaredObjKey = { [key: string]: string | number }
 type OptionItem = NotDeclaredObjKey | string | number
 const props = defineProps({
   /** Sets the label text. */
-  label: { type: String, default: '' },
+  label: String,
   /** Sets the input’s placeholder text. */
-  placeholder: { type: String, default: '' },
+  placeholder: String,
   /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Sets the size of the component. */
@@ -28,13 +28,12 @@ const props = defineProps({
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  prependIcon: { type: String, default: '' },
+  prependIcon: String,
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -46,7 +45,6 @@ const props = defineProps({
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
   appendIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -54,7 +52,6 @@ const props = defineProps({
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
   backgroundColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -62,7 +59,6 @@ const props = defineProps({
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
   borderColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
