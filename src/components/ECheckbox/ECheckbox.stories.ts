@@ -1,5 +1,6 @@
 import { ColorValues, IconTypeValues, SizeValues } from '@/configs'
 import { Meta, StoryFn } from '@storybook/vue3'
+import { ref } from 'vue'
 import eCheckbox from './ECheckbox.vue'
 
 export default {
@@ -21,7 +22,10 @@ export default {
     reversed: false,
     trueIcon: 'check',
     trueIconType: 'outlined',
-    falseIconType: 'outlined'
+    falseIconType: 'outlined',
+    errorMessages: [],
+    messages: [],
+    displayedMessages: 1
   },
   argTypes: {
     label: { control: 'text' },
@@ -52,7 +56,10 @@ export default {
       name: 'false-icon-color',
       control: 'color',
       if: { arg: 'falseIcon' }
-    }
+    },
+    errorMessages: { name: 'error-messages', control: 'object' },
+    messages: { control: 'object' },
+    displayedMessages: { name: 'displayed-messages', control: { type: 'number', min: 1 } }
   }
 } as Meta<typeof eCheckbox>
 
@@ -95,8 +102,23 @@ export const CustomIcons = () => ({
   components: { eCheckbox },
   template: `
     <div class="flex gap-3">
-      <e-checkbox :model-value="false" false-icon="remove" true-icon="add" label="Custom false icon" />
-      <e-checkbox :model-value="true" false-icon="remove" true-icon="add" label="Custom true icon" />
+      <e-checkbox :model-value="false" false-icon="remove" true-icon="add" label="Custom false-icon" />
+      <e-checkbox :model-value="true" false-icon="remove" true-icon="add" label="Custom true-icon" />
+    </div>
+  `
+})
+
+export const Messages = () => ({
+  components: { eCheckbox },
+  setup() {
+    const messages = ref(['First message', 'Second message'])
+    return { messages }
+  },
+  template: `
+    <div class="flex gap-3">
+      <e-checkbox label="Default messages" :messages="messages" />
+      <e-checkbox label="Multiple messages" :messages="messages" :displayed-messages="2" />
+      <e-checkbox label="Error messages" :error-messages="messages" />
     </div>
   `
 })
