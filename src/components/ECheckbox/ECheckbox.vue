@@ -44,11 +44,11 @@ const props = defineProps({
       return value ? isColorSet(value) : true
     }
   },
-  /** Displays a list of error messages */
+  /** Displays a list of error messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Displays a list of messages */
+  /** Displays a list of messages. */
   messages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Amount of displayed messages */
+  /** Amount of displayed messages. */
   displayedMessages: {
     type: Number,
     default: 1,

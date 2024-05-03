@@ -71,11 +71,11 @@ const props = defineProps({
       return value ? isColorSet(value) : true
     }
   },
-  /** Sets input in errors state and displays a list of messages */
+  /** Sets input in errors state and displays a list of messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Displays a list of messages */
+  /** Displays a list of messages. */
   messages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Amount of displayed messages */
+  /** Amount of displayed messages. */
   displayedMessages: {
     type: Number,
     default: 1,

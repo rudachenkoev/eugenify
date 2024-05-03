@@ -28,6 +28,7 @@ export default {
     displayedMessages: 1
   },
   argTypes: {
+    modelValue: { control: false },
     label: { control: 'text' },
     disabled: { control: 'boolean' },
     color: { control: 'select', options: ColorValues },
