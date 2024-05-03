@@ -17,11 +17,12 @@ const props = defineProps({
   /** Sets the color of the icon. */
   color: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
-  }
+  },
+  /** Specifies which form element a label is bound to. */
+  for: { type: String }
 })
 
 const isUrl = computed<boolean>(() => {
@@ -42,7 +43,7 @@ const customStyles = computed(() => {
 
 <template>
   <i v-if="isUrl" :class="['e-icon block bg-cover', sizeClasses]" :style="{ backgroundImage: `url('${source}')` }" />
-  <span v-else :class="['e-icon', iconClass, sizeClasses]" :style="customStyles">
+  <span v-else :class="['e-icon leading-none', iconClass, sizeClasses]" :style="customStyles">
     {{ source }}
   </span>
 </template>

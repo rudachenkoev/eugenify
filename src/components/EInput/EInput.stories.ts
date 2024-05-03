@@ -1,7 +1,7 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import eInput from './EInput.vue'
-import { IconTypeValues, ColorValues, VariantValues, SizeValues } from '@/configs'
+import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
 import { ref } from 'vue'
+import eInput from './EInput.vue'
 
 export default {
   title: 'e-input',

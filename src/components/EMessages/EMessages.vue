@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /** Internal component used for other control components */
 
-import { PropType } from 'vue'
+import { type PropType } from 'vue'
 import { SizeType } from '@/types'
 import SIZES from './sizes'
 //
@@ -29,8 +29,8 @@ const defaultClasses = 'e-message font-light transition duration-300 ease-in-out
 
 <template>
   <div
-    :key="`e-message-${index}`"
     v-for="(message, index) in items.slice(0, displayedMessages)"
+    :key="`e-message-${index}`"
     :class="[
       defaultClasses,
       !noIndents && 'mt-1',

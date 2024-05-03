@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, type PropType } from 'vue'
+import { computed, type PropType, ref, watch } from 'vue'
 import { isColorSet } from '@/helpers/colors'
 import COLORS from './colors'
 import SIZES from './sizes'
@@ -7,14 +7,15 @@ import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
+import { generateRandomIdentifier } from '@/helpers'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
 const props = defineProps({
   /** Sets the label text. */
-  label: { type: String, default: '' },
+  label: String,
   /** Sets the input’s placeholder text. */
-  placeholder: { type: String, default: '' },
+  placeholder: String,
   /** Default input’s type attribute. Some of the options have predefined configurations.  */
   type: { type: String as PropType<InputType>, default: 'text' },
   /** Sets the color of the component. */
@@ -32,25 +33,23 @@ const props = defineProps({
   /** Removes shadow added to element. */
   flat: { type: Boolean, default: false },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  prependIcon: { type: String, default: '' },
+  prependIcon: String,
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
   },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  appendIcon: { type: String, default: '' },
+  appendIcon: String,
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
   appendIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -58,7 +57,6 @@ const props = defineProps({
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
   backgroundColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -66,16 +64,15 @@ const props = defineProps({
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
   borderColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
   },
-  /** Sets input in errors state and displays a list of messages */
+  /** Sets input in errors state and displays a list of messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Displays a list of messages */
+  /** Displays a list of messages. */
   messages: { type: Array as PropType<string[]>, default: () => [] },
-  /** Amount of displayed messages */
+  /** Amount of displayed messages. */
   displayedMessages: {
     type: Number,
     default: 1,
@@ -98,6 +95,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['blur', 'keyup', 'focus'])
 const model = defineModel()
+const identifier = generateRandomIdentifier()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
@@ -158,7 +156,7 @@ const changeInputType = (type: InputType): void => {
 <template>
   <div class="e-input">
     <slot name="label">
-      <e-label v-if="label" :text="label" :size="size" />
+      <e-label v-if="label" :for="identifier" :text="label" :size="size" />
     </slot>
 
     <div
@@ -177,12 +175,13 @@ const changeInputType = (type: InputType): void => {
       </slot>
 
       <input
+        :id="identifier"
         v-model="model"
+        :class="[defaultClasses.field, sizeClasses.field, hideSpinButtons && 'hide-spin-buttons']"
         :type="fieldType"
         :placeholder="placeholder || label"
         :disabled="disabled"
         :readonly="readonly"
-        :class="[defaultClasses.field, sizeClasses.field, hideSpinButtons && 'hide-spin-buttons']"
         @blur="handleBlur"
         @keyup="e => $emit('keyup', e)"
         @focus="handleFocus"

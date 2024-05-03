@@ -7,7 +7,7 @@ import SIZES from './sizes'
 //
 defineProps({
   /** Specify content text for the component. */
-  text: { type: String, default: '' },
+  text: String,
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** Removes the indentation for the component */
@@ -18,9 +18,9 @@ const defaultClasses = 'e-label font-light text-secondary-500 dark:text-secondar
 </script>
 
 <template>
-  <div :class="[defaultClasses, !noIndents && 'mb-1', SIZES[size]]">
+  <label :class="[defaultClasses, !noIndents && 'mb-1', SIZES[size]]">
     <slot>
       {{ text }}
     </slot>
-  </div>
+  </label>
 </template>

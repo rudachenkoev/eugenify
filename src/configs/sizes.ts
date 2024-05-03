@@ -22,7 +22,7 @@ export default {
   },
   large: {
     height: 'h-14',
-    iconSize: 'size-[1.125rem]',
+    iconSize: 'size-4.5',
     padding: 'py-2 px-4',
     marginLeft: 'ml-4',
     marginRight: 'mr-4'

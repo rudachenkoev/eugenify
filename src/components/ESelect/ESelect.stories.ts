@@ -1,7 +1,7 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import eSelect from './ESelect.vue'
 import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
 import { ref } from 'vue'
+import eSelect from './ESelect.vue'
 
 const defaultItems = [
   { id: 1, name: 'First option' },

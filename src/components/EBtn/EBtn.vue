@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { computed, type PropType } from 'vue'
 import { isColorSet } from '@/helpers/colors'
 import eLoader from '@/components/ELoader/ELoader.vue'
 import SIZES from './sizes'
@@ -9,39 +9,36 @@ import eIcon from '@/components/EIcon/EIcon.vue'
 
 const props = defineProps({
   /** Specify content text for the component. */
-  text: { type: String, default: '' },
+  text: String,
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component instead of the button text. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>.  */
-  icon: { type: String, default: '' },
+  icon: String,
   /** Sets e-icon type. <u>Applies to Material Icons only</u>. */
   iconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets e-icon color. <u>Applies to Material Icons only</u>. */
   iconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
   },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  prependIcon: { type: String, default: '' },
+  prependIcon: String,
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
   prependIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
   },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
-  appendIcon: { type: String, default: '' },
+  appendIcon: String,
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
   appendIconColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -63,7 +60,6 @@ const props = defineProps({
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
   backgroundColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -71,7 +67,6 @@ const props = defineProps({
   /** Changes the value of the font color. */
   fontColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
@@ -79,7 +74,6 @@ const props = defineProps({
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
   borderColor: {
     type: String,
-    default: '',
     validator(value: string) {
       return value ? isColorSet(value) : true
     }

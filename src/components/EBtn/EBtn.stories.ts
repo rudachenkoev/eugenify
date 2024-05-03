@@ -1,6 +1,6 @@
-import { StoryFn, Meta } from '@storybook/vue3'
+import { ColorValues, IconTypeValues, SizeValues, VariantValues } from '@/configs'
+import { Meta, StoryFn } from '@storybook/vue3'
 import eBtn from './EBtn.vue'
-import { IconTypeValues, ColorValues, VariantValues, SizeValues } from '@/configs'
 
 export default {
   title: 'e-btn',
