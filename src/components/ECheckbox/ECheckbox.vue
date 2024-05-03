@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
-import { ColorType, SizeType, IconType } from '@/types'
+import {computed, type PropType} from 'vue'
+import {ColorType, IconType, SizeType} from '@/types'
 import SIZES from './sizes'
 import COLORS from './colors'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
-import { generateUniqueId } from '@/helpers'
-import { isColorSet } from '@/helpers/colors'
+import {generateUniqueId} from '@/helpers'
+import {isColorSet} from '@/helpers/colors'
 
 const props = defineProps({
   /** Sets the label text. */
@@ -63,34 +63,34 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     <div :class="[defaultClasses.field, sizeClasses]">
       <input
         :id="inputId"
+        :class="[defaultClasses.fieldInput, colorClasses, sizeClasses]"
         type="checkbox"
         :disabled="disabled"
-        :class="[defaultClasses.fieldInput, colorClasses, sizeClasses]"
       />
       <e-icon
         v-if="trueIcon"
+        :class="['field-true-icon text-neutral-100 opacity-0 peer-checked:opacity-100', defaultClasses.fieldIcon]"
         :source="trueIcon"
         :type="trueIconType"
         :size="size"
         :color="trueIconColor"
-        :class="['field-true-icon text-neutral-100 opacity-0 peer-checked:opacity-100', defaultClasses.fieldIcon]"
       />
       <e-icon
         v-if="falseIcon"
+        :class="['field-true-icon text-neutral-950 opacity-100 peer-checked:opacity-0', defaultClasses.fieldIcon]"
         :source="falseIcon"
         :type="falseIconType"
         :size="size"
         :color="falseIconColor"
-        :class="['field-true-icon text-neutral-950 opacity-100 peer-checked:opacity-0', defaultClasses.fieldIcon]"
       />
     </div>
     <slot name="label" v-bind="{ inputId }">
       <e-label
         v-if="label"
+        :class="[reversed ? 'pe-2' : 'ps-2', !disabled && 'cursor-pointer']"
         :for="inputId"
         :text="label"
         :size="size"
-        :class="[reversed ? 'pe-2' : 'ps-2', !disabled && 'cursor-pointer']"
         no-indents
       />
     </slot>
