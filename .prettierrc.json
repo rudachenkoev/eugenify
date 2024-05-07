@@ -29,5 +29,6 @@
     "^@",
     "^v-html$",
     "^v-text$"
-  ]
+  ],
+  "tailwindFunctions": ["tw"]
 }

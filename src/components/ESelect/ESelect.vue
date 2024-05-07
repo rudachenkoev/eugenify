@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType, ref } from 'vue'
 import { isColorSet } from '@/helpers/colors'
-import { getDuplicates } from '@/helpers'
+import { getDuplicates, tw } from '@/helpers'
 import vClickOutside from '@/directives/clickOutside'
 import COLORS from './colors'
 import SIZES from './sizes'
@@ -128,10 +128,10 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-select__wrapper flex items-center relative transition',
-  field: 'e-select__field h-full flex flex-1 items-center overflow-hidden',
-  checklist: 'e-select__checklist absolute top-full w-full overflow-auto border rounded bg-white mt-1',
-  checklistItem: 'checklist-item font-light text-neutral-950 hover:bg-secondary-50'
+  wrapper: tw`e-select__wrapper relative flex items-center transition`,
+  field: tw`e-select__field flex h-full flex-1 items-center overflow-hidden`,
+  checklist: tw`e-select__checklist absolute top-full mt-1 w-full overflow-auto rounded border bg-white`,
+  checklistItem: tw`checklist-item font-light text-neutral-950 hover:bg-secondary-50`
 }
 
 const sizeClasses = computed(() => SIZES[props.size] || {})

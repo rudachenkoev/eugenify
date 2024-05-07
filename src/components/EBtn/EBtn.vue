@@ -6,6 +6,7 @@ import SIZES from './sizes'
 import COLORS from './colors'
 import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
+import { tw } from '@/helpers'
 
 const props = defineProps({
   /** Specify content text for the component. */
@@ -93,8 +94,7 @@ const props = defineProps({
 })
 
 // Classes
-const defaultClasses =
-  'e-btn flex justify-center items-center w-fit outline-none rounded disabled:opacity-50 transition'
+const defaultClasses = tw`e-btn flex w-fit items-center justify-center rounded outline-none transition disabled:opacity-50`
 const colorClasses = computed(() => COLORS[props.color] || {})
 const sizeClasses = computed(() => SIZES[props.size] || {})
 // Colors customization

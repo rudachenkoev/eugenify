@@ -4,6 +4,7 @@
 import { type PropType } from 'vue'
 import { SizeType } from '@/types'
 import SIZES from './sizes'
+import { tw } from '@/helpers'
 //
 defineProps({
   /** Specify content text for the component. */
@@ -14,7 +15,7 @@ defineProps({
   noIndents: { type: Boolean, default: false }
 })
 
-const defaultClasses = 'e-label font-light text-secondary-500 dark:text-secondary-200'
+const defaultClasses = tw`e-label font-light text-secondary-500 dark:text-secondary-200`
 </script>
 
 <template>

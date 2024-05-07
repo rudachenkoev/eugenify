@@ -1,14 +1,16 @@
+import { tw } from '@/helpers'
+
 export default {
   primary: {
-    spinner: 'text-primary-500 dark:text-primary-200 fill-gray-100'
+    spinner: tw`fill-gray-100 text-primary-500 dark:text-primary-200`
   },
   secondary: {
-    spinner: 'text-secondary-500 dark:text-secondary-200 fill-gray-100'
+    spinner: tw`fill-gray-100 text-secondary-500 dark:text-secondary-200`
   },
   success: {
-    spinner: 'text-success-500 dark:text-success-200 fill-gray-100'
+    spinner: tw`fill-gray-100 text-success-500 dark:text-success-200`
   },
   error: {
-    spinner: 'text-error-500 dark:text-success-200 fill-gray-100'
+    spinner: tw`fill-gray-100 text-error-500 dark:text-success-200`
   }
 }

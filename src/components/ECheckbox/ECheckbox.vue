@@ -6,7 +6,7 @@ import COLORS from './colors'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
-import { generateRandomIdentifier } from '@/helpers'
+import { generateRandomIdentifier, tw } from '@/helpers'
 import { isColorSet } from '@/helpers/colors'
 
 const props = defineProps({
@@ -66,10 +66,9 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-checkbox__wrapper relative',
-  field:
-    'e-checkbox__field absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 appearance-none bg-neutral-50 peer border rounded cursor-pointer disabled:opacity-50 disabled:cursor-default transition',
-  icon: 'absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transition-opacity pointer-events-none'
+  wrapper: tw`e-checkbox__wrapper relative`,
+  field: tw`e-checkbox__field peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer appearance-none rounded border bg-neutral-50 transition disabled:cursor-default disabled:opacity-50`,
+  icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
 const sizeClasses = computed(() => SIZES[props.size] || '')
 const colorClasses = computed(() => COLORS[props.color] || '')

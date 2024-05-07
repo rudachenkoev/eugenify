@@ -7,7 +7,7 @@ import { ColorType, IconType, SizeType, VariantType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
-import { generateRandomIdentifier } from '@/helpers'
+import { generateRandomIdentifier, tw } from '@/helpers'
 //
 type InputType = 'text' | 'number' | 'date' | 'email' | 'password' | 'search' | 'tel' | 'url'
 
@@ -114,9 +114,8 @@ const messagesItems = computed<string[]>(() => {
 
 // Classes
 const defaultClasses = {
-  wrapper: 'e-input__wrapper w-fit flex items-center transition',
-  field:
-    'e-input__field h-full bg-transparent focus-visible:outline-0 font-light text-neutral-950 caret-neutral-950 placeholder:text-secondary-200'
+  wrapper: tw`e-input__wrapper flex w-fit items-center transition`,
+  field: tw`e-input__field h-full bg-transparent font-light text-neutral-950 caret-neutral-950 placeholder:text-secondary-200 focus-visible:outline-0`
 }
 
 const sizeClasses = computed(() => SIZES[props.size] || {})

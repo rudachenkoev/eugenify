@@ -4,6 +4,7 @@
 import { type PropType } from 'vue'
 import { SizeType } from '@/types'
 import SIZES from './sizes'
+import { tw } from '@/helpers'
 //
 defineProps({
   /** Size inheritance from parent component. */
@@ -24,7 +25,7 @@ defineProps({
   noIndents: { type: Boolean, default: false }
 })
 
-const defaultClasses = 'e-message font-light transition duration-300 ease-in-out'
+const defaultClasses = tw`e-message font-light transition duration-300 ease-in-out`
 </script>
 
 <template>
