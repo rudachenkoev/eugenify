@@ -5,13 +5,11 @@ import { getDuplicates, tw } from '@/helpers'
 import vClickOutside from '@/directives/clickOutside'
 import COLORS from './colors'
 import SIZES from './sizes'
-import { ColorType, IconType, SizeType, VariantType } from '@/types'
+import { ColorType, IconType, SizeType, VariantType, OptionItemType } from '@/types'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
 //
-type NotDeclaredObjKey = { [key: string]: string | number }
-type OptionItem = NotDeclaredObjKey | string | number
 const props = defineProps({
   /** Sets the label text. */
   label: String,
@@ -76,7 +74,7 @@ const props = defineProps({
     }
   },
   /** List of sample items. */
-  items: { type: Array as PropType<OptionItem[]>, default: () => [] },
+  items: { type: Array as PropType<OptionItemType[]>, default: () => [] },
   /** The object key from the items array displayed as an option label. */
   itemLabel: { type: String },
   /** The object key from the items array used for v-model. If no value is specified, the item value from items will be returned. */
@@ -99,7 +97,7 @@ const props = defineProps({
 const emit = defineEmits(['close', 'focus'])
 const model = defineModel()
 
-const availableItems = computed<OptionItem[]>(() => {
+const availableItems = computed<OptionItemType[]>(() => {
   if (props.items.some(item => !item)) {
     console.warn('Empty values were found in the items array.')
   }
@@ -155,7 +153,7 @@ const customStyles = computed(() => {
 })
 
 // Returns the title of the items in the drop-down list
-const getOptionLabel = (item: OptionItem) => {
+const getOptionLabel = (item: OptionItemType) => {
   if (props.itemLabel && typeof item === 'object') return item[props.itemLabel]
   else return item
 }
@@ -163,7 +161,7 @@ const getOptionLabel = (item: OptionItem) => {
 // Returns the title of the selected value
 const modelLabel = computed(() => {
   if (props.itemValue) {
-    const modelObj = availableItems.value.find((item: OptionItem) => {
+    const modelObj = availableItems.value.find((item: OptionItemType) => {
       return props.itemValue && typeof item === 'object' && item[props.itemValue] === model.value
     })
     // Object with itemValue key found
@@ -181,7 +179,7 @@ const modelLabel = computed(() => {
 })
 
 // Checking for the selected menu item in the drop-down list
-const checkActiveOption = (item: OptionItem): boolean => {
+const checkActiveOption = (item: OptionItemType): boolean => {
   if (typeof item === 'object' && props.itemValue) {
     return model.value === item[props.itemValue]
   } else return model.value === item
@@ -191,7 +189,7 @@ const toggleSelect = (): void => {
   if (props.disabled) return
   isOpenOptions.value = !isOpenOptions.value
 }
-const handleSelect = (item: OptionItem): void => {
+const handleSelect = (item: OptionItemType): void => {
   let selectedValue = item
   if (props.itemValue && typeof item === 'object') selectedValue = item[props.itemValue]
   model.value = model.value === selectedValue ? null : selectedValue

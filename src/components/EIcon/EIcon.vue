@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
 import { IconType, SizeType } from '@/types'
-import SIZES from './sizes.ts'
+import SIZES from './sizes'
 import { isColorSet } from '@/helpers/colors'
 //
 const props = defineProps({
