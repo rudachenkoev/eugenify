@@ -56,7 +56,7 @@ const props = defineProps({
   }
 })
 const model = defineModel()
-const identifier = generateRandomIdentifier()
+const identifier: string = generateRandomIdentifier()
 
 // Classes
 const defaultClasses = {
@@ -64,8 +64,8 @@ const defaultClasses = {
   field: tw`e-checkbox__field peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer appearance-none rounded border bg-neutral-50 transition disabled:cursor-default disabled:opacity-50`,
   icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
-const sizeClasses = computed(() => SIZES[props.size] || '')
-const colorClasses = computed(() => COLORS[props.color] || '')
+const sizeClasses = computed<string>(() => SIZES[props.size] || '')
+const colorClasses = computed<string>(() => COLORS[props.color] || '')
 </script>
 
 <template>

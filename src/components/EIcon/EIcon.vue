@@ -33,7 +33,7 @@ const iconClass = computed<string>(() => {
   if (props.type !== 'filled') str += `-${props.type}`
   return str
 })
-const sizeClasses = computed(() => SIZES[props.size] || '')
+const sizeClasses = computed<string>(() => SIZES[props.size] || '')
 // Colors customization
 const customStyles = computed(() => {
   const { color } = props

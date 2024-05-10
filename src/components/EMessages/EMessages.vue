@@ -30,7 +30,7 @@ const messageItems = computed<string[]>(() => {
   else if (props.messages?.length) return props.messages
   else return []
 })
-const type = computed(() => (props.errorMessages?.length ? 'error' : 'default'))
+const type = computed<'error' | 'default'>(() => (props.errorMessages?.length ? 'error' : 'default'))
 
 const defaultClasses = tw`e-message font-light transition duration-300 ease-in-out`
 </script>

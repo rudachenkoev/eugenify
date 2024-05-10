@@ -95,7 +95,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['blur', 'keyup', 'focus'])
 const model = defineModel()
-const identifier = generateRandomIdentifier()
+const identifier: string = generateRandomIdentifier()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)

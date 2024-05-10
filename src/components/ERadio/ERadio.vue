@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { IconType } from '@/types'
-import { computed, type PropType, inject } from 'vue'
+import { ColorType, IconType, SizeType } from '@/types'
+import { computed, type PropType, inject, type Ref } from 'vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import { generateRandomIdentifier, tw } from '@/helpers'
 import { isColorSet } from '@/helpers/colors'
 import SIZES from './sizes'
 import COLORS from './colors'
+
+interface RadioGroupData {
+  groupModelValue: Ref<any>
+  groupSize: Ref<SizeType>
+  groupDisabled: Ref<boolean>
+  groupColor: Ref<ColorType>
+}
 
 const props = defineProps({
   /** Sets the label text. */
@@ -38,10 +45,10 @@ const props = defineProps({
     }
   }
 })
-const identifier = generateRandomIdentifier()
+const identifier: string = generateRandomIdentifier()
 
-const { groupModelValue, groupSize, groupDisabled, groupColor } = inject('eRadioGroup')
-const disabledValue = computed(() => groupDisabled.value || props.disabled)
+const { groupModelValue, groupSize, groupDisabled, groupColor } = inject('eRadioGroup') as RadioGroupData
+const disabledValue = computed<boolean>(() => groupDisabled.value || props.disabled)
 
 // Classes
 const defaultClasses = {
@@ -49,8 +56,8 @@ const defaultClasses = {
   field: tw`e-radio__field peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer appearance-none rounded-full border bg-neutral-50 transition disabled:cursor-default disabled:opacity-50`,
   icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
-const sizeClasses = computed(() => SIZES[groupSize.value] || '')
-const colorClasses = computed(() => COLORS[groupColor.value] || '')
+const sizeClasses = computed<string>(() => SIZES[groupSize.value] || '')
+const colorClasses = computed<string>(() => COLORS[groupColor.value] || '')
 </script>
 
 <template>
