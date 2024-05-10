@@ -1,5 +1,5 @@
 import eRadio from '@/components/ERadio/ERadio.vue'
-import { SizeValues } from '@/configs'
+import { ColorValues, SizeValues } from '@/configs'
 import { Meta, StoryFn } from '@storybook/vue3'
 import { ref } from 'vue'
 import eRadioGroup from './ERadioGroup.vue'
@@ -12,6 +12,10 @@ export default {
   tags: ['autodocs'],
   parameters: {
     docs: {
+      description: {
+        component:
+          'The component wraps over <a href="/docs/e-radio--docs" target="_blank">e-radio</a> with their preset common properties.'
+      },
       controls: {
         sort: 'alpha'
       }
@@ -19,6 +23,7 @@ export default {
   },
   args: {
     size: 'medium',
+    color: 'primary',
     errorMessages: [],
     messages: [],
     displayedMessages: 1,
@@ -29,6 +34,7 @@ export default {
     modelValue: { control: false },
     label: { control: 'text' },
     size: { control: 'select', options: SizeValues },
+    color: { control: 'select', options: ColorValues },
     disabled: { control: 'boolean' },
     errorMessages: { name: 'error-messages', control: 'object' },
     messages: { control: 'object' },

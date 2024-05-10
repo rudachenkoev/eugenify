@@ -2,7 +2,7 @@
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
 import { computed, provide, type PropType, toRefs } from 'vue'
-import { SizeType } from '@/types'
+import { ColorType, SizeType } from '@/types'
 
 type DirectionType = 'inline' | 'column'
 const props = defineProps({
@@ -12,6 +12,8 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
+  /** Sets the color of the component. */
+  color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Displays a list of error messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
   /** Displays a list of messages. */
@@ -34,9 +36,9 @@ const messagesItems = computed<string[]>(() => {
   else return []
 })
 
-const model = defineModel()
-const { size: groupSize, disabled: groupDisabled } = toRefs(props)
-provide('eRadioGroup', { modelValue: model, groupSize, groupDisabled })
+const groupModelValue = defineModel()
+const { size: groupSize, disabled: groupDisabled, color: groupColor } = toRefs(props)
+provide('eRadioGroup', { groupModelValue, groupSize, groupDisabled, groupColor })
 </script>
 
 <template>

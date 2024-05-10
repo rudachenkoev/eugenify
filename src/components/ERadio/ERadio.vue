@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ColorType, IconType } from '@/types'
+import { IconType } from '@/types'
 import { computed, type PropType, inject } from 'vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
@@ -12,11 +12,9 @@ const props = defineProps({
   /** Sets the label text. */
   label: String,
   /** Returns the specified value when selected. */
-  value: [Object, String, Number],
+  value: [Object, String, Number, Boolean],
   /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
-  /** Sets the color of the component. */
-  color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Icon used for the active state. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   trueIcon: { type: String, default: 'adjust' },
   /** Sets true-icon type. <u>Applies to Material Icons only</u>. */
@@ -42,7 +40,7 @@ const props = defineProps({
 })
 const identifier = generateRandomIdentifier()
 
-const { modelValue, groupSize, groupDisabled } = inject('eRadioGroup')
+const { groupModelValue, groupSize, groupDisabled, groupColor } = inject('eRadioGroup')
 const disabledValue = computed(() => groupDisabled.value || props.disabled)
 
 // Classes
@@ -52,7 +50,7 @@ const defaultClasses = {
   icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
 const sizeClasses = computed(() => SIZES[groupSize.value] || '')
-const colorClasses = computed(() => COLORS[props.color] || '')
+const colorClasses = computed(() => COLORS[groupColor.value] || '')
 </script>
 
 <template>
@@ -60,7 +58,7 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     <div :class="[defaultClasses.wrapper, sizeClasses]">
       <input
         :id="identifier"
-        v-model="modelValue"
+        v-model="groupModelValue"
         :class="[defaultClasses.field, colorClasses, sizeClasses]"
         type="radio"
         :value="value"
