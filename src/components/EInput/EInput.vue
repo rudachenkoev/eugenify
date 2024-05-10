@@ -106,12 +106,6 @@ watch(
 
 const isFocused = ref<boolean>(false)
 
-const messagesItems = computed<string[]>(() => {
-  if (props.errorMessages?.length) return props.errorMessages
-  else if (props.messages?.length) return props.messages
-  else return []
-})
-
 // Classes
 const defaultClasses = {
   wrapper: tw`e-input__wrapper flex w-fit items-center transition`,
@@ -207,11 +201,11 @@ const changeInputType = (type: InputType): void => {
 
     <slot name="messages">
       <e-messages
-        v-if="messagesItems.length"
-        :items="messagesItems"
+        v-if="errorMessages.length || messages.length"
+        :error-messages="errorMessages"
+        :messages="messages"
         :size="size"
-        :type="errorMessages?.length ? 'error' : 'default'"
-        :displayedMessages="displayedMessages"
+        :displayed-messages="displayedMessages"
       />
     </slot>
   </div>

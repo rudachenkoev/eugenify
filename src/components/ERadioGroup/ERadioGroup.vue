@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eMessages from '@/components/EMessages/EMessages.vue'
-import { computed, provide, type PropType, toRefs } from 'vue'
+import { provide, type PropType, toRefs } from 'vue'
 import { ColorType, SizeType } from '@/types'
 
 type DirectionType = 'inline' | 'column'
@@ -30,12 +30,6 @@ const props = defineProps({
   direction: { type: String as PropType<DirectionType>, default: 'inline' }
 })
 
-const messagesItems = computed<string[]>(() => {
-  if (props.errorMessages?.length) return props.errorMessages
-  else if (props.messages?.length) return props.messages
-  else return []
-})
-
 const groupModelValue = defineModel()
 const { size: groupSize, disabled: groupDisabled, color: groupColor } = toRefs(props)
 provide('eRadioGroup', { groupModelValue, groupSize, groupDisabled, groupColor })
@@ -51,11 +45,11 @@ provide('eRadioGroup', { groupModelValue, groupSize, groupDisabled, groupColor }
     </div>
     <slot name="messages">
       <e-messages
-        v-if="messagesItems.length"
-        :items="messagesItems"
+        v-if="errorMessages.length || messages.length"
+        :error-messages="errorMessages"
+        :messages="messages"
         :size="size"
-        :type="errorMessages?.length ? 'error' : 'default'"
-        :displayedMessages="displayedMessages"
+        :displayed-messages="displayedMessages"
       />
     </slot>
   </div>

@@ -118,12 +118,6 @@ const availableItems = computed<OptionItemType[]>(() => {
 const isOpenOptions = ref<boolean>(false)
 const isFocused = ref<boolean>(false)
 
-const messagesItems = computed<string[]>(() => {
-  if (props.errorMessages?.length) return props.errorMessages
-  else if (props.messages?.length) return props.messages
-  else return []
-})
-
 // Classes
 const defaultClasses = {
   wrapper: tw`e-select__wrapper relative flex items-center transition`,
@@ -267,11 +261,11 @@ const handleOptionsClosing = (e?: Event): void => {
 
     <slot name="messages">
       <e-messages
-        v-if="messagesItems.length"
-        :items="messagesItems"
+        v-if="errorMessages.length || messages.length"
+        :error-messages="errorMessages"
+        :messages="messages"
         :size="size"
-        :type="errorMessages?.length ? 'error' : 'default'"
-        :displayedMessages="displayedMessages"
+        :displayed-messages="displayedMessages"
       />
     </slot>
   </div>
