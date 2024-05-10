@@ -15,7 +15,7 @@ defineProps({
   noIndents: { type: Boolean, default: false }
 })
 
-const defaultClasses = tw`e-label font-light text-secondary-500 dark:text-secondary-200`
+const defaultClasses = tw`e-label block font-light text-secondary-500 dark:text-secondary-200`
 </script>
 
 <template>

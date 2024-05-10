@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { OptionItemType, SizeType, ColorType, IconType } from '@/types'
-import { computed, type PropType } from 'vue'
+import { ColorType, IconType } from '@/types'
+import { computed, type PropType, inject } from 'vue'
 import eLabel from '@/components/ELabel/ELabel.vue'
 import eIcon from '@/components/EIcon/EIcon.vue'
 import { generateRandomIdentifier, tw } from '@/helpers'
@@ -11,8 +11,8 @@ import COLORS from './colors'
 const props = defineProps({
   /** Sets the label text. */
   label: String,
-  /** Sets the size of the component. */
-  size: { type: String as PropType<SizeType>, default: 'medium' },
+  /** Returns the specified value when selected. */
+  value: [Object, String, Number],
   /** Removes the ability to click or target the input. */
   disabled: { type: Boolean, default: false },
   /** Sets the color of the component. */
@@ -38,12 +38,12 @@ const props = defineProps({
     validator(value: string) {
       return value ? isColorSet(value) : true
     }
-  },
-  // TODO: Add description
-  value: { type: [Object, String, Number] as PropType<OptionItemType> }
+  }
 })
 const identifier = generateRandomIdentifier()
-const model = defineModel()
+
+const { modelValue, groupSize, groupDisabled } = inject('eRadioGroup')
+const disabledValue = computed(() => groupDisabled.value || props.disabled)
 
 // Classes
 const defaultClasses = {
@@ -51,7 +51,7 @@ const defaultClasses = {
   field: tw`e-radio__field peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer appearance-none rounded-full border bg-neutral-50 transition disabled:cursor-default disabled:opacity-50`,
   icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
-const sizeClasses = computed(() => SIZES[props.size] || '')
+const sizeClasses = computed(() => SIZES[groupSize.value] || '')
 const colorClasses = computed(() => COLORS[props.color] || '')
 </script>
 
@@ -60,18 +60,18 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     <div :class="[defaultClasses.wrapper, sizeClasses]">
       <input
         :id="identifier"
-        v-model="model"
+        v-model="modelValue"
         :class="[defaultClasses.field, colorClasses, sizeClasses]"
         type="radio"
         :value="value"
-        :disabled="disabled"
+        :disabled="disabledValue"
       />
       <e-icon
         v-if="trueIcon"
         :class="['e-radio__true-icon text-neutral-100 opacity-0 peer-checked:opacity-100', defaultClasses.icon]"
         :source="trueIcon"
         :type="trueIconType"
-        :size="size"
+        :size="groupSize"
         :color="trueIconColor"
       />
       <e-icon
@@ -79,16 +79,16 @@ const colorClasses = computed(() => COLORS[props.color] || '')
         :class="['e-radio__false-icon text-neutral-950 opacity-100 peer-checked:opacity-0', defaultClasses.icon]"
         :source="falseIcon"
         :type="falseIconType"
-        :size="size"
+        :size="groupSize"
         :color="falseIconColor"
       />
     </div>
     <slot name="label" v-bind="{ identifier }">
       <e-label
         v-if="label"
-        :class="['ps-2', !disabled && 'cursor-pointer']"
+        :class="['ps-2', !disabledValue && 'cursor-pointer']"
         :text="label"
-        :size="size"
+        :size="groupSize"
         :for="identifier"
         no-indents
       />
