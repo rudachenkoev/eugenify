@@ -15,12 +15,7 @@ const props = defineProps({
   /** Sets the size of the component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
   /** Sets the color of the icon. */
-  color: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  color: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Specifies which form element a label is bound to. */
   for: { type: String }
 })

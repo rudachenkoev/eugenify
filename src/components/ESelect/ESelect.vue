@@ -30,49 +30,23 @@ const props = defineProps({
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
-  prependIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  prependIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   appendIcon: { type: String, default: 'expand_more' },
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
-  appendIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  appendIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
-  backgroundColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  backgroundColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
-  borderColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  borderColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Sets input in errors state and displays a list of messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
   /** Displays a list of messages. */
   messages: { type: Array as PropType<string[]>, default: () => [] },
   /** Amount of displayed messages. */
-  displayedMessages: {
-    type: Number,
-    default: 1,
-    validator(value: number) {
-      return value >= 1
-    }
-  },
+  displayedMessages: { type: Number, default: 1, validator: (value: number) => value >= 1 },
   /** List of sample items. */
   items: { type: Array as PropType<OptionItemType[]>, default: () => [] },
   /** The object key from the items array displayed as an option label. */

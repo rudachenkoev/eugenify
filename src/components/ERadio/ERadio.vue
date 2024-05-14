@@ -8,13 +8,6 @@ import { isColorSet } from '@/helpers/colors'
 import SIZES from './sizes'
 import COLORS from './colors'
 
-interface RadioGroupData {
-  groupModelValue: Ref<any>
-  groupSize: Ref<SizeType>
-  groupDisabled: Ref<boolean>
-  groupColor: Ref<ColorType>
-}
-
 const props = defineProps({
   /** Sets the label text. */
   label: String,
@@ -27,27 +20,22 @@ const props = defineProps({
   /** Sets true-icon type. <u>Applies to Material Icons only</u>. */
   trueIconType: { type: String as PropType<IconType>, default: 'outlined' },
   /** Sets true-icon color. <u>Applies to Material Icons only</u>. */
-  trueIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  trueIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Icon used for the inactive state. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   falseIcon: { type: String },
   /** Sets false-icon type. <u>Applies to Material Icons only</u>. */
   falseIconType: { type: String as PropType<IconType>, default: 'outlined' },
   /** Sets false-icon color. <u>Applies to Material Icons only</u>. */
-  falseIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  }
+  falseIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) }
 })
 const identifier: string = generateRandomIdentifier()
 
-const { groupModelValue, groupSize, groupDisabled, groupColor } = inject('eRadioGroup') as RadioGroupData
+const { groupModelValue, groupSize, groupDisabled, groupColor } = inject('eRadioGroup') as {
+  groupModelValue: Ref<any>
+  groupSize: Ref<SizeType>
+  groupDisabled: Ref<boolean>
+  groupColor: Ref<ColorType>
+}
 const disabledValue = computed<boolean>(() => groupDisabled.value || props.disabled)
 
 // Classes

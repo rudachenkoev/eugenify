@@ -25,35 +25,19 @@ const props = defineProps({
   /** Sets true-icon type. <u>Applies to Material Icons only</u>. */
   trueIconType: { type: String as PropType<IconType>, default: 'outlined' },
   /** Sets true-icon color. <u>Applies to Material Icons only</u>. */
-  trueIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  trueIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Icon used for the inactive state. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   falseIcon: { type: String },
   /** Sets false-icon type. <u>Applies to Material Icons only</u>. */
   falseIconType: { type: String as PropType<IconType>, default: 'outlined' },
   /** Sets false-icon color. <u>Applies to Material Icons only</u>. */
-  falseIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  falseIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Displays a list of error messages. */
   errorMessages: { type: Array as PropType<string[]>, default: () => [] },
   /** Displays a list of messages. */
   messages: { type: Array as PropType<string[]>, default: () => [] },
   /** Amount of displayed messages. */
-  displayedMessages: {
-    type: Number,
-    default: 1,
-    validator(value: number) {
-      return value >= 1
-    }
-  }
+  displayedMessages: { type: Number, default: 1, validator: (value: number) => value >= 1 }
 })
 const model = defineModel()
 const identifier: string = generateRandomIdentifier()

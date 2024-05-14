@@ -16,34 +16,19 @@ const props = defineProps({
   /** Sets e-icon type. <u>Applies to Material Icons only</u>. */
   iconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets e-icon color. <u>Applies to Material Icons only</u>. */
-  iconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  iconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component before default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   prependIcon: String,
   /** Sets prepend e-icon type. <u>Applies to Material Icons only</u>. */
   prependIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets prepend e-icon color. <u>Applies to Material Icons only</u>. */
-  prependIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  prependIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Creates <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a> component after default text slot. Equivalent to the source prop from <a href="/?path=/docs/e-icon--docs" target="_blank">e-icon</a>. */
   appendIcon: String,
   /** Sets append e-icon type. <u>Applies to Material Icons only</u>. */
   appendIconType: { type: String as PropType<IconType>, default: 'filled' },
   /** Sets append e-icon color. <u>Applies to Material Icons only</u>. */
-  appendIconColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  appendIconColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Removes the ability to click or target the button. */
   disabled: { type: Boolean, default: false },
   /** Load Indicator. The <a href="/?path=/docs/e-loader--docs" target="_blank">e-loader</a> component is used by default. */
@@ -59,26 +44,11 @@ const props = defineProps({
   /** Sets the color of the component. */
   color: { type: String as PropType<ColorType>, default: 'primary' },
   /** Changes the value of the background color. <u>Applies to variant with value "default"</u>. */
-  backgroundColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  backgroundColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Changes the value of the font color. */
-  fontColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  fontColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Changes the value of the border color. <u>Applies to variant with value "outlined"</u>. */
-  borderColor: {
-    type: String,
-    validator(value: string) {
-      return value ? isColorSet(value) : true
-    }
-  },
+  borderColor: { type: String, validator: (value: string) => !value || isColorSet(value) },
   /** Sets button's width. Takes a value along with the unit. */
   width: { type: String },
   /** Sets button's height. Takes a value along with the unit. */
