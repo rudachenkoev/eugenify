@@ -1,18 +1,18 @@
 <script setup lang="ts">
 /** Internal component used for other control components */
 
-import { type PropType } from 'vue'
+import { computed, type PropType } from 'vue'
 import { SizeType } from '@/types'
 import SIZES from './sizes'
 import { tw } from '@/helpers'
 //
-defineProps({
+const props = defineProps({
   /** Size inheritance from parent component. */
   size: { type: String as PropType<SizeType>, default: 'medium' },
-  /** List of messages. */
-  items: { type: Array as PropType<string[]>, default: () => [] },
-  /** Sets type of messages. */
-  type: { type: String as PropType<'default' | 'error'>, default: 'default' },
+  /** Displays a list of error messages. */
+  errorMessages: { type: Array as PropType<string[]>, default: () => [] },
+  /** Displays a list of messages. */
+  messages: { type: Array as PropType<string[]>, default: () => [] },
   /** Amount of displayed messages. */
   displayedMessages: {
     type: Number,
@@ -25,12 +25,19 @@ defineProps({
   noIndents: { type: Boolean, default: false }
 })
 
+const messageItems = computed<string[]>(() => {
+  if (props.errorMessages?.length) return props.errorMessages
+  else if (props.messages?.length) return props.messages
+  else return []
+})
+const type = computed<'error' | 'default'>(() => (props.errorMessages?.length ? 'error' : 'default'))
+
 const defaultClasses = tw`e-message font-light transition duration-300 ease-in-out`
 </script>
 
 <template>
   <div
-    v-for="(message, index) in items.slice(0, displayedMessages)"
+    v-for="(message, index) in messageItems.slice(0, displayedMessages)"
     :key="`e-message-${index}`"
     :class="[
       defaultClasses,

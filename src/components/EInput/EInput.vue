@@ -95,7 +95,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['blur', 'keyup', 'focus'])
 const model = defineModel()
-const identifier = generateRandomIdentifier()
+const identifier: string = generateRandomIdentifier()
 
 // Used to override the type of input
 const fieldType = ref<InputType>(props.type)
@@ -105,12 +105,6 @@ watch(
 )
 
 const isFocused = ref<boolean>(false)
-
-const messagesItems = computed<string[]>(() => {
-  if (props.errorMessages?.length) return props.errorMessages
-  else if (props.messages?.length) return props.messages
-  else return []
-})
 
 // Classes
 const defaultClasses = {
@@ -207,11 +201,11 @@ const changeInputType = (type: InputType): void => {
 
     <slot name="messages">
       <e-messages
-        v-if="messagesItems.length"
-        :items="messagesItems"
+        v-if="errorMessages.length || messages.length"
+        :error-messages="errorMessages"
+        :messages="messages"
         :size="size"
-        :type="errorMessages?.length ? 'error' : 'default'"
-        :displayedMessages="displayedMessages"
+        :displayed-messages="displayedMessages"
       />
     </slot>
   </div>

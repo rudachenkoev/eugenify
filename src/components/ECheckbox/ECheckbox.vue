@@ -56,13 +56,7 @@ const props = defineProps({
   }
 })
 const model = defineModel()
-const identifier = generateRandomIdentifier()
-
-const messagesItems = computed<string[]>(() => {
-  if (props.errorMessages?.length) return props.errorMessages
-  else if (props.messages?.length) return props.messages
-  else return []
-})
+const identifier: string = generateRandomIdentifier()
 
 // Classes
 const defaultClasses = {
@@ -70,8 +64,8 @@ const defaultClasses = {
   field: tw`e-checkbox__field peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer appearance-none rounded border bg-neutral-50 transition disabled:cursor-default disabled:opacity-50`,
   icon: tw`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity`
 }
-const sizeClasses = computed(() => SIZES[props.size] || '')
-const colorClasses = computed(() => COLORS[props.color] || '')
+const sizeClasses = computed<string>(() => SIZES[props.size] || '')
+const colorClasses = computed<string>(() => COLORS[props.color] || '')
 </script>
 
 <template>
@@ -115,11 +109,11 @@ const colorClasses = computed(() => COLORS[props.color] || '')
     </div>
     <slot name="messages">
       <e-messages
-        v-if="messagesItems.length"
-        :items="messagesItems"
+        v-if="errorMessages.length || messages.length"
+        :error-messages="errorMessages"
+        :messages="messages"
         :size="size"
-        :type="errorMessages?.length ? 'error' : 'default'"
-        :displayedMessages="displayedMessages"
+        :displayed-messages="displayedMessages"
       />
     </slot>
   </div>
